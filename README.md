@@ -1,5 +1,7 @@
 # Unity-Inventory-System
 
+Unity Editor version - 2020.1.8f1
+
 plugins and packages to add:
 - UniRx - version 7.1.0 - https://github.com/neuecc/UniRx/releases/tag/7.1.0
 - UniTask - version 2.0.36 - https://github.com/Cysharp/UniTask/releases/tag/2.0.36 
