@@ -1,0 +1,17 @@
+{
+    "name": "UnityInventorySystem",
+    "references": [
+        "GUID:d178ac4b10764814c8ae876ce6354d19",
+        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4",
+        "GUID:c2406635aedc2db439f62269604e2aec"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

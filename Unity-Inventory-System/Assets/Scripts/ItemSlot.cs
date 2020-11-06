@@ -1,16 +1,19 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ItemSlot : MonoBehaviour , IDropHandler
+namespace UnityInventorySystem
 {
-    public void OnDrop(PointerEventData eventData)
+    public class ItemSlot : MonoBehaviour , IDropHandler
     {
-        Debug.Log("On Drop");
-
-        if (eventData.pointerDrag != null)
+        public void OnDrop(PointerEventData eventData)
         {
-            eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition =
-                GetComponent<RectTransform>().anchoredPosition;
+            Debug.Log("On Drop");
+
+            if (eventData.pointerDrag != null)
+            {
+                eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition =
+                    GetComponent<RectTransform>().anchoredPosition;
+            }
         }
     }
 }
