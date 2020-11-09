@@ -16,5 +16,5 @@ Unity Editor version - 2020.1.8f1
 
 - Unity reorderable list - https://github.com/cfoulston/Unity-Reorderable-List - unity package - upm
 
-- Free 2D Mega Pack - unity package - upm
+- Free 2D Mega Pack 1.0 - unity package - upm
 </details>
