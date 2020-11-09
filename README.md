@@ -15,4 +15,6 @@ Unity Editor version - 2020.1.8f1
 - Addressables - version 1.8.5 - unity package - upm
 
 - Unity reorderable list - https://github.com/cfoulston/Unity-Reorderable-List - unity package - upm
+
+- Free 2D Mega Pack - unity package - upm
 </details>
