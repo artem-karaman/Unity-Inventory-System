@@ -1,41 +1,27 @@
-﻿using System;
-using UniRx;
-using Zenject;
+﻿using UniRx;
 
 namespace Assets.Scripts.Core.ViewModels
 {
-	public class InventoryViewModel : IInitializable
+	public class InventoryViewModel
 	{
-		private readonly Settings _settings;
+		private readonly int _slotsCount;
 		
-		public InventoryViewModel(
-			Settings settings)
-		{
-			_settings = settings;
+		private int _totalItemsInRowOrColumn = 4;
 
-			SlotsCount = new ReactiveProperty<int>(0);
+		public InventoryViewModel(int slotsCount)
+		{
+			_slotsCount = slotsCount;
+
+			SlotsCount = new ReactiveProperty<int>(CalculateSlotsCountWithFullRow());
 		}
 
 		public IReactiveProperty<int> SlotsCount;
-		
-		public void Initialize()
-		{
-			SlotsCount.Value = CalculateSlotsCountWithFullRow();
-		}
 
 		private int CalculateSlotsCountWithFullRow()
 		{
-			var slotsCount = _settings.slotsCount;
+			var modulo = _slotsCount % _totalItemsInRowOrColumn;
 
-			var modulo = slotsCount % 4;
-
-			return slotsCount % 4 == 0 ? slotsCount : slotsCount + (4 - modulo);
-		}
-
-		[Serializable]
-		public class Settings
-		{
-			public int slotsCount;
+			return _slotsCount % 4 == 0 ? _slotsCount : _slotsCount + (_totalItemsInRowOrColumn - modulo);
 		}
 	}
 }

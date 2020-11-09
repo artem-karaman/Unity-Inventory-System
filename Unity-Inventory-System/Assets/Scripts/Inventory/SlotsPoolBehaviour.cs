@@ -18,6 +18,8 @@ namespace UnityInventorySystem.Inventory
 			_slotBehaviourFactory = slotBehaviourFactory;
 		}
 
+		public List<SlotBehaviour> SlotList => _slots;
+
 		public void SetParent(Transform parent)
 		{
 			_ = parent ? parent : throw new ArgumentNullException(nameof(parent));
@@ -33,12 +35,10 @@ namespace UnityInventorySystem.Inventory
 
 		public void RemoveSlot()
 		{
-			if (_slots.Any())
-			{
-				var slot = _slots[0];
-				slot.Dispose();
-				_slots.Remove(slot);
-			}
+			if (!_slots.Any()) return;
+			var slot = _slots[0];
+			slot.Dispose();
+			_slots.Remove(slot);
 		}
 	}
 }

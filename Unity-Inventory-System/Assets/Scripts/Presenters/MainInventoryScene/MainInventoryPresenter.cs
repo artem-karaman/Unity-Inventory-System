@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Core.ViewModels;
-using UnityInventorySystem.Inventory;
+﻿using UnityInventorySystem.Inventory;
 using UnityInventorySystem.Presenters.Base;
 using Zenject;
 
@@ -7,24 +6,22 @@ namespace UnityInventorySystem.Presenters
 {
 	public class MainInventoryPresenter : BasePresenter, IInitializable
 	{
-		private readonly InventoryBehaviour.Factory _inventoryBehaviourFactory;
-		private readonly InventoryViewModel _inventoryViewModel;
+		private readonly InventoryFacade.Factory _inventoryFacadeFactory;
 
-		private InventoryBehaviour _inventory;
+		private InventoryFacade _inventoryFacade;
 
 		public MainInventoryPresenter(
-			InventoryBehaviour.Factory inventoryBehaviourFactory, 
-			InventoryViewModel inventoryViewModel)
+			InventoryFacade.Factory inventoryFacadeFactory)
 		{
-			_inventoryBehaviourFactory = inventoryBehaviourFactory;
-			_inventoryViewModel = inventoryViewModel;
+			_inventoryFacadeFactory = inventoryFacadeFactory;
+
 		}
 		
 		public void Initialize()
 		{
-			if (_inventory == null)
+			if (_inventoryFacade == null)
 			{
-				_inventory = _inventoryBehaviourFactory.Create();
+				_inventoryFacade = _inventoryFacadeFactory.Create(20);
 			}
 		}
 	}

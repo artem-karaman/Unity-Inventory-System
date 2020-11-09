@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7e1810f10d12b242ba27bfdbba8d05a, type: 3}
+  m_Script: {fileID: 11500000, guid: af0677c714813ca428528282b553cf64, type: 3}
   m_Name: HorizontalInventorySOInstaller
   m_EditorClassIdentifier: 
-  _inventoryViewModelSettings:
-    slotsCount: 25
+  _horizontalInventoryMonoInstallerSettings:
+    HorizontalInventoryPrefab: {fileID: 5367829270877815982, guid: cd6f766b9ed00914aa9308111234031b, type: 3}
+    HotBarInventoryPrefab: {fileID: 2704071125238945466, guid: 2b12f47aaf32e894cb7d8fa0b92a15ce, type: 3}

@@ -6,7 +6,7 @@ namespace UnityInventorySystem
 	[CreateAssetMenu(fileName = "InventoryItems", menuName = "SO/InventoryItemsSO")]
 	public class InventoryItemsSo : ScriptableObject
 	{
-		[Reorderable(paginate = true)]
+		[Reorderable]
 		public ItemsList Items;
 	}
 }

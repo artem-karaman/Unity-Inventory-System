@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Core.ViewModels;
-using UnityInventorySystem.Inventory;
+﻿using UnityInventorySystem.Inventory;
 using UnityInventorySystem.Presenters.Base;
 using Zenject;
 
@@ -7,21 +6,30 @@ namespace UnityInventorySystem.Presenters
 {
 	public class HorizontalInventoryPresenter : BasePresenter, IInitializable
 	{
-		private readonly InventoryBehaviour.Factory _inventoryBehaviourFactory;
+		private readonly InventoryFacade.Factory _inventoryFacadeFactory;
+		private InventoryFacade _inventoryFacade;
 
-		private InventoryBehaviour _inventory;
+		private readonly HotBarFacade.Factory _hotBarFacadeFactory;
+		private HotBarFacade _hotBarFacade;
 
 		public HorizontalInventoryPresenter(
-			InventoryBehaviour.Factory inventoryBehaviourFactory)
+			InventoryFacade.Factory inventoryFacadeFactory,
+			HotBarFacade.Factory hotBarFacadeFactory)
 		{
-			_inventoryBehaviourFactory = inventoryBehaviourFactory;
+			_inventoryFacadeFactory = inventoryFacadeFactory;
+			_hotBarFacadeFactory = hotBarFacadeFactory;
 		}
 		
 		public void Initialize()
 		{
-			if (_inventory == null)
+			if (_inventoryFacade == null)
 			{
-				_inventory = _inventoryBehaviourFactory.Create();
+				_inventoryFacade = _inventoryFacadeFactory.Create(20);
+			}
+
+			if (_hotBarFacade == null)
+			{
+				_hotBarFacade = _hotBarFacadeFactory.Create(2);
 			}
 		}
 	}

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityInventorySystem.Inventory;
 using UnityInventorySystem.Presenters;
 using Zenject;
@@ -7,21 +8,34 @@ namespace UnityInventorySystem.Installers
 {
 	public class MainInventoryMonoInstaller : MonoInstaller<MainInventoryMonoInstaller>
 	{
-		[SerializeField] private GameObject _mainBackgroundPanel;
+		[SerializeField] 
+		private Transform _mainBackgroundPanelTransform;
+
+		private Settings _settings;
+		
+		[Inject]
+		void Construct(Settings settings)
+		{
+			_settings = settings;
+		}
 		
 		public override void InstallBindings()
 		{
-			InventoryInstaller.Install(Container);
-			
 			Container
-				.BindFactory<InventoryBehaviour, InventoryBehaviour.Factory>()
-				//TODO: replace with addressables
-				.FromNewComponentOnNewPrefabResource("Prefabs/VerticalInventory")
-				.UnderTransform(_mainBackgroundPanel.transform);
+				.BindFactory<int, InventoryFacade, InventoryFacade.Factory>()
+				.FromSubContainerResolve()
+				.ByNewPrefabInstaller<InventoryInstaller>(_settings.VerticalInventoryPrefab)
+				.UnderTransform(_mainBackgroundPanelTransform);
 
 			Container
 				.BindInterfacesAndSelfTo<MainInventoryPresenter>()
 				.AsSingle();
+		}
+
+		[Serializable]
+		public class Settings
+		{
+			public GameObject VerticalInventoryPrefab;
 		}
 	}
 }
