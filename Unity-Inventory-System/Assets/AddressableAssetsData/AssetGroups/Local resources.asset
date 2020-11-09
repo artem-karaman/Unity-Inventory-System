@@ -22,13 +22,31 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - scriptable objects
+    - inventory
     m_MainAsset: {fileID: 11400000, guid: 45ba49762ae9b754da327c0e33ac7cd4, type: 2}
     m_TargetAsset: {fileID: 11400000, guid: 45ba49762ae9b754da327c0e33ac7cd4, type: 2}
+  - m_GUID: abd246664f0c53d49bc5502ba782d138
+    m_Address: VerticalInventory - Scroll View
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - prefabs
+    - inventory
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: cb6d59ea04cdff541992dc0d3213a4ae
+    m_Address: ItemSlot
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - prefabs
+    - inventory
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: e8fb44161f6fec94cb5e845a2051c9d0
     m_Address: InventoryItems
     m_ReadOnly: 0
     m_SerializedLabels:
     - scriptable objects
+    - inventory
     m_MainAsset: {fileID: 11400000, guid: e8fb44161f6fec94cb5e845a2051c9d0, type: 2}
     m_TargetAsset: {fileID: 11400000, guid: e8fb44161f6fec94cb5e845a2051c9d0, type: 2}
   m_ReadOnly: 0

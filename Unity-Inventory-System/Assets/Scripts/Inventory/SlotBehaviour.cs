@@ -7,21 +7,15 @@ namespace UnityInventorySystem.Inventory
 	public class SlotBehaviour : MonoBehaviour, IPoolable<IMemoryPool>, IDisposable
 	{
 		private IMemoryPool _memoryPool;
-		
-		public void OnDespawned()
-		{
-			
-		}
 
-		public void OnSpawned(IMemoryPool memoryPool)
-		{
-			_memoryPool = memoryPool;
-		}
+		#region MemoryPoolMethods
+		public void OnDespawned() => _memoryPool = null;
 
-		public void Dispose()
-		{
-			_memoryPool.Despawn(this);
-		}
+		public void OnSpawned(IMemoryPool memoryPool) => _memoryPool = memoryPool;
+
+		public void Dispose() => _memoryPool.Despawn(this);
+
+		#endregion
 
 		public class Factory : PlaceholderFactory<SlotBehaviour>{}
 	}

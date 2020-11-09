@@ -5,7 +5,8 @@ namespace UnityInventorySystem
 {
 	public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 	{
-		[SerializeField] private Canvas _canvas;
+		[SerializeField]
+		private Canvas _canvas;
 	
 		private RectTransform _rectTransform;
 		private CanvasGroup _canvasGroup;

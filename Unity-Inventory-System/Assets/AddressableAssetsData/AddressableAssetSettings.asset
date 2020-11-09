@@ -66,8 +66,9 @@ MonoBehaviour:
     m_ProfileVersion: 1
   m_LabelTable:
     m_LabelNames:
-    - default
     - scriptable objects
+    - prefabs
+    - inventory
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 35e1ff1781e0c394aa0ea7acbcf4bf73, type: 2}
