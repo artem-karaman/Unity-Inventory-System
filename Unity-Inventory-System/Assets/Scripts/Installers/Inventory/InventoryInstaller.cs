@@ -4,7 +4,7 @@ using Zenject;
 
 namespace UnityInventorySystem.Installers
 {
-	public class MainInventoryInstaller : Installer<MainInventoryInstaller>
+	public class InventoryInstaller : Installer<InventoryInstaller>
 	{
 		public override void InstallBindings()
 		{

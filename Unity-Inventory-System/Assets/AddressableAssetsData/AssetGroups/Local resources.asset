@@ -16,39 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 5f76f854ff4e03742b07382a1732b1e2
-  m_SerializeEntries:
-  - m_GUID: 45ba49762ae9b754da327c0e33ac7cd4
-    m_Address: MainInventorySOInstaller
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - scriptable objects
-    - inventory
-    m_MainAsset: {fileID: 11400000, guid: 45ba49762ae9b754da327c0e33ac7cd4, type: 2}
-    m_TargetAsset: {fileID: 11400000, guid: 45ba49762ae9b754da327c0e33ac7cd4, type: 2}
-  - m_GUID: abd246664f0c53d49bc5502ba782d138
-    m_Address: VerticalInventory - Scroll View
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - prefabs
-    - inventory
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
-  - m_GUID: cb6d59ea04cdff541992dc0d3213a4ae
-    m_Address: ItemSlot
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - prefabs
-    - inventory
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
-  - m_GUID: e8fb44161f6fec94cb5e845a2051c9d0
-    m_Address: InventoryItems
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - scriptable objects
-    - inventory
-    m_MainAsset: {fileID: 11400000, guid: e8fb44161f6fec94cb5e845a2051c9d0, type: 2}
-    m_TargetAsset: {fileID: 11400000, guid: e8fb44161f6fec94cb5e845a2051c9d0, type: 2}
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f2dfc83e4ff92fa4eb917d82e819d434, type: 2}
   m_SchemaSet:

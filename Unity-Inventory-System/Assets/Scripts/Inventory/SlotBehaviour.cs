@@ -10,9 +10,7 @@ namespace UnityInventorySystem.Inventory
 
 		#region MemoryPoolMethods
 		public void OnDespawned() => _memoryPool = null;
-
 		public void OnSpawned(IMemoryPool memoryPool) => _memoryPool = memoryPool;
-
 		public void Dispose() => _memoryPool.Despawn(this);
 
 		#endregion

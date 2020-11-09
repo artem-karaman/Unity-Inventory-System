@@ -1,6 +1,4 @@
-﻿using Assets.Scripts.Core.ViewModels;
-using UnityEngine;
-using UnityEngine.AddressableAssets;
+﻿using UnityEngine;
 using UnityInventorySystem.Inventory;
 using UnityInventorySystem.Presenters;
 using Zenject;
@@ -13,7 +11,7 @@ namespace UnityInventorySystem.Installers
 		
 		public override void InstallBindings()
 		{
-			MainInventoryInstaller.Install(Container);
+			InventoryInstaller.Install(Container);
 			
 			Container
 				.BindFactory<InventoryBehaviour, InventoryBehaviour.Factory>()
