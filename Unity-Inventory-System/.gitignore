@@ -86,3 +86,6 @@ crashlytics-build.properties
 
 #Plugins 
 Assets/Plugins/
+
+#Asset packs
+Assets/Brackeys/
