@@ -5,20 +5,20 @@ using UnityEngine;
 
 namespace UnityInventorySystem.Inventory
 {
-	public class SlotsPoolBehaviour
+	public class SlotsFacadePoolBehaviour
 	{
-		private readonly SlotBehaviour.Factory _slotBehaviourFactory;
-		private readonly List<SlotBehaviour> _slots = new List<SlotBehaviour>();
-
+		private readonly SlotFacade.Factory _slotFacadeFactory;
+		
+		private List<SlotFacade> _slots = new List<SlotFacade>();
 		private Transform _parent;
 		
-		public SlotsPoolBehaviour(
-			SlotBehaviour.Factory slotBehaviourFactory)
+		public SlotsFacadePoolBehaviour(
+			SlotFacade.Factory slotFacadeFactory)
 		{
-			_slotBehaviourFactory = slotBehaviourFactory;
+			_slotFacadeFactory = slotFacadeFactory;
 		}
 
-		public List<SlotBehaviour> SlotList => _slots;
+		public List<SlotFacade> SlotList => _slots;
 
 		public void SetParent(Transform parent)
 		{
@@ -28,8 +28,8 @@ namespace UnityInventorySystem.Inventory
 
 		public void AddSlot()
 		{
-			var slot = _slotBehaviourFactory.Create();
-			slot.transform.SetParent(_parent, false);
+			var slot = _slotFacadeFactory.Create();
+			slot.SlotTransform.SetParent(_parent);
 			_slots.Add(slot);
 		}
 

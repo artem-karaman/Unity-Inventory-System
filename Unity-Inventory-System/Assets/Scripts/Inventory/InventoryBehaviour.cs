@@ -10,23 +10,21 @@ namespace UnityInventorySystem.Inventory
 {
 	public class InventoryBehaviour : BasePresenter, IInitializable
 	{
-		private InventoryViewModel _inventoryViewModel;
-		private SlotsPoolBehaviour _slotsPoolBehaviour;
-		private ItemPoolBehaviour _itemPoolBehaviour;
-
-		private List<SlotBehaviour> _allSlotsBehaviour;
-
-		private Transform _transform;
+		private readonly InventoryViewModel _inventoryViewModel;
+		private readonly SlotsFacadePoolBehaviour _slotsFacadePoolBehaviour;
+		private readonly ItemPoolBehaviour _itemPoolBehaviour;
+		private readonly Transform _transform;
 		
-		[Inject]
-		void Construct(
-			InventoryViewModel inventoryViewModel,
-			SlotsPoolBehaviour slotsPoolBehaviour,
-			ItemPoolBehaviour itemPoolBehaviour,
+		private List<SlotFacade> _allSlotsFacades;
+
+		public InventoryBehaviour(
+			InventoryViewModel inventoryViewModel, 
+			SlotsFacadePoolBehaviour slotsFacadePoolBehaviour, 
+			ItemPoolBehaviour itemPoolBehaviour,  
 			Transform transform)
 		{
 			_inventoryViewModel = inventoryViewModel;
-			_slotsPoolBehaviour = slotsPoolBehaviour;
+			_slotsFacadePoolBehaviour = slotsFacadePoolBehaviour;
 			_itemPoolBehaviour = itemPoolBehaviour;
 			_transform = transform;
 		}
@@ -39,9 +37,8 @@ namespace UnityInventorySystem.Inventory
 
 		private void PrepareComponents()
 		{
-			//Due to content game object is a second child root inventory component
 			var content = _transform.GetChild(0).GetChild(0);
-			_slotsPoolBehaviour.SetParent(content);
+			_slotsFacadePoolBehaviour.SetParent(content);
 		}
 
 		private void SubscribeComponents()
@@ -53,23 +50,31 @@ namespace UnityInventorySystem.Inventory
 				.AddTo(Disposables);
 		}
 
-		public bool Full => _allSlotsBehaviour.All(x => !x.Empty);
-
-		public SlotBehaviour[] EmptySlots => _allSlotsBehaviour.Where(x => x.Empty).ToArray();
-
 		private void AddSlots(int value)
 		{
 			for (var i = 0; i < value; i++)
 			{
-				_slotsPoolBehaviour.AddSlot();
+				_slotsFacadePoolBehaviour.AddSlot();
 			}
 
-			AddItems();
+			_allSlotsFacades = _slotsFacadePoolBehaviour.SlotList;
 		}
 
-		private void AddItems()
+		public void AddItem(Item item)
 		{
-			_itemPoolBehaviour.AddItem(_slotsPoolBehaviour?.SlotList[0]?.transform);
+			var slot = _allSlotsFacades.First(x => x.Empty);
+			
+			slot.AddItemToSlot(item);
+			
+			_itemPoolBehaviour.AddItem(slot.SlotTransform, item);
+		}
+
+		public void AddItems(IEnumerable<Item> items)
+		{
+			foreach (var item in items)
+			{
+				AddItem(item);
+			}
 		}
 	}
 }

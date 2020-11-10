@@ -26,22 +26,30 @@ namespace UnityInventorySystem.Installers
 				.AsSingle();
 
 			Container
-				.BindFactory<ItemBehaviour, ItemBehaviour.Factory>()
-				.FromNewComponentOnNewPrefabResource("Prefabs/Item")
-				.WithGameObjectName("Item");
+				.BindFactory<Item, ItemBehaviour, ItemBehaviour.Factory>()
+				.FromMonoPoolableMemoryPool(x => 
+					x
+						.WithInitialSize(3)
+						.FromNewComponentOnNewPrefabResource("Prefabs/Inventories/Item")
+						.WithGameObjectName("Item"));
 			
 			Container
-				.BindFactory<SlotBehaviour, SlotBehaviour.Factory>()
-				.FromNewComponentOnNewPrefabResource("Prefabs/ItemSlot")
-				.WithGameObjectName("ItemSlot");
-
-			Container
-				.Bind<ItemPoolBehaviour>()
+				.Bind<SlotsFacadePoolBehaviour>()
 				.ToSelf()
 				.AsSingle();
 
 			Container
-				.Bind<SlotsPoolBehaviour>()
+				.BindFactory<SlotFacade, SlotFacade.Factory>()
+				.FromPoolableMemoryPool(x =>
+					x
+						.WithInitialSize(25)
+						.ExpandByDoubling()
+						.FromSubContainerResolve()
+						.ByNewPrefabInstaller<SlotInstaller>(Resources.Load<GameObject>("Prefabs/Inventories/ItemSlot"))
+						.WithGameObjectName("ItemSlot"));
+				
+			Container
+				.Bind<ItemPoolBehaviour>()
 				.ToSelf()
 				.AsSingle();
 

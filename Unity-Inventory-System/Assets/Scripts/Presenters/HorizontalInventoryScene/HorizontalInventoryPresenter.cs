@@ -29,7 +29,7 @@ namespace UnityInventorySystem.Presenters
 
 			if (_hotBarFacade == null)
 			{
-				_hotBarFacade = _hotBarFacadeFactory.Create(2);
+				_hotBarFacade = _hotBarFacadeFactory.Create(3);
 			}
 		}
 	}

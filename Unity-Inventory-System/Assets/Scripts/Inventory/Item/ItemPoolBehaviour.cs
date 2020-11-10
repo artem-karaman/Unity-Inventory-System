@@ -16,9 +16,9 @@ namespace UnityInventorySystem.Inventory
 			_itemBehaviourFactory = itemBehaviourFactory;
 		}
 		
-		public void AddItem(Transform parent)
+		public void AddItem(Transform parent, Item itemData)
 		{
-			var item = _itemBehaviourFactory.Create();
+			var item = _itemBehaviourFactory.Create(itemData);
 			item.transform.SetParent(parent, false);
 			_items.Add(item);
 		}

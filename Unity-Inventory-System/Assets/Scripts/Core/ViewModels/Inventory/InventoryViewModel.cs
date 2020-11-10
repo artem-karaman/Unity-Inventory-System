@@ -12,7 +12,7 @@ namespace Assets.Scripts.Core.ViewModels
 		{
 			_slotsCount = slotsCount;
 
-			SlotsCount = new ReactiveProperty<int>(CalculateSlotsCountWithFullRow());
+			SlotsCount = new ReactiveProperty<int>(slotsCount);
 		}
 
 		public IReactiveProperty<int> SlotsCount;

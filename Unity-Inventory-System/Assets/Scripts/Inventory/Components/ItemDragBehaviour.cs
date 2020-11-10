@@ -13,8 +13,8 @@ namespace UnityInventorySystem
 		private RectTransform _rectTransform;
 		private CanvasGroup _canvasGroup;
 
-		private Vector2 _savedPosition;
-		private RectTransform _savedTransform;
+		private GameObject _selectedItem;
+		private GameObject _oldSlot;
 		
 		[Inject]
 		void Construct(UIManager uiManager)
@@ -26,10 +26,9 @@ namespace UnityInventorySystem
 		{
 			_rectTransform = GetComponent<RectTransform>();
 			_canvasGroup = GetComponent<CanvasGroup>();
+			_selectedItem = gameObject;
 
 			_canvas = _uiManager.Canvas;
-			_savedPosition = _rectTransform.anchoredPosition;
-			_savedTransform = _rectTransform;
 
 			gameObject
 				.AddComponent<ObservableDragTrigger>()
@@ -59,6 +58,8 @@ namespace UnityInventorySystem
 		private void OnPointerDown(PointerEventData eventData)
 		{
 			Debug.Log("Pointer down event");
+
+			_oldSlot = transform.parent.gameObject;
 		}
 
 		private void OnDrag(PointerEventData eventData)
@@ -81,6 +82,25 @@ namespace UnityInventorySystem
 			Debug.Log("On end drag");
 			_canvasGroup.blocksRaycasts = true;
 			_canvasGroup.alpha = 1f;
+
+			if (eventData.pointerEnter == null)
+			{
+				_selectedItem.transform.SetParent(_oldSlot.transform);
+				//_selectedItem.transform.localPosition = Vector3.zero;
+                return;
+            }
+			
+			if (!eventData.pointerEnter.CompareTag("ItemSlot"))
+			{
+				_selectedItem.transform.SetParent(_oldSlot.transform);
+				//_selectedItem.transform.localPosition = Vector3.zero;
+                return;
+            }
+
+            if (eventData.pointerEnter.CompareTag("ItemSlot"))
+            {
+				_selectedItem.transform.SetParent(eventData.pointerEnter.transform);
+            }
 		}
 	}
 }

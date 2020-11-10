@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Item
+  - ItemSlot
+  - asteroid
+  - ship
   layers:
   - Default
   - TransparentFX

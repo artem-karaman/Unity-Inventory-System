@@ -1,9 +1,27 @@
-﻿using Zenject;
+﻿using System.Collections.Generic;
+using Zenject;
 
 namespace UnityInventorySystem.Inventory
 {
-	public class InventoryFacade 
+	public class InventoryFacade
 	{
+		private readonly InventoryBehaviour _inventory;
+
+		public InventoryFacade(InventoryBehaviour inventory)
+		{
+			_inventory = inventory;
+		}
+
+		public void AddItem(Item item)
+		{
+			_inventory.AddItem(item);
+		}
+
+		public void AddItems(IEnumerable<Item> items)
+		{
+			_inventory.AddItems(items);
+		}
+		
 		public class Factory : PlaceholderFactory<int, InventoryFacade>{}
 	}
 }

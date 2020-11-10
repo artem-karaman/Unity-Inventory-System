@@ -15,9 +15,33 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 510.667
       objectReference: {fileID: 0}
+    - target: {fileID: 5367829270187370333, guid: cd6f766b9ed00914aa9308111234031b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5367829270187370333, guid: cd6f766b9ed00914aa9308111234031b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5367829270187370333, guid: cd6f766b9ed00914aa9308111234031b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5367829270187370333, guid: cd6f766b9ed00914aa9308111234031b, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5367829270187370334, guid: cd6f766b9ed00914aa9308111234031b, type: 3}
       propertyPath: m_ConstraintCount
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5367829270187370334, guid: cd6f766b9ed00914aa9308111234031b, type: 3}
+      propertyPath: m_ChildAlignment
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5367829270187370334, guid: cd6f766b9ed00914aa9308111234031b, type: 3}
+      propertyPath: m_Spacing.x
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 5367829270194936798, guid: cd6f766b9ed00914aa9308111234031b, type: 3}
       propertyPath: m_Value
@@ -25,7 +49,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5367829270194936798, guid: cd6f766b9ed00914aa9308111234031b, type: 3}
       propertyPath: m_Size
-      value: 0.46829262
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5367829270280391345, guid: cd6f766b9ed00914aa9308111234031b, type: 3}
       propertyPath: m_AnchorMax.x
@@ -45,7 +69,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5367829270877815982, guid: cd6f766b9ed00914aa9308111234031b, type: 3}
       propertyPath: m_Name
-      value: Line_HorizontalInventory
+      value: HotBarInventory
       objectReference: {fileID: 0}
     - target: {fileID: 5367829270877815983, guid: cd6f766b9ed00914aa9308111234031b, type: 3}
       propertyPath: m_LocalPosition.x
