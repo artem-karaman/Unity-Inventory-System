@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 namespace UnityInventorySystem.Inventory
@@ -15,6 +16,8 @@ namespace UnityInventorySystem.Inventory
 		{
 			_itemBehaviourFactory = itemBehaviourFactory;
 		}
+
+		public List<ItemBehaviour> Items => _items;
 		
 		public void AddItem(Transform parent, Item itemData)
 		{

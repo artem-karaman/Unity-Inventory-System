@@ -8,7 +8,7 @@ namespace UnityInventorySystem
 {
 	public class ItemDragBehaviour : MonoBehaviour
 	{
-		private UIManager _uiManager;
+		private SharedUIManager _sharedUIManager;
 		private Canvas _canvas; 
 		private RectTransform _rectTransform;
 		private CanvasGroup _canvasGroup;
@@ -17,9 +17,9 @@ namespace UnityInventorySystem
 		private GameObject _oldSlot;
 		
 		[Inject]
-		void Construct(UIManager uiManager)
+		void Construct(SharedUIManager sharedUIManager)
 		{
-			_uiManager = uiManager;
+			_sharedUIManager = sharedUIManager;
 		}
 
 		void Start()
@@ -28,7 +28,7 @@ namespace UnityInventorySystem
 			_canvasGroup = GetComponent<CanvasGroup>();
 			_selectedItem = gameObject;
 
-			_canvas = _uiManager.Canvas;
+			_canvas = _sharedUIManager.Canvas;
 
 			gameObject
 				.AddComponent<ObservableDragTrigger>()
@@ -74,7 +74,7 @@ namespace UnityInventorySystem
 			_canvasGroup.blocksRaycasts = false;
 			_canvasGroup.alpha = .6f;
 			
-			transform.SetParent(_uiManager.DragingItem.transform);
+			transform.SetParent(_sharedUIManager.DragingItem.transform);
 		}
 
 		private void OnEndDrag(PointerEventData eventData)

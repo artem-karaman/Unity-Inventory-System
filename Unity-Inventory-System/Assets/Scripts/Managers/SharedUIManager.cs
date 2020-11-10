@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class SharedUIManager : MonoBehaviour
 {
 	[Tooltip("Это поле для Canvas")] 
 	[SerializeField]

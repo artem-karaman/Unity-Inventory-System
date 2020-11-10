@@ -76,5 +76,18 @@ namespace UnityInventorySystem.Inventory
 				AddItem(item);
 			}
 		}
+
+		public void Update()
+		{
+			
+		}
+
+		public void ClearItems()
+		{
+			for (int i = 0; i < _itemPoolBehaviour.Items.Count; ++i)
+			{
+				_itemPoolBehaviour.RemoveItem();
+			}
+		}
 	}
 }

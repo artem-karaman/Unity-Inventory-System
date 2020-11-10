@@ -12,16 +12,11 @@ namespace UnityInventorySystem.Inventory
 			_inventory = inventory;
 		}
 
-		public void AddItem(Item item)
-		{
-			_inventory.AddItem(item);
-		}
+		public void AddItem(Item item) => _inventory.AddItem(item);
+		public void AddItems(IEnumerable<Item> items) => _inventory.AddItems(items);
+		public void UpdateInventory() => _inventory.Update();
+		public void ClearItems() => _inventory.ClearItems();
 
-		public void AddItems(IEnumerable<Item> items)
-		{
-			_inventory.AddItems(items);
-		}
-		
 		public class Factory : PlaceholderFactory<int, InventoryFacade>{}
 	}
 }

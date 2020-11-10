@@ -10,9 +10,7 @@ namespace UnityInventorySystem.Inventory
 		{
 			_inventory = inventory;
 		}
-		
-		
-		
+
 		public class Factory : PlaceholderFactory<int, HotBarFacade> { }
 	}
 }
