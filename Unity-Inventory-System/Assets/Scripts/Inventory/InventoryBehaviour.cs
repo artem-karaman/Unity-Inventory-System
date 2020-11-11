@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.Core.ViewModels;
 using UniRx;
@@ -78,6 +79,8 @@ namespace UnityInventorySystem.Inventory
 
 		public void AddItems(IEnumerable<IItem> items)
 		{
+			_ = items ?? throw new ArgumentNullException(nameof(items));
+			
 			foreach (var item in items)
 			{
 				AddItem(item);
@@ -103,10 +106,7 @@ namespace UnityInventorySystem.Inventory
 
 			if (!list.Any()) return;
 			
-			foreach (var item in list)
-			{
-				AddItem(item);
-			}
+			AddItems(list);
 		}
 	}
 }

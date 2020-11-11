@@ -5,15 +5,32 @@ namespace UnityInventorySystem.Managers
 {
 	public class MainSceneUIManager : MonoBehaviour
 	{
-		[Tooltip("Это поле для ClearInventoryButton")] [SerializeField]
-		private Button _clearInventoryButton;
+		[Tooltip("Это поле для HandItemsButton")]
+		[SerializeField]
+		private Button _handItemsButton;
 
-		public Button ClearInventoryButton => _clearInventoryButton;
+		[Tooltip("Это поле для BodyItemsButton")] 
+		[SerializeField]
+		private Button _bodyItemsButton;
 
-		[Tooltip("Это поле для FilterItems")] [SerializeField]
-		private Button _filterItems;
+		[Tooltip("Это поле для LegItemsButton")] 
+		[SerializeField]
+		private Button _legItemsButton;
 
-		public Button FilterItems => _filterItems;
+		[Tooltip("Это поле для CardItemsButton")] 
+		[SerializeField]
+		private Button _cardItemsButton;
 
+		[Tooltip("Это поле для OtherItemsButton")] 
+		[SerializeField]
+		private Button _otherItemsButton;
+
+		public Button HandItemsButton => _handItemsButton;
+		public Button BodyItemsButton => _bodyItemsButton;
+		public Button LegItemsButton => _legItemsButton;
+		public Button CardItemsButton => _cardItemsButton;
+		public Button OtherItemsButton => _otherItemsButton;
+
+		
 	}
 }

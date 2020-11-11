@@ -34,16 +34,10 @@ namespace UnityInventorySystem.Presenters
 		private void FillInventory()
 		{
 			_inventoryFacade.AddItem(new HandItem());
-			_inventoryFacade.AddItem(new HandItem());
-			_inventoryFacade.AddItem(new HandItem());
-			_inventoryFacade.AddItem(new HandItem());
 			
 			_inventoryFacade.AddItem(new BodyItem());
 			_inventoryFacade.AddItem(new BodyItem());
-			_inventoryFacade.AddItem(new BodyItem());
-			_inventoryFacade.AddItem(new BodyItem());
 			
-			_inventoryFacade.AddItem(new LegItem());
 			_inventoryFacade.AddItem(new LegItem());
 			_inventoryFacade.AddItem(new LegItem());
 			_inventoryFacade.AddItem(new LegItem());
@@ -52,8 +46,8 @@ namespace UnityInventorySystem.Presenters
 			_inventoryFacade.AddItem(new CardItem());
 			_inventoryFacade.AddItem(new CardItem());
 			_inventoryFacade.AddItem(new CardItem());
-			_inventoryFacade.AddItem(new CardItem());
 			
+			_inventoryFacade.AddItem(new OtherItem());
 			_inventoryFacade.AddItem(new OtherItem());
 			_inventoryFacade.AddItem(new OtherItem());
 			_inventoryFacade.AddItem(new OtherItem());
@@ -62,23 +56,37 @@ namespace UnityInventorySystem.Presenters
 
 		private void SubscribeComponents()
 		{
-			var clearInventoryButton = _mainSceneUIManager.ClearInventoryButton;
-			clearInventoryButton
+			var handItemsButton = _mainSceneUIManager.HandItemsButton;
+			var bodyItemsButton = _mainSceneUIManager.BodyItemsButton;
+			var legItemsButton = _mainSceneUIManager.LegItemsButton;
+			var cardItemsButton = _mainSceneUIManager.CardItemsButton;
+			var otherItemsButton = _mainSceneUIManager.OtherItemsButton;
+
+			handItemsButton
 				.OnClickAsObservable()
-				.Subscribe(_ =>
-				{
-					_inventoryFacade.ClearItems();
-				})
+				.Subscribe(_ => _inventoryFacade.FilterItems<IHandItem>())
 				.AddTo(Disposables);
-
-			var filterItemsButton = _mainSceneUIManager.FilterItems;
-
-			filterItemsButton
+			
+			bodyItemsButton
 				.OnClickAsObservable()
-				.Subscribe(_ =>
-				{
-					_inventoryFacade.FilterItems<IOtherItem>();
-				});
+				.Subscribe(_ => _inventoryFacade.FilterItems<IBodyItem>())
+				.AddTo(Disposables);
+			
+			legItemsButton
+				.OnClickAsObservable()
+				.Subscribe(_ => _inventoryFacade.FilterItems<ILegItem>())
+				.AddTo(Disposables);
+			
+			cardItemsButton
+				.OnClickAsObservable()
+				.Subscribe(_ => _inventoryFacade.FilterItems<ICardItem>())
+				.AddTo(Disposables);
+			
+			otherItemsButton
+				.OnClickAsObservable()
+				.Subscribe(_ => _inventoryFacade.FilterItems<IOtherItem>())
+				.AddTo(Disposables);
 		}
+
 	}
 }
