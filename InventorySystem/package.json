@@ -1,9 +1,9 @@
 {
-    "name": "com.namarakM.InventorySystem",
-    "displayName": "Inventory",
+    "name": "com.namarakm.inventorysystem",
+	"author": "Artem Karaman"
+    "displayName": "Inventory System",
     "version": "0.1.0",
-    "unity": "2020.1",
+    "unity": "2020.1.8",
     "description": "Inventory system written using UniRx, Extenject and other plugins",
-    "license": "MIT",
     "dependencies": {}
 }
