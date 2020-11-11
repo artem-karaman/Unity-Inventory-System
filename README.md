@@ -14,3 +14,7 @@ Unity Editor version - 2020.1.8f1
 
 - Unity reorderable list - https://github.com/cfoulston/Unity-Reorderable-List - unity package - upm
 </details>
+
+install this package via upm:
+
+https://github.com/namarakM/Unity-Inventory-System.git?path=/Unity-Inventory-System/Assets
