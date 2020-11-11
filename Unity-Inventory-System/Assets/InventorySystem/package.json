@@ -1,10 +1,14 @@
 {
     "name": "com.namarakm.inventorysystem",
-	"author": "Artem Karaman",
+	  "author": "Artem Karaman",
     "displayName": "Inventory",
     "version": "0.1.0",
     "unity": "2020.1",
     "description": "Inventory system writen using UniRx, Extenject and other plugins",
     "license": "MIT",
-    "dependencies": {}
+    "dependencies": {
+      "com.neuecc.unirx": "7.1.0",
+      "com.cysharp.unitask": "2.0.37",
+      "com.malee.reorderablelist":"1.0.1"
+    }
 }
