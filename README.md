@@ -18,7 +18,7 @@ or
 
 Add to manifest
 
-```json
+```yaml
 {
   "dependencies": 
   {
