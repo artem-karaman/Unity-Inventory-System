@@ -84,7 +84,9 @@ namespace UnityInventorySystem.Inventory
 
 		public void ClearItems()
 		{
-			for (int i = 0; i < _itemPoolBehaviour.Items.Count; ++i)
+			var itemCount = _itemPoolBehaviour.Items.Count;
+			
+			for (int i = 0; i < itemCount; i++)
 			{
 				_itemPoolBehaviour.RemoveItem();
 			}
