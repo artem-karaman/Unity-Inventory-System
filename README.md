@@ -12,9 +12,21 @@ Unity Editor version - 2020.1.8f1
 
 - Extenject - version 9.2.0 - asset store
 
-- Unity reorderable list - https://github.com/cfoulston/Unity-Reorderable-List - unity package - upm
+- Unity reorderable list - https://github.com/cfoulston/Unity-Reorderable-List - unity package - upm 
+
+or 
+
+Add to manifest
+
+"com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
+"com.malee.reorderablelist": "https://github.com/cfoulston/Unity-Reorderable-List.git",
+"com.neuecc.unirx": "https://github.com/neuecc/UniRx.git?path=Assets/Plugins/UniRx/Scripts",
+
+and Extenject form asset store
+
 </details>
 
-install this package via upm:
 
-https://github.com/namarakM/Unity-Inventory-System.git?path=/Unity-Inventory-System/Assets
+- Install this package via upm:
+
+https://github.com/namarakM/Unity-Inventory-System.git?path=/Unity-Inventory-System/Assets/InventorySystem
