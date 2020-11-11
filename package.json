@@ -1,9 +1,15 @@
 {
     "name": "com.namarakm.inventorysystem",
+	"author": "Artem Karaman"
     "displayName": "Inventory",
     "version": "0.1.0",
     "unity": "2020.1",
     "description": "Inventory system writen using UniRx, Extenject and other plugins",
     "license": "MIT",
-    "dependencies": {}
+    "dependencies": 
+		{
+			"com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
+			"com.malee.reorderablelist": "https://github.com/cfoulston/Unity-Reorderable-List.git",
+			"com.neuecc.unirx": "https://github.com/neuecc/UniRx.git?path=Assets/Plugins/UniRx/Scripts"
+		}
 }
