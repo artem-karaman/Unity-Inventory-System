@@ -18,9 +18,17 @@ or
 
 Add to manifest
 
-"com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
-"com.malee.reorderablelist": "https://github.com/cfoulston/Unity-Reorderable-List.git",
-"com.neuecc.unirx": "https://github.com/neuecc/UniRx.git?path=Assets/Plugins/UniRx/Scripts",
+```json
+{
+  "dependencies": 
+  {
+    "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
+    "com.malee.reorderablelist": "https://github.com/cfoulston/Unity-Reorderable-List.git",
+    "com.neuecc.unirx": "https://github.com/neuecc/UniRx.git?path=Assets/Plugins/UniRx/Scripts"
+    ...
+  }
+}
+```
 
 and Extenject form asset store
 
