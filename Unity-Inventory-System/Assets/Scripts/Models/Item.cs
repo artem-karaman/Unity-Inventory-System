@@ -4,7 +4,7 @@ using UnityEngine;
 namespace UnityInventorySystem
 {
 	[Serializable]
-	public class Item : IItem
+	public abstract class Item
 	{
 		private string _titile;
 		private string _description;
