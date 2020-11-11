@@ -10,9 +10,7 @@ Unity Editor version - 2020.1.8f1
   
 - UniTask - version 2.0.36 - https://github.com/Cysharp/UniTask/releases/tag/2.0.36 - unity package - upm
 
-- Extenject - version 9.2.0 - unity package - upm
-
-- Addressables - version 1.8.5 - unity package - upm
+- Extenject - version 9.2.0 - asset store
 
 - Unity reorderable list - https://github.com/cfoulston/Unity-Reorderable-List - unity package - upm
 </details>
