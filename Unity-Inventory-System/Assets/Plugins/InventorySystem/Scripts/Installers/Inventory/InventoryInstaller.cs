@@ -43,9 +43,8 @@ namespace UnityInventorySystem.Installers
 				.FromPoolableMemoryPool(x =>
 					x
 						.WithInitialSize(25)
-						.ExpandByDoubling()
 						.FromSubContainerResolve()
-						.ByNewPrefabInstaller<SlotInstaller>(Resources.Load<GameObject>("Prefabs/Inventories/ItemSlot"))
+						.ByNewPrefabResourceInstaller<SlotInstaller>("Prefabs/Inventories/ItemSlot")
 						.WithGameObjectName("ItemSlot"));
 				
 			Container

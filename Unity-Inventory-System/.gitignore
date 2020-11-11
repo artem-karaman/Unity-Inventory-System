@@ -85,7 +85,8 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 #Plugins 
-Assets/Plugins/
+Assets/Plugins/Zenject/
+Assets/Plugins/Zenject*
 
 #Asset packs
 Assets/TextMesh Pro/

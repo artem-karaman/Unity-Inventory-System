@@ -16,6 +16,10 @@ namespace UnityInventorySystem
 		private GameObject _selectedItem;
 		private GameObject _oldSlot;
 		
+		[SerializeField]
+		[Tooltip("How long must pointer be down on this object to trigger a long press")]
+		private float _holdTime = 1f;
+		
 		[Inject]
 		void Construct(SharedUIManager sharedUIManager)
 		{
@@ -60,6 +64,13 @@ namespace UnityInventorySystem
 			Debug.Log("Pointer down event");
 
 			_oldSlot = transform.parent.gameObject;
+			
+			Invoke("OnLongPress", _holdTime);
+		}
+
+		private void OnLongPress()
+		{
+			Debug.Log("Log press detected ");
 		}
 
 		private void OnDrag(PointerEventData eventData)
@@ -85,22 +96,36 @@ namespace UnityInventorySystem
 
 			if (eventData.pointerEnter == null)
 			{
-				_selectedItem.transform.SetParent(_oldSlot.transform);
-				//_selectedItem.transform.localPosition = Vector3.zero;
+				MoveToOriginalSlot();
+				
                 return;
             }
 			
 			if (!eventData.pointerEnter.CompareTag("ItemSlot"))
 			{
-				_selectedItem.transform.SetParent(_oldSlot.transform);
-				//_selectedItem.transform.localPosition = Vector3.zero;
+				MoveToOriginalSlot();
+				
                 return;
             }
 
             if (eventData.pointerEnter.CompareTag("ItemSlot"))
             {
-				_selectedItem.transform.SetParent(eventData.pointerEnter.transform);
+	            _selectedItem.transform.SetParent(eventData.pointerEnter.transform);
+	            
+	            // if (eventData.pointerEnter.GetComponent<SlotInteractor>().Empty())
+	            // {
+		           //  _selectedItem.transform.SetParent(eventData.pointerEnter.transform);
+	            // }
+	            // else
+	            // {
+		           //  MoveToOriginalSlot();
+	            // }
             }
+		}
+
+		public void MoveToOriginalSlot()
+		{
+			_selectedItem.transform.SetParent(_oldSlot.transform);
 		}
 	}
 }

@@ -15,15 +15,13 @@ namespace UnityInventorySystem.Inventory
 		private readonly SlotsFacadePoolBehaviour _slotsFacadePoolBehaviour;
 		private readonly ItemPoolBehaviour _itemPoolBehaviour;
 		private readonly Transform _transform;
-		
-		private List<SlotFacade> _allSlotsFacades;
 
-		private List<IItem> _items = new List<IItem>();
+		private List<IItem> _savedOrigianlItemsList = new List<IItem>();
 
 		public InventoryBehaviour(
-			InventoryViewModel inventoryViewModel, 
-			SlotsFacadePoolBehaviour slotsFacadePoolBehaviour, 
-			ItemPoolBehaviour itemPoolBehaviour,  
+			InventoryViewModel inventoryViewModel,
+			SlotsFacadePoolBehaviour slotsFacadePoolBehaviour,
+			ItemPoolBehaviour itemPoolBehaviour,
 			Transform transform)
 		{
 			_inventoryViewModel = inventoryViewModel;
@@ -59,22 +57,13 @@ namespace UnityInventorySystem.Inventory
 			{
 				_slotsFacadePoolBehaviour.AddSlot();
 			}
-
-			_allSlotsFacades = _slotsFacadePoolBehaviour.SlotList;
 		}
 
-		public void AddItem(IItem item, bool saveItem = true)
+		public void AddItem(IItem item, bool saveItem = false)
 		{
 			AddItem(item);
 			
-			_items.Add(item);
-		}
-
-		private void AddItem(IItem item)
-		{
-			var slot = _allSlotsFacades.First(x => x.Empty);
-			
-			slot.AddItemToSlot(_itemPoolBehaviour.AddItem(slot.SlotTransform, item));
+			_savedOrigianlItemsList.Add(item);
 		}
 
 		public void AddItems(IEnumerable<IItem> items)
@@ -92,21 +81,25 @@ namespace UnityInventorySystem.Inventory
 			
 		}
 
-		public void ClearItems()
-		{
-			_slotsFacadePoolBehaviour.SlotList.ForEach(s => s.SetEmpty());
-		}
+		public void ClearItems() => _slotsFacadePoolBehaviour.ClearSlots();
 
 		public void FilterItems<T>() 
 			where T : IItem
 		{
 			ClearItems();
 
-			var list = _items.Where(i => i is T).ToList();
+			var list = _savedOrigianlItemsList.Where(i => i is T).ToList();
 
 			if (!list.Any()) return;
 			
 			AddItems(list);
+		}
+
+		private void AddItem(IItem item)
+		{
+			var slot = _slotsFacadePoolBehaviour.FindEmptySlot();
+			
+			slot.AddItemToSlot(_itemPoolBehaviour.AddItem(slot.SlotTransform, item));
 		}
 	}
 }

@@ -18,8 +18,6 @@ namespace UnityInventorySystem.Inventory
 			_slotFacadeFactory = slotFacadeFactory;
 		}
 
-		public List<SlotFacade> SlotList => _slots;
-
 		public void SetParent(Transform parent)
 		{
 			_ = parent ? parent : throw new ArgumentNullException(nameof(parent));
@@ -31,6 +29,16 @@ namespace UnityInventorySystem.Inventory
 			var slot = _slotFacadeFactory.Create();
 			slot.SlotTransform.SetParent(_parent);
 			_slots.Add(slot);
+		}
+
+		public SlotFacade FindEmptySlot()
+		{
+			return _slots.First(s => s.Empty);
+		}
+
+		public void ClearSlots()
+		{
+			_slots.ForEach(s => s.SetEmpty());
 		}
 
 		public void RemoveSlot()

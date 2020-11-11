@@ -7,10 +7,10 @@ namespace UnityInventorySystem.Presenters
 	public class HorizontalInventoryPresenter : BasePresenter, IInitializable
 	{
 		private readonly InventoryFacade.Factory _inventoryFacadeFactory;
-		private InventoryFacade _inventoryFacade;
+		private InventoryFacade _inventory;
 
 		private readonly HotBarFacade.Factory _hotBarFacadeFactory;
-		private HotBarFacade _hotBarFacade;
+		private HotBarFacade _hotBar;
 
 		public HorizontalInventoryPresenter(
 			InventoryFacade.Factory inventoryFacadeFactory,
@@ -22,15 +22,18 @@ namespace UnityInventorySystem.Presenters
 		
 		public void Initialize()
 		{
-			if (_inventoryFacade == null)
+			if (_inventory == null)
 			{
-				_inventoryFacade = _inventoryFacadeFactory.Create(20);
+				_inventory = _inventoryFacadeFactory.Create(20);
 			}
 
-			if (_hotBarFacade == null)
+			if (_hotBar == null)
 			{
-				_hotBarFacade = _hotBarFacadeFactory.Create(3);
+				_hotBar = _hotBarFacadeFactory.Create(3);
 			}
+			
+			_inventory.AddItem(new LegItem());
+			_inventory.AddItem(new BodyItem());
 		}
 	}
 }

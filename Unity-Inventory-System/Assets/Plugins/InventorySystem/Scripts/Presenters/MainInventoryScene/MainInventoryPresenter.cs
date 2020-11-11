@@ -11,7 +11,7 @@ namespace UnityInventorySystem.Presenters
 		private readonly InventoryFacade.Factory _inventoryFacadeFactory;
 		private readonly MainSceneUIManager _mainSceneUIManager;
 		
-		private InventoryFacade _inventoryFacade;
+		private InventoryFacade _inventory;
 		public MainInventoryPresenter(
 			InventoryFacade.Factory inventoryFacadeFactory,
 			MainSceneUIManager mainSceneUIManager)
@@ -22,9 +22,9 @@ namespace UnityInventorySystem.Presenters
 		
 		public void Initialize()
 		{
-			if (_inventoryFacade == null)
+			if (_inventory == null)
 			{
-				_inventoryFacade = _inventoryFacadeFactory.Create(35);
+				_inventory = _inventoryFacadeFactory.Create(20);
 			}
 
 			FillInventory();
@@ -33,25 +33,25 @@ namespace UnityInventorySystem.Presenters
 
 		private void FillInventory()
 		{
-			_inventoryFacade.AddItem(new HandItem());
+			_inventory.AddItem(new HandItem());
 			
-			_inventoryFacade.AddItem(new BodyItem());
-			_inventoryFacade.AddItem(new BodyItem());
+			_inventory.AddItem(new BodyItem());
+			_inventory.AddItem(new BodyItem());
 			
-			_inventoryFacade.AddItem(new LegItem());
-			_inventoryFacade.AddItem(new LegItem());
-			_inventoryFacade.AddItem(new LegItem());
+			_inventory.AddItem(new LegItem());
+			_inventory.AddItem(new LegItem());
+			_inventory.AddItem(new LegItem());
 			
-			_inventoryFacade.AddItem(new CardItem());
-			_inventoryFacade.AddItem(new CardItem());
-			_inventoryFacade.AddItem(new CardItem());
-			_inventoryFacade.AddItem(new CardItem());
+			_inventory.AddItem(new CardItem());
+			_inventory.AddItem(new CardItem());
+			_inventory.AddItem(new CardItem());
+			_inventory.AddItem(new CardItem());
 			
-			_inventoryFacade.AddItem(new OtherItem());
-			_inventoryFacade.AddItem(new OtherItem());
-			_inventoryFacade.AddItem(new OtherItem());
-			_inventoryFacade.AddItem(new OtherItem());
-			_inventoryFacade.AddItem(new OtherItem());
+			_inventory.AddItem(new OtherItem());
+			_inventory.AddItem(new OtherItem());
+			_inventory.AddItem(new OtherItem());
+			_inventory.AddItem(new OtherItem());
+			_inventory.AddItem(new OtherItem());
 		}
 
 		private void SubscribeComponents()
@@ -64,29 +64,28 @@ namespace UnityInventorySystem.Presenters
 
 			handItemsButton
 				.OnClickAsObservable()
-				.Subscribe(_ => _inventoryFacade.FilterItems<IHandItem>())
+				.Subscribe(_ => _inventory.FilterItems<IHandItem>())
 				.AddTo(Disposables);
 			
 			bodyItemsButton
 				.OnClickAsObservable()
-				.Subscribe(_ => _inventoryFacade.FilterItems<IBodyItem>())
+				.Subscribe(_ => _inventory.FilterItems<IBodyItem>())
 				.AddTo(Disposables);
 			
 			legItemsButton
 				.OnClickAsObservable()
-				.Subscribe(_ => _inventoryFacade.FilterItems<ILegItem>())
+				.Subscribe(_ => _inventory.FilterItems<ILegItem>())
 				.AddTo(Disposables);
 			
 			cardItemsButton
 				.OnClickAsObservable()
-				.Subscribe(_ => _inventoryFacade.FilterItems<ICardItem>())
+				.Subscribe(_ => _inventory.FilterItems<ICardItem>())
 				.AddTo(Disposables);
 			
 			otherItemsButton
 				.OnClickAsObservable()
-				.Subscribe(_ => _inventoryFacade.FilterItems<IOtherItem>())
+				.Subscribe(_ => _inventory.FilterItems<IOtherItem>())
 				.AddTo(Disposables);
 		}
-
 	}
 }

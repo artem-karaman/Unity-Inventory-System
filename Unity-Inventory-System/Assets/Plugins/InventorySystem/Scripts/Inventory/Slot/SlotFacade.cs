@@ -8,7 +8,7 @@ namespace UnityInventorySystem.Inventory
 	{
 		private readonly Transform _slotTransform;
 		private readonly SlotBehaviour _slotBehaviour;
-		
+
 		private IMemoryPool _memoryPool;
 
 		public SlotFacade(
@@ -18,9 +18,9 @@ namespace UnityInventorySystem.Inventory
 			_slotTransform = slotTransform;
 			_slotBehaviour = slotBehaviour;
 		}
-		
+
 		public Transform SlotTransform => _slotTransform;
-		
+
 		public void Dispose()
 		{
 			_memoryPool?.Despawn(this);
@@ -48,6 +48,13 @@ namespace UnityInventorySystem.Inventory
 			_slotBehaviour.ClearStack();
 		}
 
-		public class Factory : PlaceholderFactory<SlotFacade> { }
+		public int ItemsCount()
+		{
+			return _slotBehaviour.ItemsCount;
+		}
+
+		public class Factory : PlaceholderFactory<SlotFacade>
+		{
+		}
 	}
 }

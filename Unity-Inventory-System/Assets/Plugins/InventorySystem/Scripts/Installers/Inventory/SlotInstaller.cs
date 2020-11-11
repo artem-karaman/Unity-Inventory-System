@@ -12,7 +12,7 @@ namespace UnityInventorySystem.Installers
 			Container
 				.Bind<Transform>()
 				.FromComponentOnRoot();
-
+			
 			Container
 				.BindInterfacesAndSelfTo<SlotFacade>()
 				.AsSingle();
