@@ -5,10 +5,10 @@ using Zenject;
 
 namespace UnityInventorySystem.Inventory
 {
-	public class ItemBehaviour : MonoBehaviour, IPoolable<Item, IMemoryPool>, IDisposable
+	public class ItemBehaviour : MonoBehaviour, IPoolable<IItem, IMemoryPool>, IDisposable
 	{
 		private IMemoryPool _memoryPool;
-		private Item _item;
+		private IItem _item;
 		
 		public void OnDespawned()
 		{
@@ -16,7 +16,7 @@ namespace UnityInventorySystem.Inventory
 			_item = null;
 		}
 
-		public void OnSpawned(Item item, IMemoryPool memoryPool)
+		public void OnSpawned(IItem item, IMemoryPool memoryPool)
 		{
 			_memoryPool = memoryPool;
 			_item = item;
@@ -32,6 +32,6 @@ namespace UnityInventorySystem.Inventory
 
 		public void Dispose() => _memoryPool.Despawn(this);
 
-		public class Factory : PlaceholderFactory<Item, ItemBehaviour>{}
+		public class Factory : PlaceholderFactory<IItem, ItemBehaviour>{}
 	}
 }

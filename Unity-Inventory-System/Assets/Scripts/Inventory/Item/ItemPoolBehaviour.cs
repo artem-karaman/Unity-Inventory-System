@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using TMPro;
 using UnityEngine;
 
 namespace UnityInventorySystem.Inventory
@@ -19,17 +17,25 @@ namespace UnityInventorySystem.Inventory
 
 		public List<ItemBehaviour> Items => _items;
 		
-		public void AddItem(Transform parent, Item itemData)
+		public ItemBehaviour AddItem(Transform parent, IItem itemData)
 		{
 			var item = _itemBehaviourFactory.Create(itemData);
 			item.transform.SetParent(parent, false);
 			_items.Add(item);
+
+			return item;
 		}
 
 		public void RemoveItem()
 		{
 			if (!_items.Any()) return;
 			var item = _items[0];
+			item.Dispose();
+			_items.Remove(item);
+		}
+
+		public void RemoveItem(ItemBehaviour item)
+		{
 			item.Dispose();
 			_items.Remove(item);
 		}

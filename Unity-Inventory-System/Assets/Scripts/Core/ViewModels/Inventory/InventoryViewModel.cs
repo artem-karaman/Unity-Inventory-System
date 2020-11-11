@@ -1,4 +1,5 @@
-﻿using UniRx;
+﻿using System.Collections.Generic;
+using UniRx;
 
 namespace Assets.Scripts.Core.ViewModels
 {
@@ -7,7 +8,7 @@ namespace Assets.Scripts.Core.ViewModels
 		private readonly int _slotsCount;
 		
 		private int _totalItemsInRowOrColumn = 4;
-
+		
 		public InventoryViewModel(int slotsCount)
 		{
 			_slotsCount = slotsCount;

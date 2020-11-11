@@ -36,12 +36,17 @@ namespace UnityInventorySystem.Inventory
 			_memoryPool = memoryPool;
 		}
 
-		public void AddItemToSlot(Item item)
+		public void AddItemToSlot(ItemBehaviour item)
 		{
 			_slotBehaviour.AddItem(item);
 		}
 
 		public bool Empty => _slotBehaviour.Empty;
+
+		public void SetEmpty()
+		{
+			_slotBehaviour.ClearStack();
+		}
 
 		public class Factory : PlaceholderFactory<SlotFacade> { }
 	}

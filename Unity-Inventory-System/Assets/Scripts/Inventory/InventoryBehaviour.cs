@@ -17,6 +17,8 @@ namespace UnityInventorySystem.Inventory
 		
 		private List<SlotFacade> _allSlotsFacades;
 
+		private List<IItem> _items = new List<IItem>();
+
 		public InventoryBehaviour(
 			InventoryViewModel inventoryViewModel, 
 			SlotsFacadePoolBehaviour slotsFacadePoolBehaviour, 
@@ -60,16 +62,21 @@ namespace UnityInventorySystem.Inventory
 			_allSlotsFacades = _slotsFacadePoolBehaviour.SlotList;
 		}
 
-		public void AddItem(Item item)
+		public void AddItem(IItem item, bool saveItem = true)
+		{
+			AddItem(item);
+			
+			_items.Add(item);
+		}
+
+		private void AddItem(IItem item)
 		{
 			var slot = _allSlotsFacades.First(x => x.Empty);
 			
-			slot.AddItemToSlot(item);
-			
-			_itemPoolBehaviour.AddItem(slot.SlotTransform, item);
+			slot.AddItemToSlot(_itemPoolBehaviour.AddItem(slot.SlotTransform, item));
 		}
 
-		public void AddItems(IEnumerable<Item> items)
+		public void AddItems(IEnumerable<IItem> items)
 		{
 			foreach (var item in items)
 			{
@@ -84,11 +91,21 @@ namespace UnityInventorySystem.Inventory
 
 		public void ClearItems()
 		{
-			var itemCount = _itemPoolBehaviour.Items.Count;
+			_slotsFacadePoolBehaviour.SlotList.ForEach(s => s.SetEmpty());
+		}
+
+		public void FilterItems<T>() 
+			where T : IItem
+		{
+			ClearItems();
+
+			var list = _items.Where(i => i is T).ToList();
+
+			if (!list.Any()) return;
 			
-			for (int i = 0; i < itemCount; i++)
+			foreach (var item in list)
 			{
-				_itemPoolBehaviour.RemoveItem();
+				AddItem(item);
 			}
 		}
 	}

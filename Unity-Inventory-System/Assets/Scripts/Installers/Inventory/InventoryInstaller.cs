@@ -26,7 +26,7 @@ namespace UnityInventorySystem.Installers
 				.AsSingle();
 
 			Container
-				.BindFactory<Item, ItemBehaviour, ItemBehaviour.Factory>()
+				.BindFactory<IItem, ItemBehaviour, ItemBehaviour.Factory>()
 				.FromMonoPoolableMemoryPool(x => 
 					x
 						.WithInitialSize(3)

@@ -9,5 +9,11 @@ namespace UnityInventorySystem.Managers
 		private Button _clearInventoryButton;
 
 		public Button ClearInventoryButton => _clearInventoryButton;
+
+		[Tooltip("Это поле для FilterItems")] [SerializeField]
+		private Button _filterItems;
+
+		public Button FilterItems => _filterItems;
+
 	}
 }

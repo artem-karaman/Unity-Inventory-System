@@ -1,5 +1,4 @@
 ﻿using UniRx;
-using UnityEngine;
 using UnityInventorySystem.Inventory;
 using UnityInventorySystem.Managers;
 using UnityInventorySystem.Presenters.Base;
@@ -34,31 +33,31 @@ namespace UnityInventorySystem.Presenters
 
 		private void FillInventory()
 		{
-			_inventoryFacade.AddItem(new Item(Color.blue));
-			_inventoryFacade.AddItem(new Item(Color.blue));
-			_inventoryFacade.AddItem(new Item(Color.blue));
-			_inventoryFacade.AddItem(new Item(Color.blue));
+			_inventoryFacade.AddItem(new HandItem());
+			_inventoryFacade.AddItem(new HandItem());
+			_inventoryFacade.AddItem(new HandItem());
+			_inventoryFacade.AddItem(new HandItem());
 			
-			_inventoryFacade.AddItem(new Item(Color.green));
-			_inventoryFacade.AddItem(new Item(Color.green));
-			_inventoryFacade.AddItem(new Item(Color.green));
-			_inventoryFacade.AddItem(new Item(Color.green));
+			_inventoryFacade.AddItem(new BodyItem());
+			_inventoryFacade.AddItem(new BodyItem());
+			_inventoryFacade.AddItem(new BodyItem());
+			_inventoryFacade.AddItem(new BodyItem());
 			
-			_inventoryFacade.AddItem(new Item(Color.red));
-			_inventoryFacade.AddItem(new Item(Color.red));
-			_inventoryFacade.AddItem(new Item(Color.red));
-			_inventoryFacade.AddItem(new Item(Color.red));
+			_inventoryFacade.AddItem(new LegItem());
+			_inventoryFacade.AddItem(new LegItem());
+			_inventoryFacade.AddItem(new LegItem());
+			_inventoryFacade.AddItem(new LegItem());
 			
-			_inventoryFacade.AddItem(new Item(Color.yellow));
-			_inventoryFacade.AddItem(new Item(Color.yellow));
-			_inventoryFacade.AddItem(new Item(Color.yellow));
-			_inventoryFacade.AddItem(new Item(Color.yellow));
-			_inventoryFacade.AddItem(new Item(Color.yellow));
+			_inventoryFacade.AddItem(new CardItem());
+			_inventoryFacade.AddItem(new CardItem());
+			_inventoryFacade.AddItem(new CardItem());
+			_inventoryFacade.AddItem(new CardItem());
+			_inventoryFacade.AddItem(new CardItem());
 			
-			_inventoryFacade.AddItem(new Item(Color.gray));
-			_inventoryFacade.AddItem(new Item(Color.gray));
-			_inventoryFacade.AddItem(new Item(Color.gray));
-			_inventoryFacade.AddItem(new Item(Color.gray));
+			_inventoryFacade.AddItem(new OtherItem());
+			_inventoryFacade.AddItem(new OtherItem());
+			_inventoryFacade.AddItem(new OtherItem());
+			_inventoryFacade.AddItem(new OtherItem());
 		}
 
 		private void SubscribeComponents()
@@ -71,6 +70,15 @@ namespace UnityInventorySystem.Presenters
 					_inventoryFacade.ClearItems();
 				})
 				.AddTo(Disposables);
+
+			var filterItemsButton = _mainSceneUIManager.FilterItems;
+
+			filterItemsButton
+				.OnClickAsObservable()
+				.Subscribe(_ =>
+				{
+					_inventoryFacade.FilterItems<IOtherItem>();
+				});
 		}
 	}
 }
