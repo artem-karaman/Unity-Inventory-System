@@ -12,12 +12,18 @@ namespace UnityInventorySystem
 		private Color _color;
 		private int _maxStack;
 
-		public Item() 
+		protected Item() 
 			: this("other","default item", Color.gray)
 		{
 		}
-		
-		public Item(
+
+		protected Item(Color color)
+			: this("other", "default", color)
+		{
+			
+		}
+
+		protected Item(
 			string title, 
 			string description, 
 			Sprite itemSprite)
@@ -26,7 +32,7 @@ namespace UnityInventorySystem
 			ItemSprite = itemSprite;
 		}
 
-		public Item(string title, string description, Color color, int maxStack = 1)
+		protected Item(string title, string description, Color color, int maxStack = 1)
 		{
 			Title = title;
 			Description = description;
@@ -34,12 +40,6 @@ namespace UnityInventorySystem
 			MaxStack = maxStack;
 		}
 
-		public Item(Color color)
-			: this("other", "default", color)
-		{
-			
-		}
-			
 
 		public string Title { get; }
 		public string Description { get;  }

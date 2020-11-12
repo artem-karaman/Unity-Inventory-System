@@ -4,16 +4,16 @@ namespace UnityInventorySystem.Inventory
 {
 	public class SlotBehaviour
 	{
-		private readonly ItemPoolBehaviour _itemPoolBehaviour;
+		private readonly ItemFacadesPoolBehaviour _itemFacadesPoolBehaviour;
 
-		public SlotBehaviour(ItemPoolBehaviour itemPoolBehaviour)
+		public SlotBehaviour(ItemFacadesPoolBehaviour itemFacadesPoolBehaviour)
 		{
-			_itemPoolBehaviour = itemPoolBehaviour;
+			_itemFacadesPoolBehaviour = itemFacadesPoolBehaviour;
 		}
 		
-		private readonly Stack<ItemBehaviour> _itemsInSlot = new Stack<ItemBehaviour>();
-		public void AddItem(ItemBehaviour item) => _itemsInSlot.Push(item);
-		public ItemBehaviour RemoveItem() => _itemsInSlot.Pop();
+		private readonly Stack<ItemFacade> _itemsInSlot = new Stack<ItemFacade>();
+		public void AddItem(ItemFacade item) => _itemsInSlot.Push(item);
+		public ItemFacade RemoveItem() => _itemsInSlot.Pop();
 		public int ItemsCount => _itemsInSlot.Count;
 		public bool Empty => _itemsInSlot.Count == 0;
 
@@ -21,7 +21,7 @@ namespace UnityInventorySystem.Inventory
 		{
 			foreach (var item in _itemsInSlot)
 			{
-				_itemPoolBehaviour.RemoveItem(item);
+				_itemFacadesPoolBehaviour.RemoveItem(item);
 			}
 			
 			_itemsInSlot.Clear();

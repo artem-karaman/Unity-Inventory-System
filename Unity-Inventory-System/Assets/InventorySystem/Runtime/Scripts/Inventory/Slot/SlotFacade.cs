@@ -4,22 +4,17 @@ using Zenject;
 
 namespace UnityInventorySystem.Inventory
 {
-	public class SlotFacade : IPoolable<IMemoryPool>, IDisposable
+	public class SlotFacade : MonoBehaviour, IPoolable<IMemoryPool>, IDisposable
 	{
-		private readonly Transform _slotTransform;
-		private readonly SlotBehaviour _slotBehaviour;
-
+		private SlotBehaviour _slotBehaviour;
 		private IMemoryPool _memoryPool;
 
-		public SlotFacade(
-			Transform slotTransform,
+		[Inject]
+		void Construct(
 			SlotBehaviour slotBehaviour)
 		{
-			_slotTransform = slotTransform;
 			_slotBehaviour = slotBehaviour;
 		}
-
-		public Transform SlotTransform => _slotTransform;
 
 		public void Dispose()
 		{
@@ -36,7 +31,7 @@ namespace UnityInventorySystem.Inventory
 			_memoryPool = memoryPool;
 		}
 
-		public void AddItemToSlot(ItemBehaviour item)
+		public void AddItemToSlot(ItemFacade item)
 		{
 			_slotBehaviour.AddItem(item);
 		}
@@ -53,8 +48,6 @@ namespace UnityInventorySystem.Inventory
 			return _slotBehaviour.ItemsCount;
 		}
 
-		public class Factory : PlaceholderFactory<SlotFacade>
-		{
-		}
+		public class Factory : PlaceholderFactory<SlotFacade> { }
 	}
 }

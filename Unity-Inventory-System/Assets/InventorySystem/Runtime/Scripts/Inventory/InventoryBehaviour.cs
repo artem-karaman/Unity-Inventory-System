@@ -12,21 +12,21 @@ namespace UnityInventorySystem.Inventory
 	public class InventoryBehaviour : BasePresenter, IInitializable
 	{
 		private readonly InventoryViewModel _inventoryViewModel;
-		private readonly SlotsFacadePoolBehaviour _slotsFacadePoolBehaviour;
-		private readonly ItemPoolBehaviour _itemPoolBehaviour;
+		private readonly SlotFacadesPoolBehaviour _slotFacadesPoolBehaviour;
+		private readonly ItemFacadesPoolBehaviour _itemFacadesPoolBehaviour;
 		private readonly Transform _transform;
 
 		private List<IItem> _savedOrigianlItemsList = new List<IItem>();
 
 		public InventoryBehaviour(
 			InventoryViewModel inventoryViewModel,
-			SlotsFacadePoolBehaviour slotsFacadePoolBehaviour,
-			ItemPoolBehaviour itemPoolBehaviour,
+			SlotFacadesPoolBehaviour slotFacadesPoolBehaviour,
+			ItemFacadesPoolBehaviour itemFacadesPoolBehaviour,
 			Transform transform)
 		{
 			_inventoryViewModel = inventoryViewModel;
-			_slotsFacadePoolBehaviour = slotsFacadePoolBehaviour;
-			_itemPoolBehaviour = itemPoolBehaviour;
+			_slotFacadesPoolBehaviour = slotFacadesPoolBehaviour;
+			_itemFacadesPoolBehaviour = itemFacadesPoolBehaviour;
 			_transform = transform;
 		}
 
@@ -39,7 +39,7 @@ namespace UnityInventorySystem.Inventory
 		private void PrepareComponents()
 		{
 			var content = _transform.GetChild(0).GetChild(0);
-			_slotsFacadePoolBehaviour.SetParent(content);
+			_slotFacadesPoolBehaviour.SetParent(content);
 		}
 
 		private void SubscribeComponents()
@@ -55,7 +55,7 @@ namespace UnityInventorySystem.Inventory
 		{
 			for (var i = 0; i < value; i++)
 			{
-				_slotsFacadePoolBehaviour.AddSlot();
+				_slotFacadesPoolBehaviour.AddSlot();
 			}
 		}
 
@@ -81,7 +81,7 @@ namespace UnityInventorySystem.Inventory
 			
 		}
 
-		public void ClearItems() => _slotsFacadePoolBehaviour.ClearSlots();
+		public void ClearItems() => _slotFacadesPoolBehaviour.ClearSlots();
 
 		public void FilterItems<T>() 
 			where T : IItem
@@ -97,9 +97,9 @@ namespace UnityInventorySystem.Inventory
 
 		private void AddItem(IItem item)
 		{
-			var slot = _slotsFacadePoolBehaviour.FindEmptySlot();
+			var slot = _slotFacadesPoolBehaviour.FindEmptySlot();
 			
-			slot.AddItemToSlot(_itemPoolBehaviour.AddItem(slot.SlotTransform, item));
+			slot.AddItemToSlot(_itemFacadesPoolBehaviour.AddItem(slot.transform, item));
 		}
 	}
 }

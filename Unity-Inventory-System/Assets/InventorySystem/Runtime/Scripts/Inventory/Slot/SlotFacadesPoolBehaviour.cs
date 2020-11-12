@@ -5,14 +5,14 @@ using UnityEngine;
 
 namespace UnityInventorySystem.Inventory
 {
-	public class SlotsFacadePoolBehaviour
+	public class SlotFacadesPoolBehaviour
 	{
 		private readonly SlotFacade.Factory _slotFacadeFactory;
 		
 		private List<SlotFacade> _slots = new List<SlotFacade>();
 		private Transform _parent;
 		
-		public SlotsFacadePoolBehaviour(
+		public SlotFacadesPoolBehaviour(
 			SlotFacade.Factory slotFacadeFactory)
 		{
 			_slotFacadeFactory = slotFacadeFactory;
@@ -27,7 +27,7 @@ namespace UnityInventorySystem.Inventory
 		public void AddSlot()
 		{
 			var slot = _slotFacadeFactory.Create();
-			slot.SlotTransform.SetParent(_parent);
+			slot.transform.SetParent(_parent);
 			_slots.Add(slot);
 		}
 

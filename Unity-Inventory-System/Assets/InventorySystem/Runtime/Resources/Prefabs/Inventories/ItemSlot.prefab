@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6916430053703684942}
   - component: {fileID: 4451737310187096834}
   - component: {fileID: 198601439}
-  - component: {fileID: 8131759148754249493}
   - component: {fileID: -2002894985587855135}
   m_Layer: 0
   m_Name: ItemSlot
@@ -104,18 +103,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &8131759148754249493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7674578362149860231}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59d9710ff5234e2c8f8db210372b24ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-2002894985587855135
 MonoBehaviour:
   m_ObjectHideFlags: 0

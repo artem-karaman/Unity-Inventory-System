@@ -1,4 +1,3 @@
-using System.ComponentModel;
 using Assets.Scripts.Core.ViewModels;
 using UnityEngine;
 using UnityInventorySystem.Inventory;
@@ -18,6 +17,9 @@ namespace UnityInventorySystem.Installers
 		
 		public override void InstallBindings()
 		{
+			SlotsContainerInstaller.Install(Container);
+			ItemsContainerInstaller.Install(Container);
+			
 			Container
 				.Bind<Transform>()
 				.FromComponentOnRoot();
@@ -25,34 +27,7 @@ namespace UnityInventorySystem.Installers
 			Container
 				.BindInterfacesAndSelfTo<InventoryFacade>()
 				.AsSingle();
-
-			Container
-				.BindFactory<IItem, ItemBehaviour, ItemBehaviour.Factory>()
-				.FromMonoPoolableMemoryPool(x => 
-					x
-						.WithInitialSize(3)
-						.FromNewComponentOnNewPrefabResource("Prefabs/Inventories/Item")
-						.WithGameObjectName("Item"));
 			
-			Container
-				.Bind<SlotsFacadePoolBehaviour>()
-				.ToSelf()
-				.AsSingle();
-
-			Container
-				.BindFactory<SlotFacade, SlotFacade.Factory>()
-				.FromPoolableMemoryPool(x =>
-					x
-						.WithInitialSize(25)
-						.FromSubContainerResolve()
-						.ByNewPrefabResourceInstaller<SlotInstaller>("Prefabs/Inventories/ItemSlot")
-						.WithGameObjectName("ItemSlot"));
-				
-			Container
-				.Bind<ItemPoolBehaviour>()
-				.ToSelf()
-				.AsSingle();
-
 			Container
 				.BindInterfacesAndSelfTo<InventoryBehaviour>()
 				.AsSingle();

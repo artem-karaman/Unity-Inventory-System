@@ -31,9 +31,6 @@ namespace UnityInventorySystem.Presenters
 			{
 				_hotBar = _hotBarFacadeFactory.Create(3);
 			}
-			
-			_inventory.AddItem(new LegItem());
-			_inventory.AddItem(new BodyItem());
 		}
 	}
 }
