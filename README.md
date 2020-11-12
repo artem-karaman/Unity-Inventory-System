@@ -5,7 +5,9 @@ Table of Contents
 
 
 ## Intro
-Unity Editor version - 2020.1.8f1
+Inventory system for unity android project.
+
+Tests with Unity Editor version - 2020.1.8f1
 
 ## Plugins to add
 <details>
