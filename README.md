@@ -1,8 +1,15 @@
-# Unity-Inventory-System
+Table of Contents
+1. [Intro](#intro)
+2. [Plugins to add](#plugins-to-add)
+3. [How to install](#how-to-install)
 
-Unity Editor version - 2020.1.8f1
 
+## Intro
+Inventory system for unity android project.
 
+Tests with Unity Editor version - 2020.1.8f1
+
+## Plugins to add
 <details>
   <summary>Plugins and packages to add:</summary>
   
@@ -18,7 +25,7 @@ or
 
 Add to manifest
 
-```json
+```yaml
 {
   "dependencies": 
   {
@@ -34,7 +41,7 @@ and Extenject form asset store
 
 </details>
 
-
+## How to install
 - Install this package via upm:
 
 https://github.com/namarakM/Unity-Inventory-System.git?path=/Unity-Inventory-System/Assets/InventorySystem
