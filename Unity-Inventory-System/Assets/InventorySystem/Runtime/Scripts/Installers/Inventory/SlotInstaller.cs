@@ -10,11 +10,6 @@ namespace UnityInventorySystem.Installers
 		public override void InstallBindings()
 		{
 			Container
-				.BindInterfacesAndSelfTo<SlotFacade>()
-				.FromNewComponentOnRoot()
-				.AsSingle();
-			
-			Container
 				.BindInterfacesAndSelfTo<SlotViewModel>()
 				.AsSingle();
 			
@@ -24,6 +19,11 @@ namespace UnityInventorySystem.Installers
 
 			Container
 				.BindInterfacesAndSelfTo<SlotBehaviour>()
+				.AsSingle();
+			
+			Container
+				.BindInterfacesAndSelfTo<SlotFacade>()
+				.FromNewComponentOnRoot()
 				.AsSingle();
 		}
 	}

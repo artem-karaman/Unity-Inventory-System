@@ -1,20 +1,31 @@
 ﻿using System;
+using Assets.Scripts.Core.ViewModels;
 using UnityEngine;
 using Zenject;
 
 namespace UnityInventorySystem.Inventory
 {
-	public class SlotFacade : MonoBehaviour, IPoolable<IMemoryPool>, IDisposable
+	public class SlotFacade : MonoBehaviour, IPoolable<IMemoryPool>, ISlotFacade
 	{
 		private SlotBehaviour _slotBehaviour;
+		private SlotViewModel _slotViewModel;
 		private IMemoryPool _memoryPool;
 
 		[Inject]
 		void Construct(
-			SlotBehaviour slotBehaviour)
+			SlotBehaviour slotBehaviour,
+			SlotViewModel slotViewModel)
 		{
 			_slotBehaviour = slotBehaviour;
+			_slotViewModel = slotViewModel;
 		}
+
+		void Start()
+		{
+			_slotViewModel.SetCurrentSlot(this);
+		}
+
+		public Transform Transform => transform;
 
 		public void Dispose()
 		{
@@ -31,12 +42,13 @@ namespace UnityInventorySystem.Inventory
 			_memoryPool = memoryPool;
 		}
 
-		public void AddItemToSlot(ItemFacade item)
+		public void AddItemToSlot(IItemFacade item)
 		{
 			_slotBehaviour.AddItem(item);
 		}
 
 		public bool Empty => _slotBehaviour.Empty;
+
 
 		public void SetEmpty()
 		{
@@ -46,6 +58,16 @@ namespace UnityInventorySystem.Inventory
 		public int ItemsCount()
 		{
 			return _slotBehaviour.ItemsCount;
+		}
+
+		public void SetSelected(bool value)
+		{
+			_slotBehaviour.SetSelected(value);
+		}
+
+		public void RemoveItem()
+		{
+			_slotBehaviour.RemoveItem();
 		}
 
 		public class Factory : PlaceholderFactory<SlotFacade> { }

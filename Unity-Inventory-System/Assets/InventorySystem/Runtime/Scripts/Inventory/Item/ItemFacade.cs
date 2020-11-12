@@ -4,11 +4,13 @@ using Zenject;
 
 namespace UnityInventorySystem.Inventory
 {
-	public class ItemFacade : MonoBehaviour, IPoolable<IMemoryPool>, IDisposable
+	public class ItemFacade : MonoBehaviour, IPoolable<IMemoryPool>, IItemFacade
 	{
 		private IMemoryPool _memoryPool;
 		private ItemView _itemView;
 		private IItem _item;
+
+		public Transform Transform => transform;
 
 		[Inject]
 		void Construct(
@@ -16,7 +18,7 @@ namespace UnityInventorySystem.Inventory
 		{
 			_itemView = itemView;
 		}
-		
+
 		public void Dispose()
 		{
 			_memoryPool?.Despawn(this);

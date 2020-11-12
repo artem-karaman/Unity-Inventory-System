@@ -1,30 +1,54 @@
-﻿using System.Collections.Generic;
+﻿using Assets.Scripts.Core.ViewModels;
+using UniRx;
+using UnityInventorySystem.Presenters.Base;
+using Zenject;
 
 namespace UnityInventorySystem.Inventory
 {
-	public class SlotBehaviour
+	public class SlotBehaviour : BasePresenter, IInitializable
+
 	{
 		private readonly ItemFacadesPoolBehaviour _itemFacadesPoolBehaviour;
+		private readonly SlotViewModel _slotViewModel;
 
-		public SlotBehaviour(ItemFacadesPoolBehaviour itemFacadesPoolBehaviour)
+		public SlotBehaviour(
+			ItemFacadesPoolBehaviour itemFacadesPoolBehaviour,
+			SlotViewModel slotViewModel)
 		{
 			_itemFacadesPoolBehaviour = itemFacadesPoolBehaviour;
+			_slotViewModel = slotViewModel;
 		}
-		
-		private readonly Stack<ItemFacade> _itemsInSlot = new Stack<ItemFacade>();
-		public void AddItem(ItemFacade item) => _itemsInSlot.Push(item);
-		public ItemFacade RemoveItem() => _itemsInSlot.Pop();
-		public int ItemsCount => _itemsInSlot.Count;
-		public bool Empty => _itemsInSlot.Count == 0;
+
+		public void Initialize()
+		{
+			_slotViewModel
+				.ItemsInSlot
+				.ObserveRemove()
+				.Subscribe(value =>
+				{
+					_itemFacadesPoolBehaviour.RemoveItem(value.Value);
+				})
+				.AddTo(Disposables);
+		}
+
+		public void AddItem(IItemFacade item) => _slotViewModel.ItemsInSlot.Add(item);
+
+		public void RemoveItem() => _slotViewModel.RemoveItem();
+
+		public int ItemsCount => _slotViewModel.ItemsCount;
+
+		public bool Empty => _slotViewModel.Empty;
+
+		public void SetSelected(bool value) => _slotViewModel.SetSelected(value);
 
 		public void ClearStack()
 		{
-			foreach (var item in _itemsInSlot)
+			foreach (var item in _slotViewModel.ItemsInSlot)
 			{
 				_itemFacadesPoolBehaviour.RemoveItem(item);
 			}
-			
-			_itemsInSlot.Clear();
+
+			_slotViewModel.ClearItems();
 		}
 	}
 }

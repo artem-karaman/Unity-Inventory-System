@@ -9,7 +9,7 @@ namespace UnityInventorySystem.Inventory
 	{
 		private readonly SlotFacade.Factory _slotFacadeFactory;
 		
-		private List<SlotFacade> _slots = new List<SlotFacade>();
+		private List<ISlotFacade> _slots = new List<ISlotFacade>();
 		private Transform _parent;
 		
 		public SlotFacadesPoolBehaviour(
@@ -27,11 +27,11 @@ namespace UnityInventorySystem.Inventory
 		public void AddSlot()
 		{
 			var slot = _slotFacadeFactory.Create();
-			slot.transform.SetParent(_parent);
+			slot.Transform.SetParent(_parent);
 			_slots.Add(slot);
 		}
 
-		public SlotFacade FindEmptySlot()
+		public ISlotFacade FindEmptySlot()
 		{
 			return _slots.First(s => s.Empty);
 		}

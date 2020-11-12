@@ -15,9 +15,7 @@ namespace UnityInventorySystem.Inventory
 		private readonly SlotFacadesPoolBehaviour _slotFacadesPoolBehaviour;
 		private readonly ItemFacadesPoolBehaviour _itemFacadesPoolBehaviour;
 		private readonly Transform _transform;
-
-		private List<IItem> _savedOrigianlItemsList = new List<IItem>();
-
+		
 		public InventoryBehaviour(
 			InventoryViewModel inventoryViewModel,
 			SlotFacadesPoolBehaviour slotFacadesPoolBehaviour,
@@ -49,6 +47,16 @@ namespace UnityInventorySystem.Inventory
 				.AsObservable()
 				.Subscribe(AddSlots)
 				.AddTo(Disposables);
+
+			_inventoryViewModel
+				.InventoryItems
+				.ObserveRemove()
+				.Subscribe(value =>
+				{
+					
+				})
+				.AddTo(Disposables);
+
 		}
 
 		private void AddSlots(int value)
@@ -59,11 +67,11 @@ namespace UnityInventorySystem.Inventory
 			}
 		}
 
-		public void AddItem(IItem item, bool saveItem = false)
+		public void AddItem(IItem item)
 		{
-			AddItem(item);
-			
-			_savedOrigianlItemsList.Add(item);
+			AddItemToSlot(item);
+
+			_inventoryViewModel.InventoryItems.Add(item);
 		}
 
 		public void AddItems(IEnumerable<IItem> items)
@@ -72,7 +80,7 @@ namespace UnityInventorySystem.Inventory
 			
 			foreach (var item in items)
 			{
-				AddItem(item);
+				AddItemToSlot(item);
 			}
 		}
 
@@ -88,18 +96,23 @@ namespace UnityInventorySystem.Inventory
 		{
 			ClearItems();
 
-			var list = _savedOrigianlItemsList.Where(i => i is T).ToList();
+			var list = _inventoryViewModel.FilteredItems<T>().ToList();
 
 			if (!list.Any()) return;
 			
 			AddItems(list);
 		}
 
-		private void AddItem(IItem item)
+		private void AddItemToSlot(IItem item)
 		{
 			var slot = _slotFacadesPoolBehaviour.FindEmptySlot();
 			
-			slot.AddItemToSlot(_itemFacadesPoolBehaviour.AddItem(slot.transform, item));
+			slot.AddItemToSlot(_itemFacadesPoolBehaviour.AddItem(slot.Transform, item));
+		}
+
+		public void RemoveSelectedItem()
+		{
+			_inventoryViewModel.RemoveItem();
 		}
 	}
 }

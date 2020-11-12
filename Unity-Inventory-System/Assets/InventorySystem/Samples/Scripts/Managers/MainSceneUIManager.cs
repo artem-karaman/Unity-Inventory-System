@@ -25,11 +25,26 @@ namespace UnityInventorySystem.Managers
 		[SerializeField]
 		private Button _otherItemsButton;
 
+		[Tooltip("Это поле для SeparateItems")] [SerializeField]
+		private Button separateItemsButton;
+
+		[Tooltip("Это поле для DeleteSelectedItem")] [SerializeField]
+		private Button deleteSelectedItemButton;
+
 		public Button HandItemsButton => _handItemsButton;
+
 		public Button BodyItemsButton => _bodyItemsButton;
+
 		public Button LegItemsButton => _legItemsButton;
+
 		public Button CardItemsButton => _cardItemsButton;
+
 		public Button OtherItemsButton => _otherItemsButton;
+
+		public Button SeparateItemsButton => separateItemsButton;
+
+		public Button DeleteSelectedItemButton => deleteSelectedItemButton;
+
 
 		
 	}

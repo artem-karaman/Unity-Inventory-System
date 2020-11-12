@@ -16,7 +16,7 @@ namespace UnityInventorySystem.Installers
 				.BindFactory<SlotFacade, SlotFacade.Factory>()
 				.FromMonoPoolableMemoryPool(x =>
 					x
-						.WithInitialSize(25)
+						.WithInitialSize(15)
 						.FromSubContainerResolve()
 						.ByNewPrefabResourceInstaller<SlotInstaller>("Prefabs/Inventories/ItemSlot")
 						.WithGameObjectName("ItemSlot"));

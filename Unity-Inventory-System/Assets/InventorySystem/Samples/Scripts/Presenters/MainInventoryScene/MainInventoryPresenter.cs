@@ -62,6 +62,9 @@ namespace UnityInventorySystem.Presenters
 			var cardItemsButton = _mainSceneUIManager.CardItemsButton;
 			var otherItemsButton = _mainSceneUIManager.OtherItemsButton;
 
+			var deleteSelectedItemButton = _mainSceneUIManager.DeleteSelectedItemButton;
+			var separateItemsButton = _mainSceneUIManager.SeparateItemsButton;
+
 			handItemsButton
 				.OnClickAsObservable()
 				.Subscribe(_ => _inventory.FilterItems<IHandItem>())
@@ -85,6 +88,14 @@ namespace UnityInventorySystem.Presenters
 			otherItemsButton
 				.OnClickAsObservable()
 				.Subscribe(_ => _inventory.FilterItems<IOtherItem>())
+				.AddTo(Disposables);
+
+			deleteSelectedItemButton
+				.OnClickAsObservable()
+				.Subscribe(_ =>
+				{
+					_inventory.RemoveSelectedItem();
+				})
 				.AddTo(Disposables);
 		}
 	}

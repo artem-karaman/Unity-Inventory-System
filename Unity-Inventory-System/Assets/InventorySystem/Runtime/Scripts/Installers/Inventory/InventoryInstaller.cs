@@ -25,19 +25,19 @@ namespace UnityInventorySystem.Installers
 				.FromComponentOnRoot();
 
 			Container
-				.BindInterfacesAndSelfTo<InventoryFacade>()
-				.AsSingle();
-			
-			Container
-				.BindInterfacesAndSelfTo<InventoryBehaviour>()
-				.AsSingle();
-
-			Container
 				.BindInstance(_slotsCount)
 				.WhenInjectedInto<InventoryViewModel>();
 			
 			Container
 				.BindInterfacesAndSelfTo<InventoryViewModel>()
+				.AsSingle();
+			
+			Container
+				.BindInterfacesAndSelfTo<InventoryFacade>()
+				.AsSingle();
+
+			Container
+				.BindInterfacesAndSelfTo<InventoryBehaviour>()
 				.AsSingle();
 		}
 	}
