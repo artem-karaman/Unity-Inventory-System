@@ -61,6 +61,7 @@ namespace UnityInventorySystem.Presenters
 			var legItemsButton = _mainSceneUIManager.LegItemsButton;
 			var cardItemsButton = _mainSceneUIManager.CardItemsButton;
 			var otherItemsButton = _mainSceneUIManager.OtherItemsButton;
+			var allItemsButton = _mainSceneUIManager.AllItemsButton;
 
 			var deleteSelectedItemButton = _mainSceneUIManager.DeleteSelectedItemButton;
 			var separateItemsButton = _mainSceneUIManager.SeparateItemsButton;
@@ -84,12 +85,17 @@ namespace UnityInventorySystem.Presenters
 				.OnClickAsObservable()
 				.Subscribe(_ => _inventory.FilterItems<ICardItem>())
 				.AddTo(Disposables);
-			
+
 			otherItemsButton
 				.OnClickAsObservable()
 				.Subscribe(_ => _inventory.FilterItems<IOtherItem>())
 				.AddTo(Disposables);
 
+			allItemsButton
+				.OnClickAsObservable()
+				.Subscribe(_ => _inventory.FilterItems<IItem>())
+				.AddTo(Disposables);
+			
 			deleteSelectedItemButton
 				.OnClickAsObservable()
 				.Subscribe(_ =>
