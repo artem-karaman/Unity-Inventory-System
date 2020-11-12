@@ -1,14 +1,21 @@
-﻿using Zenject;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace UnityInventorySystem.Inventory
 {
-	public class ItemView : IInitializable
+	public class ItemView 
 	{
-		public void Initialize()
+		private readonly Transform _itemTransform;
+
+		public ItemView(Transform itemTransform)
 		{
-			
+			_itemTransform = itemTransform;
+		}
+		
+		public void PrepareItem(IItem item)
+		{
+			var image = _itemTransform.gameObject.GetComponent<Image>();
+			image.color = item.Color;
 		}
 	}
-	
-	public class Factory : PlaceholderFactory<ItemView>{}
 }
