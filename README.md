@@ -1,5 +1,4 @@
-# Unity-Inventory-System
-
+Table of Contents
 1. [Intro](#intro)
 2. [Plugins to add](#plugins-to-add)
 3. [How to install](#how-to-install)
