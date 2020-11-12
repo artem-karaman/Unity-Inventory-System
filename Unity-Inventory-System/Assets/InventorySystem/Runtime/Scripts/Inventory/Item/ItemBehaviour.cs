@@ -81,9 +81,14 @@ namespace UnityInventorySystem.Inventory
 			_item.Invoke("OnLongPress", 1f);
 		}
 
+		private void SelectOldSlot(bool value)
+		{
+			_oldSlot.GetComponent<SlotFacade>().SetSelected(value);
+		}
+		
 		private void OnPress()
 		{
-			_oldSlot.GetComponent<SlotFacade>().SetSelected(true);
+			SelectOldSlot(true);
 		}
 		
 		private void OnLongPress()
@@ -92,6 +97,8 @@ namespace UnityInventorySystem.Inventory
 
 		private void OnDrag(PointerEventData eventData)
 		{
+			SelectOldSlot(false);
+			
 			_rectTransform.anchoredPosition += eventData.delta / _canvas.scaleFactor;
 		}
 

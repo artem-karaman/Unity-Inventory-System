@@ -6,7 +6,6 @@ using Zenject;
 namespace UnityInventorySystem.Inventory
 {
 	public class SlotBehaviour : BasePresenter, IInitializable
-
 	{
 		private readonly ItemFacadesPoolBehaviour _itemFacadesPoolBehaviour;
 		private readonly SlotViewModel _slotViewModel;
@@ -31,13 +30,14 @@ namespace UnityInventorySystem.Inventory
 				.AddTo(Disposables);
 		}
 
-		public void AddItem(IItemFacade item) => _slotViewModel.ItemsInSlot.Add(item);
+		public void AddItem(IItemFacade item) => _slotViewModel.AddItem(item);
 
 		public void RemoveItem() => _slotViewModel.RemoveItem();
 
 		public int ItemsCount => _slotViewModel.ItemsCount;
 
 		public bool Empty => _slotViewModel.Empty;
+		public bool Selected => _slotViewModel.Selected.Value;
 
 		public void SetSelected(bool value) => _slotViewModel.SetSelected(value);
 

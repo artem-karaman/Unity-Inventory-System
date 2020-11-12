@@ -8,6 +8,7 @@ namespace UnityInventorySystem
 		Transform Transform { get; }
 		
 		bool Empty { get; }
+		bool Selected { get;}
 
 		void SetEmpty();
 

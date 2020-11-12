@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 namespace UnityInventorySystem.Inventory
@@ -11,6 +10,7 @@ namespace UnityInventorySystem.Inventory
 		private IItem _item;
 
 		public Transform Transform => transform;
+		public IItem Item => _item;
 
 		[Inject]
 		void Construct(
@@ -36,6 +36,8 @@ namespace UnityInventorySystem.Inventory
 
 		public void SetItem(IItem item)
 		{
+			_item = item;
+			
 			_itemView.PrepareItem(item);
 		}
 

@@ -1,4 +1,5 @@
-﻿using UniRx;
+﻿using System.Linq;
+using UniRx;
 using UnityInventorySystem;
 using Zenject;
 
@@ -46,13 +47,20 @@ namespace Assets.Scripts.Core.ViewModels
 			_disposables?.Dispose();
 		}
 
+		public void AddItem(IItemFacade item)
+		{
+			ItemsInSlot.Add(item);
+		}
+
 		public void RemoveItem()
 		{
 			if (Empty) return;
-			
-			ItemsInSlot.RemoveAt(0);
-			CurrentSlot.SetSelected(false);
 
+			var item = ItemsInSlot.First().Item;
+			_inventoryViewModel.InventoryItems.Remove(item);
+			ItemsInSlot.RemoveAt(0);
+			
+			CurrentSlot.SetSelected(false);
 		}
 
 		public void SetSelected(bool value)

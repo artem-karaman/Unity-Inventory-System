@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UniRx;
 using UnityInventorySystem;
@@ -10,9 +9,7 @@ namespace Assets.Scripts.Core.ViewModels
 	{
 		private readonly int _slotsCount;
 		private int _totalItemsInRowOrColumn = 4;
-
 		private ISlotFacade _selectedSlot;
-		
 		public InventoryViewModel(int slotsCount)
 		{
 			_slotsCount = slotsCount;
@@ -27,8 +24,13 @@ namespace Assets.Scripts.Core.ViewModels
 		public ReactiveCollection<IItem> InventoryItems { get; }
 
 		public IEnumerable<IItem> FilteredItems<T>()
-			where T : IItem =>
-			InventoryItems.Where(i => i is T);
+			where T : IItem
+		{
+			_selectedSlot.SetSelected(false);
+			
+			return InventoryItems.Where(i => i is T);
+		}
+			
 
 		public void SetSelectedSlot(ISlotFacade slot)
 		{
@@ -47,7 +49,8 @@ namespace Assets.Scripts.Core.ViewModels
 
 		public void RemoveItem()
 		{
-			_selectedSlot.RemoveItem();
+			if(_selectedSlot.Selected)
+				_selectedSlot.RemoveItem();
 		}
 		
 		private int CalculateSlotsCountWithFullRow()
