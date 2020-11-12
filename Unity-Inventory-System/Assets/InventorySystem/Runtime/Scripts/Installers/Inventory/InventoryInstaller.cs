@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using Assets.Scripts.Core.ViewModels;
 using UnityEngine;
 using UnityInventorySystem.Inventory;
