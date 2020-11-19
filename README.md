@@ -1,6 +1,6 @@
 Table of Contents
 1. [Intro](#intro)
-2. [Plugins to add](#plugins-to-add)
+2. [Used plugins](#plugins-to-add)
 3. [How to install](#how-to-install)
 
 
@@ -9,7 +9,7 @@ Inventory system for unity android project.
 
 Tests with Unity Editor version - 2020.1.8f1
 
-## Plugins to add
+## Used plugins
 <details>
   <summary>Plugins and packages to add:</summary>
   
