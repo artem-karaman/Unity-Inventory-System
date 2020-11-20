@@ -26,7 +26,7 @@ namespace Assets.Scripts.Core.ViewModels
 		public IEnumerable<IItem> FilteredItems<T>()
 			where T : IItem
 		{
-			_selectedSlot.SetSelected(false);
+			_selectedSlot?.SetSelected(false);
 			
 			return InventoryItems.Where(i => i is T);
 		}
