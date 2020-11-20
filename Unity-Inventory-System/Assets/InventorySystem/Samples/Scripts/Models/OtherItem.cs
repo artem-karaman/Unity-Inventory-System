@@ -4,8 +4,10 @@ namespace UnityInventorySystem
 {
 	public class OtherItem : Item, IOtherItem
 	{
+		private static int maxItemStack = 20;
+		
 		public OtherItem()
-			: base(Color.gray)
+			: base(Color.gray, maxItemStack)
 		{
 			
 		}

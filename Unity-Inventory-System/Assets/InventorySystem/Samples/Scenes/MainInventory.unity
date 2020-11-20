@@ -1494,6 +1494,7 @@ MonoBehaviour:
   _legItemsButton: {fileID: 45078617}
   _cardItemsButton: {fileID: 1560999752}
   _otherItemsButton: {fileID: 1175318258}
+  _allItemsButton: {fileID: 174409240}
   separateItemsButton: {fileID: 395147901}
   deleteSelectedItemButton: {fileID: 682953744}
 --- !u!1 &675605772
