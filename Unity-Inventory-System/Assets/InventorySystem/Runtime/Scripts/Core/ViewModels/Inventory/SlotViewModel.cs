@@ -28,13 +28,11 @@ namespace Assets.Scripts.Core.ViewModels
 		
 		public ISlotFacade CurrentSlot { get; private set; }
 		
-		public void Initialize()
-		{
+		public void Initialize() =>
 			ItemsInSlot
 				.ObserveCountChanged()
 				.Subscribe(ChangeItemsInSlot)
 				.AddTo(_disposables);
-		}
 
 		private void ChangeItemsInSlot(int count)
 		{
@@ -42,10 +40,7 @@ namespace Assets.Scripts.Core.ViewModels
 			ItemsCount = count;
 		}
 
-		public void LateDispose()
-		{
-			_disposables?.Dispose();
-		}
+		public void LateDispose() => _disposables?.Dispose();
 
 		public void AddItem(IItemFacade item)
 		{
@@ -77,14 +72,8 @@ namespace Assets.Scripts.Core.ViewModels
 			}
 		}
 
-		public void SetCurrentSlot(ISlotFacade slot)
-		{
-			CurrentSlot = slot;
-		}
+		public void SetCurrentSlot(ISlotFacade slot) => CurrentSlot = slot;
 
-		public void ClearItems()
-		{
-			ItemsInSlot.Clear();
-		}
+		public void ClearItems() => ItemsInSlot.Clear();
 	}
 }

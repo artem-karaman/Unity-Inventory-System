@@ -1,9 +1,9 @@
 {
-    "m_SelectedDeviceId": "0123456789ABCDEF",
+    "m_SelectedDeviceId": "emulator-5554",
     "m_SelectedPackage": {
-        "deviceId": "0123456789ABCDEF",
-        "name": "com.namarakM.inventorysystem",
-        "processId": 26395,
+        "deviceId": "",
+        "name": "",
+        "processId": 0,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -31,6 +31,30 @@
             "name": "com.namarakM.inventorysystem",
             "processId": 26395,
             "exited": false
+        },
+        {
+            "deviceId": "emulator-5554",
+            "name": "com.namarakM.inventorysystem",
+            "processId": 7111,
+            "exited": true
+        },
+        {
+            "deviceId": "emulator-5554",
+            "name": "com.namarakM.inventorysystem",
+            "processId": 29075,
+            "exited": true
+        },
+        {
+            "deviceId": "emulator-5554",
+            "name": "com.namarakM.inventorysystem",
+            "processId": 31220,
+            "exited": true
+        },
+        {
+            "deviceId": "emulator-5554",
+            "name": "com.google.android.apps.nexuslauncher",
+            "processId": 1085,
+            "exited": true
         }
     ],
     "m_Tags": {

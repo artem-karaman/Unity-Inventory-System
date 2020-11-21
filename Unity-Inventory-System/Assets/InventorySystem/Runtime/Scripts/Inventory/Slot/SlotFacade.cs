@@ -32,6 +32,7 @@ namespace UnityInventorySystem.Inventory
 		public void AddItemToSlot(IItemFacade item) => _slotBehaviour.AddItem(item);
 
 		public bool Empty => _slotBehaviour.Empty;
+		
 		public bool Selected => _slotBehaviour.Selected;
 
 		public void SetEmpty() => _slotBehaviour.ClearStack();

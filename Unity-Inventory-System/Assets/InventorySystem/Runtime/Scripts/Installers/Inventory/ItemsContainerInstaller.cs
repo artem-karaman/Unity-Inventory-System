@@ -18,7 +18,7 @@ namespace UnityInventorySystem.Installers
 					x
 						.WithInitialSize(3)
 						.FromSubContainerResolve()
-						.ByNewPrefabResourceInstaller<ItemInstaller>("Prefabs/Inventories/Item")
+						.ByNewPrefabResourceInstaller<ItemInstaller>("Prefabs/Item")
 						.WithGameObjectName("Item"));
 		}
 	}

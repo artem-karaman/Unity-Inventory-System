@@ -10,7 +10,8 @@ namespace Assets.Scripts.Core.ViewModels
 		private readonly int _slotsCount;
 		private int _totalItemsInRowOrColumn = 4;
 		private ISlotFacade _selectedSlot;
-		public InventoryViewModel(int slotsCount)
+		public InventoryViewModel(
+			int slotsCount)
 		{
 			_slotsCount = slotsCount;
 

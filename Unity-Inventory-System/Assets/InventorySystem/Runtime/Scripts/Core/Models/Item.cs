@@ -7,12 +7,6 @@ namespace UnityInventorySystem
 	[Serializable]
 	public abstract class Item
 	{
-		private string _titile;
-		private string _description;
-		private Sprite _itemSprite;
-		private Color _color;
-		private int _maxStack;
-
 		protected Item()
 			: this("other", "default item", Color.gray)
 		{

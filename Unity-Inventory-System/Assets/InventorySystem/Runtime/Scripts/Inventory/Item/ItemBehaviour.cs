@@ -1,4 +1,5 @@
-﻿using UniRx;
+﻿using InventorySystem.Runtime.Scripts.Models;
+using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -11,7 +12,6 @@ namespace UnityInventorySystem.Inventory
 	{
 		private readonly SharedUIManager _sharedUIManager;
 		private readonly ItemFacade _item;
-		private readonly InventoryFacade _inventoryFacade;
 
 		private Canvas _canvas;
 		private RectTransform _rectTransform;
@@ -20,14 +20,14 @@ namespace UnityInventorySystem.Inventory
 		private GameObject _selectedItem;
 		private GameObject _oldSlot;
 
+		private ItemEndDragBehaviour _itemEndDragBehaviour;
+
 		public ItemBehaviour(
 			SharedUIManager sharedUIManager,
-			ItemFacade item,
-			InventoryFacade inventoryFacade)
+			ItemFacade item)
 		{
 			_sharedUIManager = sharedUIManager;
 			_item = item;
-			_inventoryFacade = inventoryFacade;
 		}
 		
 		public void Initialize()
@@ -47,25 +47,29 @@ namespace UnityInventorySystem.Inventory
 
 		private void SubscribeComponents()
 		{
-			_item.gameObject
+			_item
+				.gameObject
 				.AddComponent<ObservablePointerDownTrigger>()
 				.OnPointerDownAsObservable()
 				.Subscribe(OnPointerDown)
 				.AddTo(Disposables);
 			
-			_item.gameObject
+			_item
+				.gameObject
 				.AddComponent<ObservableDragTrigger>()
 				.OnDragAsObservable()
 				.Subscribe(OnDrag)
 				.AddTo(Disposables);
 
-			_item.gameObject
+			_item
+				.gameObject
 				.AddComponent<ObservableBeginDragTrigger>()
 				.OnBeginDragAsObservable()
 				.Subscribe(OnBeginDrag)
 				.AddTo(Disposables);
 
-			_item.gameObject
+			_item
+				.gameObject
 				.AddComponent<ObservableEndDragTrigger>()
 				.OnEndDragAsObservable()
 				.Subscribe(OnEndDrag)
@@ -83,7 +87,9 @@ namespace UnityInventorySystem.Inventory
 
 		private void SelectOldSlot(bool value)
 		{
-			_oldSlot.GetComponent<SlotFacade>().SetSelected(value);
+			_oldSlot
+				.GetComponent<SlotFacade>()
+				.SetSelected(value);
 		}
 		
 		private void OnPress()
@@ -112,32 +118,23 @@ namespace UnityInventorySystem.Inventory
 
 		private void OnEndDrag(PointerEventData eventData)
 		{
-			_canvasGroup.blocksRaycasts = true;
-			_canvasGroup.alpha = 1f;
+			var itemData = new ItemDragData(_selectedItem, _oldSlot, eventData, _canvasGroup, _item);
 
-			if (eventData.pointerEnter == null)
-			{
-				MoveToOriginalSlot();
-				
-                return;
-            }
+			PrepareItemEndDragBehaviour(itemData);
 			
-			if (!eventData.pointerEnter.CompareTag("ItemSlot"))
-			{
-				MoveToOriginalSlot();
-				
-                return;
-            }
-
-			if (!eventData.pointerEnter.CompareTag("ItemSlot")) return;
-			
-			_selectedItem.transform.SetParent(eventData.pointerEnter.transform);
-	        eventData.pointerEnter.GetComponent<SlotFacade>().AddItemToSlot(_item);
+			_itemEndDragBehaviour.OnEndDrag();
 		}
 
-		private void MoveToOriginalSlot()
+		private void PrepareItemEndDragBehaviour(ItemDragData itemData)
 		{
-			_selectedItem.transform.SetParent(_oldSlot.transform);
+			if (_itemEndDragBehaviour == null)
+			{
+				_itemEndDragBehaviour = new ItemEndDragBehaviour(itemData);
+			}
+			else
+			{
+				_itemEndDragBehaviour.Prepare(itemData);
+			}
 		}
 	}
 }
