@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Core.ViewModels;
+using InventorySystem.Runtime.Scripts.Models;
 using UnityInventorySystem.Inventory;
 using Zenject;
 
@@ -23,6 +24,10 @@ namespace UnityInventorySystem.Installers
 
 			Container
 				.BindInterfacesAndSelfTo<ItemBehaviour>()
+				.AsSingle();
+
+			Container
+				.BindFactory<ItemDragData, ItemEndDragBehaviour, ItemEndDragBehaviour.Factory>()
 				.AsSingle();
 		}
 	}

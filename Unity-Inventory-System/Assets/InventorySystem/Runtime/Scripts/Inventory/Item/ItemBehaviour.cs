@@ -12,6 +12,7 @@ namespace UnityInventorySystem.Inventory
 	{
 		private readonly SharedUIManager _sharedUIManager;
 		private readonly ItemFacade _item;
+		private readonly ItemEndDragBehaviour.Factory _itemEndDragBehaviourFactory;
 
 		private Canvas _canvas;
 		private RectTransform _rectTransform;
@@ -24,10 +25,12 @@ namespace UnityInventorySystem.Inventory
 
 		public ItemBehaviour(
 			SharedUIManager sharedUIManager,
-			ItemFacade item)
+			ItemFacade item,
+			ItemEndDragBehaviour.Factory itemEndDragBehaviourFactory)
 		{
 			_sharedUIManager = sharedUIManager;
 			_item = item;
+			_itemEndDragBehaviourFactory = itemEndDragBehaviourFactory;
 		}
 		
 		public void Initialize()
@@ -129,7 +132,7 @@ namespace UnityInventorySystem.Inventory
 		{
 			if (_itemEndDragBehaviour == null)
 			{
-				_itemEndDragBehaviour = new ItemEndDragBehaviour(itemData);
+				_itemEndDragBehaviour = _itemEndDragBehaviourFactory.Create(itemData);
 			}
 			else
 			{

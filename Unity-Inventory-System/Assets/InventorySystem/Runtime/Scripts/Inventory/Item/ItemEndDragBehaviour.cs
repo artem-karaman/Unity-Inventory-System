@@ -45,6 +45,7 @@ namespace UnityInventorySystem.Inventory
 				{
 					_itemFacadesPoolBehaviour.RemoveItem(_itemDragData.SelectedItem.GetComponent<IItemFacade>());
 					_slotFacade.AddItemToSlot(_itemDragData.Item);
+					
 
 					return;
 				}

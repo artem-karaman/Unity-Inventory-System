@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Core.ViewModels;
+using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +12,8 @@ namespace UnityInventorySystem.Inventory
 	{
 		private readonly SlotViewModel _slotViewModel;
 		private readonly SlotFacade _slot;
+
+		private TextMeshProUGUI _itemCount;
 		
 		public SlotView(
 			SlotViewModel slotViewModel,
@@ -22,16 +25,47 @@ namespace UnityInventorySystem.Inventory
 		
 		public void Initialize()
 		{
+			PrepareComponents();
+			SubscribeComponents();
+		}
+
+		private void PrepareComponents()
+		{
+			_itemCount = _slot.GetComponentInChildren<TextMeshProUGUI>();
+		}
+
+		private void SubscribeComponents()
+		{
 			_slotViewModel
 				.Selected
 				.AsObservable()
 				.Subscribe(PrepareSelectedSlot)
 				.AddTo(Disposables);
+
+			_slotViewModel
+				.ItemsCount
+				.AsObservable()
+				.Subscribe(ChangeItemCount)
+				.AddTo(Disposables);
 		}
 
 		private void PrepareSelectedSlot(bool value)
 		{
-			_slot.gameObject.GetComponent<Image>().color = value ? Color.cyan : Color.white;
+			_slot.gameObject.GetComponent<Image>().color = value 
+				? Color.cyan 
+				: Color.white;
+		}
+
+		private void ChangeItemCount(int count)
+		{
+			if (count == 0 || count == 1)
+			{
+				_itemCount.text = string.Empty;
+			}
+			else
+			{
+				_itemCount.text = count.ToString();
+			}
 		}
 	}
 }
