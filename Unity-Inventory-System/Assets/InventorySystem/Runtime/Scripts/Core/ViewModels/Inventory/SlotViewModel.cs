@@ -15,6 +15,7 @@ namespace Assets.Scripts.Core.ViewModels
 
 			Selected = new ReactiveProperty<bool>(false);
 			ItemsInSlot = new ReactiveCollection<IItemFacade>();
+			ItemsCount = new ReactiveProperty<int>(0);
 			Empty = true;
 		}
 
@@ -24,7 +25,7 @@ namespace Assets.Scripts.Core.ViewModels
 
 		public bool Empty { get; private set; }
 		
-		public int ItemsCount { get; private set; }
+		public IReactiveProperty<int> ItemsCount { get; private set; }
 		
 		public ISlotFacade CurrentSlot { get; private set; }
 		
@@ -37,15 +38,12 @@ namespace Assets.Scripts.Core.ViewModels
 		private void ChangeItemsInSlot(int count)
 		{
 			Empty = count == 0;
-			ItemsCount = count;
+			ItemsCount.Value = count;
 		}
 
 		public void LateDispose() => _disposables?.Dispose();
 
-		public void AddItem(IItemFacade item)
-		{
-			ItemsInSlot.Add(item);
-		}
+		public void AddItem(IItemFacade item) => ItemsInSlot.Add(item);
 
 		public void RemoveItem()
 		{

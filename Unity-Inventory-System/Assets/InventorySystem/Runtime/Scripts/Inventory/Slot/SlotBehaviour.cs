@@ -34,9 +34,10 @@ namespace UnityInventorySystem.Inventory
 
 		public void RemoveItem() => _slotViewModel.RemoveItem();
 
-		public int ItemsCount => _slotViewModel.ItemsCount;
+		public int ItemsCount => _slotViewModel.ItemsCount.Value;
 
 		public bool Empty => _slotViewModel.Empty;
+		
 		public bool Selected => _slotViewModel.Selected.Value;
 
 		public void SetSelected(bool value) => _slotViewModel.SetSelected(value);

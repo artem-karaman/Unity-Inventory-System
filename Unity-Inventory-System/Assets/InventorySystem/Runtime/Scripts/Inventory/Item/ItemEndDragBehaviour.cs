@@ -1,17 +1,20 @@
 ﻿using InventorySystem.Runtime.Scripts.Models;
-using UniRx.Triggers;
 using UnityEngine;
+using Zenject;
 
 namespace UnityInventorySystem.Inventory
 {
 	public class ItemEndDragBehaviour
 	{
+		private readonly ItemFacadesPoolBehaviour _itemFacadesPoolBehaviour;
+		
 		private ItemDragData _itemDragData;
 		private SlotFacade _slotFacade;
 
-		public ItemEndDragBehaviour(
+		public ItemEndDragBehaviour(ItemFacadesPoolBehaviour itemFacadesPoolBehaviour,
 			ItemDragData itemDragData)
 		{
+			_itemFacadesPoolBehaviour = itemFacadesPoolBehaviour;
 			_itemDragData = itemDragData;
 		}
 
@@ -20,6 +23,7 @@ namespace UnityInventorySystem.Inventory
 			_itemDragData = itemDragData;
 		}
 
+		//TODO: Need to clear item from old slot when move item from it
 		public void OnEndDrag()
 		{
 			FindSlot();
@@ -36,9 +40,10 @@ namespace UnityInventorySystem.Inventory
 
 			if (_itemDragData.EventData.pointerEnter.CompareTag("Item"))
 			{
-				if (_itemDragData.Item.Item.MaxStack > 1 && _slotFacade.ItemsCount() < _itemDragData.Item.Item.MaxStack) 
+				if (_itemDragData.Item.Item.MaxStack > 1 &&
+				    _slotFacade.ItemsCount() < _itemDragData.Item.Item.MaxStack) 
 				{
-					Object.Destroy(_itemDragData.SelectedItem.gameObject); 
+					_itemFacadesPoolBehaviour.RemoveItem(_itemDragData.SelectedItem.GetComponent<IItemFacade>());
 					_slotFacade.AddItemToSlot(_itemDragData.Item);
 
 					return;
@@ -51,8 +56,11 @@ namespace UnityInventorySystem.Inventory
 				
 				return;
 			}
-
+			
 			_itemDragData.SelectedItem.transform.SetParent(_itemDragData.EventData.pointerEnter.transform);
+			// set item to the center of slot
+			_itemDragData.SelectedItem.GetComponent<RectTransform>().localPosition = Vector3.zero;
+			
 			_slotFacade.AddItemToSlot(_itemDragData.Item);
 		}
 
@@ -69,6 +77,9 @@ namespace UnityInventorySystem.Inventory
 		private void MoveToOriginalSlot()
 		{
 			_itemDragData.SelectedItem.transform.SetParent(_itemDragData.OldSlot.transform);
+			_itemDragData.SelectedItem.GetComponent<RectTransform>().localPosition = Vector3.zero;
 		}
+		
+		public class Factory : PlaceholderFactory<ItemDragData, ItemEndDragBehaviour>{}
 	}
 }
