@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Core.ViewModels;
+﻿using System.Linq;
+using Assets.Scripts.Core.ViewModels;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -14,6 +15,7 @@ namespace UnityInventorySystem.Inventory
 		private readonly SlotFacade _slot;
 
 		private TextMeshProUGUI _itemCount;
+		private Image _image;
 		
 		public SlotView(
 			SlotViewModel slotViewModel,
@@ -32,6 +34,12 @@ namespace UnityInventorySystem.Inventory
 		private void PrepareComponents()
 		{
 			_itemCount = _slot.GetComponentInChildren<TextMeshProUGUI>();
+			_image = _slot.GetComponent<Image>();
+
+			if (!_slotViewModel.Empty)
+			{
+				_image.color = _slotViewModel.ItemsInSlot.First().Item.Color;
+			}
 		}
 
 		private void SubscribeComponents()
@@ -61,10 +69,12 @@ namespace UnityInventorySystem.Inventory
 			if (count == 0 || count == 1)
 			{
 				_itemCount.text = string.Empty;
+				_image.color = Color.white;
 			}
 			else
 			{
 				_itemCount.text = count.ToString();
+				_image.color = _slotViewModel.ItemsInSlot.First().Item.Color;
 			}
 		}
 	}
