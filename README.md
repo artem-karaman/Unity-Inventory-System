@@ -17,7 +17,7 @@ Tests with Unity Editor version - 2020.1.8f1
   
 - UniTask - version 2.0.36 - https://github.com/Cysharp/UniTask/releases/tag/2.0.36 - unity package - upm
 
-- Extenject - version 9.2.0 - asset store
+- Extenject - version 9.2.0 - https://openupm.com/packages/com.svermeulen.extenject/ - open upm
 
 - Unity reorderable list - https://github.com/cfoulston/Unity-Reorderable-List - unity package - upm 
 
@@ -37,7 +37,7 @@ Add to manifest
 }
 ```
 
-and Extenject form asset store
+and Extenject open upm
 
 </details>
 
