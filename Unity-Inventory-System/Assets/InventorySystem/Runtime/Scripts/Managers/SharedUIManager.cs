@@ -2,14 +2,13 @@
 
 public class SharedUIManager : MonoBehaviour
 {
-	[Tooltip("Это поле для Canvas")] 
 	[SerializeField]
 	private Canvas _canvas;
-	public Canvas Canvas => _canvas;
 
-	[Tooltip("Это поле для DragingItem")] [SerializeField]
+	[SerializeField]
 	private GameObject _dragingItem;
 
+	public Canvas Canvas => _canvas;
 	public GameObject DragingItem => _dragingItem;
 
 }
