@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Assets.Scripts.Core.ViewModels;
+using InventorySystem.Runtime.Scripts.Inventory.Slot;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -59,7 +60,8 @@ namespace UnityInventorySystem.Inventory
 
 		private void PrepareSelectedSlot(bool value)
 		{
-			_slot.gameObject.GetComponent<Image>().color = value 
+			_slot.gameObject.GetComponent<Image>().color 
+				= value 
 				? Color.cyan 
 				: Color.white;
 		}

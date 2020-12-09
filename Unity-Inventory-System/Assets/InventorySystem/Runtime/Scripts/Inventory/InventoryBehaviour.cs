@@ -47,16 +47,6 @@ namespace UnityInventorySystem.Inventory
 				.AsObservable()
 				.Subscribe(AddSlots)
 				.AddTo(Disposables);
-
-			_inventoryViewModel
-				.InventoryItems
-				.ObserveRemove()
-				.Subscribe(value =>
-				{
-					
-				})
-				.AddTo(Disposables);
-
 		}
 
 		private void AddSlots(int value)
@@ -71,7 +61,7 @@ namespace UnityInventorySystem.Inventory
 		{
 			AddItemToSlot(item);
 
-			_inventoryViewModel.InventoryItems.Add(item);
+			//_inventoryViewModel.InventoryItems.Add(item);
 		}
 
 		public void AddItems(IEnumerable<IItem> items)

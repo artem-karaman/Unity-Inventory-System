@@ -1,4 +1,5 @@
-﻿using InventorySystem.Runtime.Scripts.Models;
+﻿using InventorySystem.Runtime.Scripts.Inventory.Slot;
+using InventorySystem.Runtime.Scripts.Models;
 using UnityEngine;
 using Zenject;
 
@@ -43,10 +44,9 @@ namespace UnityInventorySystem.Inventory
 				if (_itemDragData.Item.Item.MaxStack > 1 &&
 				    _slotFacade.ItemsCount() < _itemDragData.Item.Item.MaxStack) 
 				{
-					_itemFacadesPoolBehaviour.RemoveItem(_itemDragData.SelectedItem.GetComponent<IItemFacade>());
+					_itemDragData.OldSlot.GetComponent<SlotFacade>().RemoveItem();
+					//_itemFacadesPoolBehaviour.RemoveItem(_itemDragData.SelectedItem.GetComponent<IItemFacade>());
 					_slotFacade.AddItemToSlot(_itemDragData.Item);
-					
-
 					return;
 				}
 			}
@@ -54,7 +54,6 @@ namespace UnityInventorySystem.Inventory
 			if (!_itemDragData.EventData.pointerEnter.CompareTag("ItemSlot"))
 			{
 				MoveToOriginalSlot();
-				
 				return;
 			}
 			
@@ -62,6 +61,7 @@ namespace UnityInventorySystem.Inventory
 			// set item to the center of slot
 			_itemDragData.SelectedItem.GetComponent<RectTransform>().localPosition = Vector3.zero;
 			
+			_itemDragData.OldSlot.GetComponent<SlotFacade>().RemoveItem();
 			_slotFacade.AddItemToSlot(_itemDragData.Item);
 		}
 

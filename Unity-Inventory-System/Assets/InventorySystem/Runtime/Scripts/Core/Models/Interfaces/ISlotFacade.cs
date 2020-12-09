@@ -18,5 +18,7 @@ namespace UnityInventorySystem
 		void SetSelected(bool value);
 		
 		void RemoveItem();
+		
+		IItemFacade Item { get; }
 	}
 }

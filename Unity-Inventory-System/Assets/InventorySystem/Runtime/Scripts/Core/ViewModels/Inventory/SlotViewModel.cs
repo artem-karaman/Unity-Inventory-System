@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using UniRx;
+﻿using UniRx;
 using UnityInventorySystem;
 using Zenject;
 
@@ -28,12 +27,17 @@ namespace Assets.Scripts.Core.ViewModels
 		public IReactiveProperty<int> ItemsCount { get; private set; }
 		
 		public ISlotFacade CurrentSlot { get; private set; }
-		
-		public void Initialize() =>
+
+		public void Initialize()
+		{
 			ItemsInSlot
 				.ObserveCountChanged()
 				.Subscribe(ChangeItemsInSlot)
 				.AddTo(_disposables);
+
+			Empty = ItemsInSlot.Count == 0;
+		}
+			
 
 		private void ChangeItemsInSlot(int count)
 		{
@@ -48,12 +52,8 @@ namespace Assets.Scripts.Core.ViewModels
 		public void RemoveItem()
 		{
 			if (Empty) return;
-
-			var item = ItemsInSlot.First().Item;
-			_inventoryViewModel.InventoryItems.Remove(item);
-			ItemsInSlot.RemoveAt(0);
 			
-			CurrentSlot.SetSelected(false);
+			ItemsInSlot?.Clear();
 		}
 
 		public void SetSelected(bool value)

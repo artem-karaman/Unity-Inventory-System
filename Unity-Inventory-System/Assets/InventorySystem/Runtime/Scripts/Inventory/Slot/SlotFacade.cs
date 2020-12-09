@@ -1,35 +1,29 @@
-﻿using Assets.Scripts.Core.ViewModels;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityInventorySystem;
+using UnityInventorySystem.Inventory;
 using Zenject;
 
-namespace UnityInventorySystem.Inventory
+namespace InventorySystem.Runtime.Scripts.Inventory.Slot
 {
 	public class SlotFacade : MonoBehaviour, IPoolable<IMemoryPool>, ISlotFacade
 	{
 		private SlotBehaviour _slotBehaviour;
-		private SlotViewModel _slotViewModel;
 		private IMemoryPool _memoryPool;
 
 		[Inject]
-		void Construct(
-			SlotBehaviour slotBehaviour,
-			SlotViewModel slotViewModel)
+		void Construct(SlotBehaviour slotBehaviour)
 		{
 			_slotBehaviour = slotBehaviour;
-			_slotViewModel = slotViewModel;
 		}
-
-		void Start() => _slotViewModel.SetCurrentSlot(this);
 
 		public Transform Transform => transform;
 
 		public void Dispose() => _memoryPool?.Despawn(this);
 
-		public void OnDespawned() => _memoryPool = null;
-
-		public void OnSpawned(IMemoryPool memoryPool) => _memoryPool = memoryPool;
-
-		public void AddItemToSlot(IItemFacade item) => _slotBehaviour.AddItem(item);
+		public void AddItemToSlot(IItemFacade item)
+		{
+			_slotBehaviour.AddItem(item);
+		}
 
 		public bool Empty => _slotBehaviour.Empty;
 		
@@ -42,6 +36,13 @@ namespace UnityInventorySystem.Inventory
 		public void SetSelected(bool value) => _slotBehaviour.SetSelected(value);
 
 		public void RemoveItem() => _slotBehaviour.RemoveItem();
+		public IItemFacade Item { get; }
+		
+		#region PoolBehaviour
+		public void OnDespawned() => _memoryPool = null;
+		public void OnSpawned(IMemoryPool memoryPool) => _memoryPool = memoryPool;
+
+		#endregion
 
 		public class Factory : PlaceholderFactory<SlotFacade> { }
 	}

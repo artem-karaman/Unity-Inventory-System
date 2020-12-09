@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Assets.Scripts.Core.ViewModels;
+using InventorySystem.Runtime.Scripts.Inventory.Slot;
 using UnityEngine;
 
 namespace UnityInventorySystem.Inventory
@@ -8,14 +10,16 @@ namespace UnityInventorySystem.Inventory
 	public class SlotFacadesPoolBehaviour
 	{
 		private readonly SlotFacade.Factory _slotFacadeFactory;
-		
+		private readonly InventoryViewModel _inventoryViewModel;
 		private List<ISlotFacade> _slots = new List<ISlotFacade>();
 		private Transform _parent;
 		
 		public SlotFacadesPoolBehaviour(
-			SlotFacade.Factory slotFacadeFactory)
+			SlotFacade.Factory slotFacadeFactory,
+			InventoryViewModel inventoryViewModel)
 		{
 			_slotFacadeFactory = slotFacadeFactory;
+			_inventoryViewModel = inventoryViewModel;
 		}
 
 		public void SetParent(Transform parent)
@@ -27,6 +31,7 @@ namespace UnityInventorySystem.Inventory
 		public void AddSlot()
 		{
 			var slot = _slotFacadeFactory.Create();
+			_inventoryViewModel.InventoryItems.Add(slot);
 			slot.Transform.SetParent(_parent);
 			_slots.Add(slot);
 		}

@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Core.ViewModels;
+using InventorySystem.Runtime.Scripts.Inventory.Slot;
 using UnityEngine;
 using UnityInventorySystem.Inventory;
 using Zenject;
