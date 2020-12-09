@@ -31,7 +31,7 @@ namespace Assets.Scripts.Core.ViewModels
 		public void Initialize()
 		{
 			ItemsInSlot
-				.ObserveCountChanged()
+				.ObserveCountChanged(true)
 				.Subscribe(ChangeItemsInSlot)
 				.AddTo(_disposables);
 
@@ -47,7 +47,10 @@ namespace Assets.Scripts.Core.ViewModels
 
 		public void LateDispose() => _disposables?.Dispose();
 
-		public void AddItem(IItemFacade item) => ItemsInSlot.Add(item);
+		public void AddItem(IItemFacade item)
+		{
+			ItemsInSlot.Add(item);
+		}
 
 		public void RemoveItem()
 		{

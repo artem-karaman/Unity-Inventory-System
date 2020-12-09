@@ -41,6 +41,29 @@ namespace UnityInventorySystem.Inventory
 			{
 				_image.color = _slotViewModel.ItemsInSlot.First().Item.Color;
 			}
+
+			// _slotViewModel
+			// 	.ItemsInSlot
+			// 	.ObserveAdd()
+			// 	.Subscribe(_ =>
+			// 	{
+			// 		if (!_slotViewModel.Empty)
+			// 		{
+			// 			_image.color = _slotViewModel.ItemsInSlot.First().Item.Color;
+			// 		}
+			// 	})
+			// 	.AddTo(Disposables);
+
+			_slotViewModel
+				.ItemsInSlot
+				.ObserveCountChanged(true)
+				.Subscribe(_ =>
+				{
+					if (!_slotViewModel.Empty)
+					{
+						_image.color = _slotViewModel.ItemsInSlot.First().Item.Color;
+					}
+				}).AddTo(Disposables);
 		}
 
 		private void SubscribeComponents()

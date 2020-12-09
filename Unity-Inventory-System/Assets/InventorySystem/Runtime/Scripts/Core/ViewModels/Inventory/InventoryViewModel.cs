@@ -52,8 +52,11 @@ namespace Assets.Scripts.Core.ViewModels
 
 		public void RemoveItem()
 		{
-			if(_selectedSlot.Selected)
-				_selectedSlot.RemoveItem();
+			if (_selectedSlot != null)
+			{
+				if(_selectedSlot.Selected)
+					_selectedSlot.RemoveItem();
+			}
 		}
 	}
 }

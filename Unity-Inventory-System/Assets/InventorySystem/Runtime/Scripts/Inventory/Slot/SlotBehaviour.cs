@@ -28,6 +28,12 @@ namespace UnityInventorySystem.Inventory
 					_itemFacadesPoolBehaviour.RemoveItem(value.Value);
 				})
 				.AddTo(Disposables);
+
+			// _slotViewModel
+			// 	.ItemsInSlot
+			// 	.ObserveReset()
+			// 	.Subscribe(_ => _itemFacadesPoolBehaviour.RemoveItem())
+			// 	.AddTo(Disposables);
 		}
 
 		public void AddItem(IItemFacade item) => _slotViewModel.AddItem(item);

@@ -1,10 +1,11 @@
 ﻿using System;
 using UnityEngine;
+using UnityInventorySystem.Installers;
 using UnityInventorySystem.Inventory;
 using UnityInventorySystem.Presenters;
 using Zenject;
 
-namespace UnityInventorySystem.Installers.HorizontalInventoryScene
+namespace InventorySystem.Samples.Scripts.Installers.HorizontalInventoryScene
 {
 	public class HorizontalInventoryMonoInstaller : MonoInstaller<HorizontalInventoryMonoInstaller>
 	{
@@ -21,8 +22,6 @@ namespace UnityInventorySystem.Installers.HorizontalInventoryScene
 		
 		public override void InstallBindings()
 		{
-			//InventoryInstaller.Install(Container);
-
 			Container
 				.BindFactory<int, InventoryFacade, InventoryFacade.Factory>()
 				.FromSubContainerResolve()
