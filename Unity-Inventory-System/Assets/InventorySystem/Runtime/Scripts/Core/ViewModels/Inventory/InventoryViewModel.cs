@@ -3,7 +3,7 @@ using System.Linq;
 using UniRx;
 using UnityInventorySystem;
 
-namespace Assets.Scripts.Core.ViewModels
+namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
 {
 	public class InventoryViewModel
 	{
@@ -55,8 +55,14 @@ namespace Assets.Scripts.Core.ViewModels
 			if (_selectedSlot != null)
 			{
 				if(_selectedSlot.Selected)
-					_selectedSlot.RemoveItem();
+					_selectedSlot.ClearItems();
 			}
+		}
+
+		public void MoveItem(ISlotFacade from, ISlotFacade to)
+		{
+			var items = from.AllItemsInSlot;
+			to.AddItemsToSlot(items);
 		}
 	}
 }

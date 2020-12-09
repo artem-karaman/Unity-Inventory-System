@@ -1,4 +1,5 @@
-﻿using InventorySystem.Runtime.Scripts.Inventory.Slot;
+﻿using InventorySystem.Runtime.Scripts.Inventory.Item;
+using InventorySystem.Runtime.Scripts.Inventory.Slot;
 using InventorySystem.Runtime.Scripts.Models;
 using UniRx;
 using UniRx.Triggers;

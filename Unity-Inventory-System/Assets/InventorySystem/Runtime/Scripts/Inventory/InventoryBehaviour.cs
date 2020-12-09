@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Assets.Scripts.Core.ViewModels;
+using InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory;
 using UniRx;
 using UnityEngine;
 using UnityInventorySystem.Presenters.Base;
@@ -57,12 +57,7 @@ namespace UnityInventorySystem.Inventory
 			}
 		}
 
-		public void AddItem(IItem item)
-		{
-			AddItemToSlot(item);
-
-			//_inventoryViewModel.InventoryItems.Add(item);
-		}
+		public void AddItem(IItem item) => AddItemToSlot(item);
 
 		public void AddItems(IEnumerable<IItem> items)
 		{
@@ -73,12 +68,7 @@ namespace UnityInventorySystem.Inventory
 				AddItemToSlot(item);
 			}
 		}
-
-		public void Update()
-		{
-			
-		}
-
+		
 		public void ClearItems() => _slotFacadesPoolBehaviour.ClearSlots();
 
 		public void FilterItems<T>() 

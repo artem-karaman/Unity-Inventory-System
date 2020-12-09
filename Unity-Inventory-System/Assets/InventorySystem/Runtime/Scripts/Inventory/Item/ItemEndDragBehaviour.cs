@@ -1,22 +1,28 @@
-﻿using InventorySystem.Runtime.Scripts.Inventory.Slot;
+﻿using InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory;
+using InventorySystem.Runtime.Scripts.Inventory.Slot;
 using InventorySystem.Runtime.Scripts.Models;
 using UnityEngine;
+using UnityInventorySystem.Inventory;
 using Zenject;
 
-namespace UnityInventorySystem.Inventory
+namespace InventorySystem.Runtime.Scripts.Inventory.Item
 {
 	public class ItemEndDragBehaviour
 	{
 		private readonly ItemFacadesPoolBehaviour _itemFacadesPoolBehaviour;
+		private readonly InventoryViewModel _inventoryViewModel;
 		
 		private ItemDragData _itemDragData;
 		private SlotFacade _slotFacade;
 
-		public ItemEndDragBehaviour(ItemFacadesPoolBehaviour itemFacadesPoolBehaviour,
-			ItemDragData itemDragData)
+		public ItemEndDragBehaviour(
+			ItemFacadesPoolBehaviour itemFacadesPoolBehaviour,
+			ItemDragData itemDragData,
+			InventoryViewModel inventoryViewModel)
 		{
 			_itemFacadesPoolBehaviour = itemFacadesPoolBehaviour;
 			_itemDragData = itemDragData;
+			_inventoryViewModel = inventoryViewModel;
 		}
 
 		public void Prepare(ItemDragData itemDragData)
@@ -38,15 +44,15 @@ namespace UnityInventorySystem.Inventory
 				
 				return;
 			}
+			
+			var oldSlot = _itemDragData.OldSlot.GetComponent<SlotFacade>();
 
 			if (_itemDragData.EventData.pointerEnter.CompareTag("Item"))
 			{
 				if (_itemDragData.Item.Item.MaxStack > 1 &&
 				    _slotFacade.ItemsCount() < _itemDragData.Item.Item.MaxStack) 
 				{
-					_itemDragData.OldSlot.GetComponent<SlotFacade>().RemoveItem();
-					//_itemFacadesPoolBehaviour.RemoveItem(_itemDragData.SelectedItem.GetComponent<IItemFacade>());
-					_slotFacade.AddItemToSlot(_itemDragData.Item);
+					_inventoryViewModel.MoveItem(oldSlot, _slotFacade);
 					return;
 				}
 			}
@@ -60,9 +66,8 @@ namespace UnityInventorySystem.Inventory
 			_itemDragData.SelectedItem.transform.SetParent(_itemDragData.EventData.pointerEnter.transform);
 			// set item to the center of slot
 			_itemDragData.SelectedItem.GetComponent<RectTransform>().localPosition = Vector3.zero;
-			
-			_itemDragData.OldSlot.GetComponent<SlotFacade>().RemoveItem();
-			_slotFacade.AddItemToSlot(_itemDragData.Item);
+
+			_inventoryViewModel.MoveItem(oldSlot, _slotFacade);
 		}
 
 		private void FindSlot()

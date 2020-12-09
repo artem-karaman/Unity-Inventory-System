@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 
 namespace UnityInventorySystem
@@ -15,10 +18,14 @@ namespace UnityInventorySystem
 
 		void AddItemToSlot(IItemFacade item);
 
+		void AddItemsToSlot(IEnumerable<IItemFacade> items);
+
 		void SetSelected(bool value);
 		
-		void RemoveItem();
+		void ClearItems();
 		
 		IItemFacade Item { get; }
+		
+		IReactiveCollection<IItemFacade> AllItemsInSlot { get; }
 	}
 }

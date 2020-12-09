@@ -1,8 +1,11 @@
-﻿using UniRx;
+﻿using System;
+using System.Collections.Generic;
+using Assets.Scripts.Core.ViewModels;
+using UniRx;
 using UnityInventorySystem;
 using Zenject;
 
-namespace Assets.Scripts.Core.ViewModels
+namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
 {
 	public class SlotViewModel : IInitializable, ILateDisposable
 	{
@@ -50,6 +53,16 @@ namespace Assets.Scripts.Core.ViewModels
 		public void AddItem(IItemFacade item)
 		{
 			ItemsInSlot.Add(item);
+		}
+
+		public void AddItems(IEnumerable<IItemFacade> items)
+		{
+			_ = items ?? throw new ArgumentNullException(nameof(items));
+
+			foreach (var item in items)
+			{
+				ItemsInSlot.Add(item);
+			}
 		}
 
 		public void RemoveItem()

@@ -1,9 +1,12 @@
-﻿using Assets.Scripts.Core.ViewModels;
+﻿using System.Collections.Generic;
+using InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory;
 using UniRx;
+using UnityInventorySystem;
+using UnityInventorySystem.Inventory;
 using UnityInventorySystem.Presenters.Base;
 using Zenject;
 
-namespace UnityInventorySystem.Inventory
+namespace InventorySystem.Runtime.Scripts.Inventory.Slot
 {
 	public class SlotBehaviour : BasePresenter, IInitializable
 	{
@@ -28,12 +31,6 @@ namespace UnityInventorySystem.Inventory
 					_itemFacadesPoolBehaviour.RemoveItem(value.Value);
 				})
 				.AddTo(Disposables);
-
-			// _slotViewModel
-			// 	.ItemsInSlot
-			// 	.ObserveReset()
-			// 	.Subscribe(_ => _itemFacadesPoolBehaviour.RemoveItem())
-			// 	.AddTo(Disposables);
 		}
 
 		public void AddItem(IItemFacade item) => _slotViewModel.AddItem(item);
@@ -45,6 +42,7 @@ namespace UnityInventorySystem.Inventory
 		public bool Empty => _slotViewModel.Empty;
 		
 		public bool Selected => _slotViewModel.Selected.Value;
+		public IReactiveCollection<IItemFacade> GetAllItemsInSlot => _slotViewModel.ItemsInSlot;
 
 		public void SetSelected(bool value) => _slotViewModel.SetSelected(value);
 
@@ -56,6 +54,11 @@ namespace UnityInventorySystem.Inventory
 			}
 
 			_slotViewModel.ClearItems();
+		}
+
+		public void AddItems(IEnumerable<IItemFacade> items)
+		{
+			_slotViewModel.AddItems(items);
 		}
 	}
 }
