@@ -1,7 +1,10 @@
-﻿using UnityEngine;
+﻿using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
+using UnityEngine;
+using UnityInventorySystem;
+using UnityInventorySystem.Inventory;
 using Zenject;
 
-namespace UnityInventorySystem.Inventory
+namespace InventorySystem.Runtime.Scripts.Inventory.Item
 {
 	public class ItemFacade : MonoBehaviour, IPoolable<IMemoryPool>, IItemFacade
 	{

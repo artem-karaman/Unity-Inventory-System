@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Assets.Scripts.Core.ViewModels;
+using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
 using UniRx;
-using UnityInventorySystem;
 using Zenject;
 
 namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory

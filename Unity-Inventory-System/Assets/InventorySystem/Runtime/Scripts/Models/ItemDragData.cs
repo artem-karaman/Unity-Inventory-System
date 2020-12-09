@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using InventorySystem.Runtime.Scripts.Inventory.Item;
+using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityInventorySystem.Inventory;
 
 namespace InventorySystem.Runtime.Scripts.Models
 {

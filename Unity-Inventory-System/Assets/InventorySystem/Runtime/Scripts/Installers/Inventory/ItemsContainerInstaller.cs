@@ -1,4 +1,5 @@
-﻿using UnityInventorySystem.Inventory;
+﻿using InventorySystem.Runtime.Scripts.Inventory.Item;
+using UnityInventorySystem.Inventory;
 using Zenject;
 
 namespace UnityInventorySystem.Installers

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
 using Zenject;
 
 namespace UnityInventorySystem.Inventory

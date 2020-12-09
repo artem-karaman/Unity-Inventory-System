@@ -1,14 +1,14 @@
-﻿using InventorySystem.Runtime.Scripts.Inventory.Item;
-using InventorySystem.Runtime.Scripts.Inventory.Slot;
+﻿using InventorySystem.Runtime.Scripts.Inventory.Slot;
+using InventorySystem.Runtime.Scripts.Managers;
 using InventorySystem.Runtime.Scripts.Models;
+using InventorySystem.Runtime.Scripts.Presenters.Base;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityInventorySystem.Presenters.Base;
 using Zenject;
 
-namespace UnityInventorySystem.Inventory
+namespace InventorySystem.Runtime.Scripts.Inventory.Item
 {
 	public class ItemBehaviour : BasePresenter, IInitializable
 	{
@@ -104,6 +104,7 @@ namespace UnityInventorySystem.Inventory
 		
 		private void OnLongPress()
 		{
+			//TODO: implement show tooltip about selected element
 		}
 
 		private void OnDrag(PointerEventData eventData)

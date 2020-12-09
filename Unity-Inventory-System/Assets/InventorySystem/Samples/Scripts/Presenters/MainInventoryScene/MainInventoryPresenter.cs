@@ -1,7 +1,8 @@
-﻿using UniRx;
+﻿using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
+using InventorySystem.Runtime.Scripts.Presenters.Base;
+using UniRx;
 using UnityInventorySystem.Inventory;
 using UnityInventorySystem.Managers;
-using UnityInventorySystem.Presenters.Base;
 using Zenject;
 
 namespace UnityInventorySystem.Presenters

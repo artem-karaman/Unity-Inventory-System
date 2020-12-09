@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using InventorySystem.Runtime.Scripts.Core.Models;
+using UnityEngine;
 
 namespace UnityInventorySystem
 {

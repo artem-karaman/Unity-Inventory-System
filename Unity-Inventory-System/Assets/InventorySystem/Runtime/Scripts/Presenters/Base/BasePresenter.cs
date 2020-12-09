@@ -1,7 +1,7 @@
 ﻿using UniRx;
 using Zenject;
 
-namespace UnityInventorySystem.Presenters.Base
+namespace InventorySystem.Runtime.Scripts.Presenters.Base
 {
 	public class BasePresenter : ILateDisposable
 	{

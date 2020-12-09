@@ -1,5 +1,5 @@
-﻿using UnityInventorySystem.Inventory;
-using UnityInventorySystem.Presenters.Base;
+﻿using InventorySystem.Runtime.Scripts.Presenters.Base;
+using UnityInventorySystem.Inventory;
 using Zenject;
 
 namespace UnityInventorySystem.Presenters

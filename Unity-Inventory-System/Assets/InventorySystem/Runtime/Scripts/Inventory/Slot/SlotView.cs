@@ -2,11 +2,11 @@
 using Assets.Scripts.Core.ViewModels;
 using InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory;
 using InventorySystem.Runtime.Scripts.Inventory.Slot;
+using InventorySystem.Runtime.Scripts.Presenters.Base;
 using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityInventorySystem.Presenters.Base;
 using Zenject;
 
 namespace UnityInventorySystem.Inventory

@@ -1,8 +1,7 @@
 ﻿using System;
-using UnityEditor;
 using UnityEngine;
 
-namespace UnityInventorySystem
+namespace InventorySystem.Runtime.Scripts.Core.Models
 {
 	[Serializable]
 	public abstract class Item

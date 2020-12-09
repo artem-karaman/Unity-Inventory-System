@@ -2,7 +2,6 @@
 using InventorySystem.Runtime.Scripts.Inventory.Slot;
 using InventorySystem.Runtime.Scripts.Models;
 using UnityEngine;
-using UnityInventorySystem.Inventory;
 using Zenject;
 
 namespace InventorySystem.Runtime.Scripts.Inventory.Item

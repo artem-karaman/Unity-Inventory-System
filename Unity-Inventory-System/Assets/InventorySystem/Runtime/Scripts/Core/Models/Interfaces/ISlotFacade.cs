@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
 
-namespace UnityInventorySystem
+namespace InventorySystem.Runtime.Scripts.Core.Models.Interfaces
 {
 	public interface ISlotFacade : IDisposable
 	{

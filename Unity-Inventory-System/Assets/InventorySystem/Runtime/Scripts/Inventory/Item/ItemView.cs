@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
+using UnityEngine;
 using UnityEngine.UI;
+using UnityInventorySystem;
 
-namespace UnityInventorySystem.Inventory
+namespace InventorySystem.Runtime.Scripts.Inventory.Item
 {
 	public class ItemView 
 	{

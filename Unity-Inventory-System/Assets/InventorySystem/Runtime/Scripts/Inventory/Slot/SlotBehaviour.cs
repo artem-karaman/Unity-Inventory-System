@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
 using InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory;
+using InventorySystem.Runtime.Scripts.Inventory.Item;
+using InventorySystem.Runtime.Scripts.Presenters.Base;
 using UniRx;
 using UnityInventorySystem;
 using UnityInventorySystem.Inventory;
-using UnityInventorySystem.Presenters.Base;
 using Zenject;
 
 namespace InventorySystem.Runtime.Scripts.Inventory.Slot

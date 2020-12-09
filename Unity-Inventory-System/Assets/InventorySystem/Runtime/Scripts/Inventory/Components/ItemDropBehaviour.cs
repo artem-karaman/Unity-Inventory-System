@@ -3,7 +3,7 @@ using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace UnityInventorySystem
+namespace InventorySystem.Runtime.Scripts.Inventory.Components
 {
 	public class ItemDropBehaviour : MonoBehaviour
 	{

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace UnityInventorySystem
+namespace InventorySystem.Runtime.Scripts.Core.Models.Interfaces
 {
 	public interface IItemFacade : IDisposable
 	{
