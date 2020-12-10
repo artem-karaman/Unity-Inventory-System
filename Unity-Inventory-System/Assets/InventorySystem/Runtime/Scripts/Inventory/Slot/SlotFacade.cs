@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
+using InventorySystem.Runtime.Scripts.Core.Messages;
 using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
 using UniRx;
 using UnityEngine;
-using UnityInventorySystem;
 using Zenject;
 
 namespace InventorySystem.Runtime.Scripts.Inventory.Slot
@@ -18,6 +18,15 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Slot
 			_slotBehaviour = slotBehaviour;
 		}
 
+		void Start()
+		{
+			MessageBroker
+				.Default
+				.Receive<NewSlotSelectedMessage>()
+				.AsObservable()
+				.Subscribe(value => SetSelected(Equals(value.SelectedSlot)))
+				.AddTo(this);
+		}
 		public Transform Transform => transform;
 
 		public void Dispose() => _memoryPool?.Despawn(this);
@@ -40,7 +49,10 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Slot
 
 		public int ItemsCount() => _slotBehaviour.ItemsCount;
 
-		public void SetSelected(bool value) => _slotBehaviour.SetSelected(value);
+		public void SetSelected(bool value)
+		{
+			_slotBehaviour.SetSelected(value);
+		}
 
 		public void ClearItems() => _slotBehaviour.RemoveItem();
 		public IItemFacade Item { get; }

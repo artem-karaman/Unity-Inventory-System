@@ -9,9 +9,11 @@ namespace InventorySystem.Samples.Scripts.Installers.HorizontalInventoryScene
 {
 	public class HorizontalInventoryMonoInstaller : MonoInstaller<HorizontalInventoryMonoInstaller>
 	{
+		#pragma warning disable 0649
 		[SerializeField] 
 		private Transform _mainBackgroundPanelTransform;
-
+		#pragma warning disable 0649
+		
 		private Settings _settings;
 		
 		[Inject]

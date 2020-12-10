@@ -1,4 +1,5 @@
-﻿using InventorySystem.Runtime.Scripts.Inventory.Slot;
+﻿using InventorySystem.Runtime.Scripts.Core.Messages;
+using InventorySystem.Runtime.Scripts.Inventory.Slot;
 using InventorySystem.Runtime.Scripts.Managers;
 using InventorySystem.Runtime.Scripts.Models;
 using InventorySystem.Runtime.Scripts.Presenters.Base;
@@ -92,9 +93,10 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 
 		private void SelectOldSlot(bool value)
 		{
-			_oldSlot
-				.GetComponent<SlotFacade>()
-				.SetSelected(value);
+			var slot = _oldSlot.GetComponent<SlotFacade>();
+			slot.SetSelected(value);
+			
+			MessageBroker.Default.Publish(new NewSlotSelectedMessage(slot));
 		}
 		
 		private void OnPress()

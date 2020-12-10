@@ -5,6 +5,7 @@ namespace UnityInventorySystem.Managers
 {
 	public class MainSceneUIManager : MonoBehaviour
 	{
+		#pragma warning disable 0649
 		[Tooltip("Это поле для HandItemsButton")]
 		[SerializeField]
 		private Button _handItemsButton;
@@ -34,6 +35,7 @@ namespace UnityInventorySystem.Managers
 		[Tooltip("Это поле для DeleteSelectedItem")] [SerializeField]
 		private Button deleteSelectedItemButton;
 
+		#pragma warning restore 0649
 		public Button HandItemsButton => _handItemsButton;
 
 		public Button BodyItemsButton => _bodyItemsButton;

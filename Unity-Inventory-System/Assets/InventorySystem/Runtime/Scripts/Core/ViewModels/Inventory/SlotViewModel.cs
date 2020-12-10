@@ -76,8 +76,6 @@ namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
 			if (!Empty && value)
 			{
 				Selected.Value = true;
-				
-				_inventoryViewModel.SetSelectedSlot(CurrentSlot);
 			}
 			else
 			{

@@ -1,6 +1,8 @@
-﻿using InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory;
+﻿using InventorySystem.Runtime.Scripts.Core.Messages;
+using InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory;
 using InventorySystem.Runtime.Scripts.Inventory.Slot;
 using InventorySystem.Runtime.Scripts.Models;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -52,6 +54,9 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 				    _slotFacade.ItemsCount() < _itemDragData.Item.Item.MaxStack) 
 				{
 					_inventoryViewModel.MoveItem(oldSlot, _slotFacade);
+					
+					MessageBroker.Default.Publish(new NewSlotSelectedMessage(null));
+					
 					return;
 				}
 			}
@@ -67,6 +72,8 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 			_itemDragData.SelectedItem.GetComponent<RectTransform>().localPosition = Vector3.zero;
 
 			_inventoryViewModel.MoveItem(oldSlot, _slotFacade);
+			
+			MessageBroker.Default.Publish(new NewSlotSelectedMessage(null));
 		}
 
 		private void FindSlot()

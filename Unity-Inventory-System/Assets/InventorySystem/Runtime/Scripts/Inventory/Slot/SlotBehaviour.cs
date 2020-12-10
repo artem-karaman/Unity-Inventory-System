@@ -4,8 +4,6 @@ using InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory;
 using InventorySystem.Runtime.Scripts.Inventory.Item;
 using InventorySystem.Runtime.Scripts.Presenters.Base;
 using UniRx;
-using UnityInventorySystem;
-using UnityInventorySystem.Inventory;
 using Zenject;
 
 namespace InventorySystem.Runtime.Scripts.Inventory.Slot
@@ -46,7 +44,10 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Slot
 		public bool Selected => _slotViewModel.Selected.Value;
 		public IReactiveCollection<IItemFacade> GetAllItemsInSlot => _slotViewModel.ItemsInSlot;
 
-		public void SetSelected(bool value) => _slotViewModel.SetSelected(value);
+		public void SetSelected(bool value)
+		{
+			_slotViewModel.SetSelected(value);
+		}
 
 		public void ClearStack()
 		{

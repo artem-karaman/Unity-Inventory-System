@@ -8,9 +8,11 @@ namespace UnityInventorySystem.Installers
 {
 	public class MainInventoryMonoInstaller : MonoInstaller<MainInventoryMonoInstaller>
 	{
+		#pragma warning disable 0649
 		[SerializeField] 
 		private Transform _mainBackgroundPanelTransform;
-
+		#pragma warning restore 0649
+		
 		private Settings _settings;
 		
 		[Inject]

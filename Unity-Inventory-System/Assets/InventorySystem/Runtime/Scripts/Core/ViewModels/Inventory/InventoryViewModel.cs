@@ -1,21 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using InventorySystem.Runtime.Scripts.Core.Messages;
 using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
 using UniRx;
+using Zenject;
 
 namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
 {
-	public class InventoryViewModel
+	public class InventoryViewModel : IInitializable, ILateDisposable
 	{
+		private readonly CompositeDisposable _compositeDisposable = new CompositeDisposable();
 		private readonly int _slotsCount;
 		private ISlotFacade _selectedSlot;
 		public InventoryViewModel(
 			int slotsCount)
 		{
 			_slotsCount = slotsCount;
-
 			SlotsCount = new ReactiveProperty<int>(slotsCount);
-
 			InventoryItems = new List<ISlotFacade>();
 		}
 
@@ -33,22 +34,6 @@ namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
 				.Select(i => i.Item.Item)
 				.ToArray();
 		}
-			
-
-		public void SetSelectedSlot(ISlotFacade slot)
-		{
-			if (_selectedSlot != null)
-			{
-				if (ReferenceEquals(_selectedSlot, slot)) return;
-				
-				_selectedSlot.SetSelected(false);
-				_selectedSlot = slot;
-			}
-			else
-			{
-				_selectedSlot = slot;
-			}
-		}
 
 		public void RemoveItem()
 		{
@@ -63,6 +48,24 @@ namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
 		{
 			var items = from.AllItemsInSlot;
 			to.AddItemsToSlot(items);
+		}
+
+		public void Initialize()
+		{
+			MessageBroker
+				.Default
+				.Receive<NewSlotSelectedMessage>()
+				.AsObservable()
+				.Subscribe(value =>
+				{
+					_selectedSlot = value.SelectedSlot;
+				})
+				.AddTo(_compositeDisposable);
+		}
+
+		public void LateDispose()
+		{
+			_compositeDisposable?.Dispose();
 		}
 	}
 }
