@@ -51,12 +51,10 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 			if (_itemDragData.EventData.pointerEnter.CompareTag("Item"))
 			{
 				if (_itemDragData.Item.Item.MaxStack > 1 &&
-				    _slotFacade.ItemsCount() < _itemDragData.Item.Item.MaxStack) 
+				    _slotFacade.AllItemsInSlot.Count < _itemDragData.Item.Item.MaxStack)
 				{
-					_inventoryViewModel.MoveItem(oldSlot, _slotFacade);
-					
-					MessageBroker.Default.Publish(new NewSlotSelectedMessage(null));
-					
+					AddItemToStack(oldSlot);
+
 					return;
 				}
 			}
@@ -67,12 +65,31 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 				return;
 			}
 			
+			MoveItemToEmptySlot(oldSlot);
+
+			MessageBroker.Default.Publish(new NewSlotSelectedMessage(null));
+		}
+
+		private void MoveItemToEmptySlot(SlotFacade oldSlot)
+		{
 			_itemDragData.SelectedItem.transform.SetParent(_itemDragData.EventData.pointerEnter.transform);
 			// set item to the center of slot
 			_itemDragData.SelectedItem.GetComponent<RectTransform>().localPosition = Vector3.zero;
 
+			if (!_slotFacade.Equals(oldSlot) && _slotFacade.Empty)
+			{
+				_inventoryViewModel.MoveItem(oldSlot, _slotFacade);
+
+				oldSlot.ClearItems();
+			}
+		}
+
+		private void AddItemToStack(SlotFacade oldSlot)
+		{
+			_itemFacadesPoolBehaviour.RemoveItem(oldSlot.Item);
 			_inventoryViewModel.MoveItem(oldSlot, _slotFacade);
-			
+			oldSlot.ClearItems();
+
 			MessageBroker.Default.Publish(new NewSlotSelectedMessage(null));
 		}
 

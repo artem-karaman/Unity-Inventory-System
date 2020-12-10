@@ -2,7 +2,6 @@
 using System.Linq;
 using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
 using UnityEngine;
-using UnityInventorySystem;
 
 namespace InventorySystem.Runtime.Scripts.Inventory.Item
 {

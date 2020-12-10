@@ -94,7 +94,7 @@ namespace UnityInventorySystem.Inventory
 
 		public void RemoveSelectedItem()
 		{
-			_inventoryViewModel.RemoveItem();
+			_inventoryViewModel.RemoveSelectedItem();
 		}
 	}
 }

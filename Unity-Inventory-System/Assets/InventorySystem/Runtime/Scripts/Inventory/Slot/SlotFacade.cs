@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using InventorySystem.Runtime.Scripts.Core.Messages;
 using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
 using UniRx;
@@ -47,15 +48,14 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Slot
 
 		public void SetEmpty() => _slotBehaviour.ClearStack();
 
-		public int ItemsCount() => _slotBehaviour.ItemsCount;
-
 		public void SetSelected(bool value)
 		{
 			_slotBehaviour.SetSelected(value);
 		}
 
-		public void ClearItems() => _slotBehaviour.RemoveItem();
-		public IItemFacade Item { get; }
+		public void ClearItems() => _slotBehaviour.ClearItemsInSlot();
+		
+		public IItemFacade Item => _slotBehaviour.GetAllItemsInSlot?.First();
 
 		public IReactiveCollection<IItemFacade> AllItemsInSlot => _slotBehaviour.GetAllItemsInSlot;
 

@@ -16,19 +16,11 @@ namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
 
 			Selected = new ReactiveProperty<bool>(false);
 			ItemsInSlot = new ReactiveCollection<IItemFacade>();
-			ItemsCount = new ReactiveProperty<int>(0);
 			Empty = true;
 		}
-
 		public IReactiveProperty<bool> Selected { get; }
-
 		public IReactiveCollection<IItemFacade> ItemsInSlot { get; }
-
 		public bool Empty { get; private set; }
-		
-		public IReactiveProperty<int> ItemsCount { get; private set; }
-		
-		public ISlotFacade CurrentSlot { get; private set; }
 
 		public void Initialize()
 		{
@@ -37,22 +29,25 @@ namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
 				.Subscribe(ChangeItemsInSlot)
 				.AddTo(_disposables);
 
+			ItemsInSlot
+				.ObserveReset()
+				.Subscribe(_ =>
+				{
+					Empty = true;
+				})
+				.AddTo(_disposables);
+
 			Empty = ItemsInSlot.Count == 0;
 		}
-			
 
 		private void ChangeItemsInSlot(int count)
 		{
 			Empty = count == 0;
-			ItemsCount.Value = count;
 		}
 
 		public void LateDispose() => _disposables?.Dispose();
 
-		public void AddItem(IItemFacade item)
-		{
-			ItemsInSlot.Add(item);
-		}
+		public void AddItem(IItemFacade item) => ItemsInSlot.Add(item);
 
 		public void AddItems(IEnumerable<IItemFacade> items)
 		{
@@ -64,26 +59,20 @@ namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
 			}
 		}
 
-		public void RemoveItem()
+		public void ClearItemsInSlot()
 		{
 			if (Empty) return;
 			
-			ItemsInSlot?.Clear();
+			ClearItems();
 		}
 
 		public void SetSelected(bool value)
 		{
-			if (!Empty && value)
+			if (!Empty)
 			{
-				Selected.Value = true;
-			}
-			else
-			{
-				Selected.Value = false;
+				Selected.Value = value;
 			}
 		}
-
-		public void SetCurrentSlot(ISlotFacade slot) => CurrentSlot = slot;
 
 		public void ClearItems() => ItemsInSlot.Clear();
 	}

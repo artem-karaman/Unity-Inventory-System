@@ -67,5 +67,10 @@ namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
 		{
 			_compositeDisposable?.Dispose();
 		}
+
+		public void RemoveSelectedItem()
+		{
+			
+		}
 	}
 }

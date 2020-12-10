@@ -18,7 +18,7 @@ namespace UnityInventorySystem.Inventory
 
 		private TextMeshProUGUI _itemCount;
 		private Image _image;
-		
+
 		public SlotView(
 			SlotViewModel slotViewModel,
 			SlotFacade slot)
@@ -26,7 +26,7 @@ namespace UnityInventorySystem.Inventory
 			_slotViewModel = slotViewModel;
 			_slot = slot;
 		}
-		
+
 		public void Initialize()
 		{
 			PrepareComponents();
@@ -46,13 +46,16 @@ namespace UnityInventorySystem.Inventory
 			_slotViewModel
 				.ItemsInSlot
 				.ObserveCountChanged(true)
-				.Subscribe(_ =>
+				.Subscribe(value =>
 				{
-					if (!_slotViewModel.Empty)
-					{
-						_image.color = _slotViewModel.ItemsInSlot.First().Item.Color;
-					}
+					FillSlotBackground();
 				}).AddTo(Disposables);
+		}
+
+		private void FillSlotBackground()
+		{
+			if (_slotViewModel.ItemsInSlot.Any())
+				_image.color = _slotViewModel.ItemsInSlot.First().Item.Color;
 		}
 
 		private void SubscribeComponents()
@@ -64,18 +67,18 @@ namespace UnityInventorySystem.Inventory
 				.AddTo(Disposables);
 
 			_slotViewModel
-				.ItemsCount
-				.AsObservable()
+				.ItemsInSlot
+				.ObserveCountChanged()
 				.Subscribe(ChangeItemCount)
 				.AddTo(Disposables);
 		}
 
 		private void PrepareSelectedSlot(bool value)
 		{
-			_slot.gameObject.GetComponent<Image>().color 
-				= value 
-				? Color.cyan 
-				: Color.white;
+			_slot.gameObject.GetComponent<Image>().color
+				= value
+					? Color.cyan
+					: Color.white;
 		}
 
 		private void ChangeItemCount(int count)

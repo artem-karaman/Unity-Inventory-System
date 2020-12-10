@@ -20,48 +20,15 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Slot
 			_itemFacadesPoolBehaviour = itemFacadesPoolBehaviour;
 			_slotViewModel = slotViewModel;
 		}
-
-		public void Initialize()
-		{
-			_slotViewModel
-				.ItemsInSlot
-				.ObserveRemove()
-				.Subscribe(value =>
-				{
-					_itemFacadesPoolBehaviour.RemoveItem(value.Value);
-				})
-				.AddTo(Disposables);
-		}
+		public void Initialize() { }
 
 		public void AddItem(IItemFacade item) => _slotViewModel.AddItem(item);
-
-		public void RemoveItem() => _slotViewModel.RemoveItem();
-
-		public int ItemsCount => _slotViewModel.ItemsCount.Value;
-
+		public void ClearItemsInSlot() => _slotViewModel.ClearItemsInSlot();
 		public bool Empty => _slotViewModel.Empty;
-		
 		public bool Selected => _slotViewModel.Selected.Value;
 		public IReactiveCollection<IItemFacade> GetAllItemsInSlot => _slotViewModel.ItemsInSlot;
-
-		public void SetSelected(bool value)
-		{
-			_slotViewModel.SetSelected(value);
-		}
-
-		public void ClearStack()
-		{
-			foreach (var item in _slotViewModel.ItemsInSlot)
-			{
-				_itemFacadesPoolBehaviour.RemoveItem(item);
-			}
-
-			_slotViewModel.ClearItems();
-		}
-
-		public void AddItems(IEnumerable<IItemFacade> items)
-		{
-			_slotViewModel.AddItems(items);
-		}
+		public void SetSelected(bool value) => _slotViewModel.SetSelected(value);
+		public void ClearStack() => _slotViewModel.ClearItems();
+		public void AddItems(IEnumerable<IItemFacade> items) => _slotViewModel.AddItems(items);
 	}
 }
