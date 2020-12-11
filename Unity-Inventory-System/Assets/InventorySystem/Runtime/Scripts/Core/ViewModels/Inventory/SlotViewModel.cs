@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
 using UniRx;
+using UnityEditor;
 using Zenject;
 
 namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
@@ -40,28 +41,16 @@ namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
 				.ObserveAdd()
 				.Subscribe(_ => Empty.Value = false)
 				.AddTo(_disposables);
+			
 
 			Empty.Value = ItemsInSlot.Count == 0;
 		}
 
-		private void ChangeItemsInSlot(int count)
-		{
-			Empty.Value = count == 0;
-		}
+		private void ChangeItemsInSlot(int count) => Empty.Value = count == 0;
 
 		public void LateDispose() => _disposables?.Dispose();
 
-		public void AddItem(IItemFacade item)
-		{
-			ItemsInSlot.Add(item);
-			
-			FillSlot(true);
-		}
-
-		private void FillSlot(bool value)
-		{
-			PaintSlot.Value = value;
-		}
+		public void AddItem(IItemFacade item) => ItemsInSlot.Add(item);
 
 		public void AddItems(IEnumerable<IItemFacade> items)
 		{
@@ -71,8 +60,6 @@ namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
 			{
 				ItemsInSlot.Add(item);
 			}
-			
-			FillSlot(true);
 		}
 
 		public void ClearItemsInSlot()
@@ -93,8 +80,6 @@ namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
 		public void ClearItems()
 		{
 			ItemsInSlot.Clear();
-			
-			FillSlot(false);
 		}
 	}
 }

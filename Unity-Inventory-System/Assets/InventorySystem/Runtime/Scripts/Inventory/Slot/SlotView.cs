@@ -50,7 +50,7 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Slot
 				var c = _slotViewModel.ItemsInSlot?.First()?.Item?.Color;
 				color = c.HasValue ? c.Value : Color.white;
 			}
-
+			
 			_image.color = color;
 		}
 
@@ -83,24 +83,13 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Slot
 				.AddTo(Disposables);
 		}
 
-		private void PrepareSelectedSlot(bool value)
-		{
+		private void PrepareSelectedSlot(bool value) =>
 			_slot.gameObject.GetComponent<Image>().color
 				= value
 					? Color.cyan
 					: Color.white;
-		}
 
-		private void ChangeItemCount(int count)
-		{
-			if (count == 0 || count == 1)
-			{
-				_itemCount.text = string.Empty;
-			}
-			else
-			{
-				_itemCount.text = count.ToString();
-			}
-		}
+		private void ChangeItemCount(int count) => 
+			_itemCount.text = count == 0 || count == 1 ? string.Empty : count.ToString();
 	}
 }

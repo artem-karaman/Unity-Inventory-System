@@ -12,6 +12,5 @@ public class MainInventorySOInstaller : ScriptableObjectInstaller<MainInventoryS
     public override void InstallBindings()
     {
         Container.BindInstance(_mainInventoryMonoInstallerSettings).IfNotBound();
-        
     }
 }

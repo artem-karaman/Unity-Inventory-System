@@ -93,9 +93,6 @@ namespace UnityInventorySystem.Inventory
 			slot.AddItemToSlot(_itemFacadesPoolBehaviour.AddItem(slot.Transform, item));
 		}
 
-		public void RemoveSelectedItem()
-		{
-			_inventoryViewModel.RemoveSelectedItem();
-		}
+		public void RemoveSelectedItem() => _inventoryViewModel.RemoveSelectedItem();
 	}
 }
