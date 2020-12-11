@@ -22,8 +22,7 @@ namespace InventorySystem.Runtime.Scripts.Core.Models.Interfaces
 		void SetSelected(bool value);
 		
 		void ClearItems();
-		
-		IItemFacade Item { get; }
+		void FillSlotBackground();
 		
 		IReactiveCollection<IItemFacade> AllItemsInSlot { get; }
 	}

@@ -29,10 +29,11 @@ namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
 		{
 			_selectedSlot?.SetSelected(false);
 
-			return InventoryItems
-				.Where(i => !i.Empty && i.Item.Item is T)
-				.Select(i => i.Item.Item)
-				.ToArray();
+			return null;
+			// return InventoryItems
+			// 	.Where(i => !i.Empty && i.Item.Item is T)
+			// 	.Select(i => i.Item.Item)
+			// 	.ToArray();
 		}
 
 		public void RemoveItem()

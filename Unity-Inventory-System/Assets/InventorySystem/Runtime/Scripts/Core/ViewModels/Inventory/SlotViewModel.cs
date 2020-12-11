@@ -16,11 +16,13 @@ namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
 
 			Selected = new ReactiveProperty<bool>(false);
 			ItemsInSlot = new ReactiveCollection<IItemFacade>();
-			Empty = true;
+			Empty = new ReactiveProperty<bool>(true);
+			PaintSlot = new ReactiveProperty<bool>(true);
 		}
 		public IReactiveProperty<bool> Selected { get; }
 		public IReactiveCollection<IItemFacade> ItemsInSlot { get; }
-		public bool Empty { get; private set; }
+		public IReactiveProperty<bool> Empty { get; }
+		public IReactiveProperty<bool> PaintSlot { get; }
 
 		public void Initialize()
 		{
@@ -31,23 +33,35 @@ namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
 
 			ItemsInSlot
 				.ObserveReset()
-				.Subscribe(_ =>
-				{
-					Empty = true;
-				})
+				.Subscribe(_ => Empty.Value = true)
 				.AddTo(_disposables);
 
-			Empty = ItemsInSlot.Count == 0;
+			ItemsInSlot
+				.ObserveAdd()
+				.Subscribe(_ => Empty.Value = false)
+				.AddTo(_disposables);
+
+			Empty.Value = ItemsInSlot.Count == 0;
 		}
 
 		private void ChangeItemsInSlot(int count)
 		{
-			Empty = count == 0;
+			Empty.Value = count == 0;
 		}
 
 		public void LateDispose() => _disposables?.Dispose();
 
-		public void AddItem(IItemFacade item) => ItemsInSlot.Add(item);
+		public void AddItem(IItemFacade item)
+		{
+			ItemsInSlot.Add(item);
+			
+			FillSlot(true);
+		}
+
+		private void FillSlot(bool value)
+		{
+			PaintSlot.Value = value;
+		}
 
 		public void AddItems(IEnumerable<IItemFacade> items)
 		{
@@ -57,23 +71,30 @@ namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
 			{
 				ItemsInSlot.Add(item);
 			}
+			
+			FillSlot(true);
 		}
 
 		public void ClearItemsInSlot()
 		{
-			if (Empty) return;
+			if (Empty.Value) return;
 			
 			ClearItems();
 		}
 
 		public void SetSelected(bool value)
 		{
-			if (!Empty)
+			if (!Empty.Value)
 			{
 				Selected.Value = value;
 			}
 		}
 
-		public void ClearItems() => ItemsInSlot.Clear();
+		public void ClearItems()
+		{
+			ItemsInSlot.Clear();
+			
+			FillSlot(false);
+		}
 	}
 }

@@ -1,7 +1,5 @@
 ﻿using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
 using UnityEngine;
-using UnityInventorySystem;
-using UnityInventorySystem.Inventory;
 using Zenject;
 
 namespace InventorySystem.Runtime.Scripts.Inventory.Item

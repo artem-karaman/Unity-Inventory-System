@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
 using UnityEngine;
@@ -38,6 +39,8 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 
 		public void RemoveItem(IItemFacade item)
 		{
+			_ = item ?? throw new ArgumentNullException(nameof(item));
+			
 			item.Dispose();
 			_items.Remove(item);
 		}

@@ -1,7 +1,5 @@
 ﻿using System.Linq;
-using Assets.Scripts.Core.ViewModels;
 using InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory;
-using InventorySystem.Runtime.Scripts.Inventory.Slot;
 using InventorySystem.Runtime.Scripts.Presenters.Base;
 using TMPro;
 using UniRx;
@@ -9,7 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace UnityInventorySystem.Inventory
+namespace InventorySystem.Runtime.Scripts.Inventory.Slot
 {
 	public class SlotView : BasePresenter, IInitializable
 	{
@@ -38,24 +36,28 @@ namespace UnityInventorySystem.Inventory
 			_itemCount = _slot.GetComponentInChildren<TextMeshProUGUI>();
 			_image = _slot.GetComponent<Image>();
 
-			if (!_slotViewModel.Empty)
-			{
-				_image.color = _slotViewModel.ItemsInSlot.First().Item.Color;
-			}
-
-			_slotViewModel
-				.ItemsInSlot
-				.ObserveCountChanged(true)
-				.Subscribe(value =>
-				{
-					FillSlotBackground();
-				}).AddTo(Disposables);
+			_itemCount.text = string.Empty;
+			
+			FillSlot();
 		}
 
-		private void FillSlotBackground()
+		private void FillSlot()
 		{
+			Color color = Color.white;
+
 			if (_slotViewModel.ItemsInSlot.Any())
-				_image.color = _slotViewModel.ItemsInSlot.First().Item.Color;
+			{
+				var c = _slotViewModel.ItemsInSlot?.First()?.Item?.Color;
+				color = c.HasValue ? c.Value : Color.white;
+			}
+
+			_image.color = color;
+		}
+
+		private void FillSlot(int value)
+		{
+			_image.color = value == 0 ? Color.white 
+				: _slotViewModel.ItemsInSlot.First().Item.Color;
 		}
 
 		private void SubscribeComponents()
@@ -70,6 +72,14 @@ namespace UnityInventorySystem.Inventory
 				.ItemsInSlot
 				.ObserveCountChanged()
 				.Subscribe(ChangeItemCount)
+				.AddTo(Disposables);
+
+
+			_slotViewModel
+				.ItemsInSlot
+				.ObserveEveryValueChanged(x => x.Count)
+				.AsObservable()
+				.Subscribe(value => { FillSlot(value); })
 				.AddTo(Disposables);
 		}
 
@@ -86,12 +96,10 @@ namespace UnityInventorySystem.Inventory
 			if (count == 0 || count == 1)
 			{
 				_itemCount.text = string.Empty;
-				_image.color = Color.white;
 			}
 			else
 			{
 				_itemCount.text = count.ToString();
-				_image.color = _slotViewModel.ItemsInSlot.First().Item.Color;
 			}
 		}
 	}

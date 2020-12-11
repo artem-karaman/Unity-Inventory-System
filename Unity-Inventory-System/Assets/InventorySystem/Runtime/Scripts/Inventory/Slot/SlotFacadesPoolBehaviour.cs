@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
 using InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory;
-using InventorySystem.Runtime.Scripts.Inventory.Slot;
 using UnityEngine;
 
-namespace UnityInventorySystem.Inventory
+namespace InventorySystem.Runtime.Scripts.Inventory.Slot
 {
 	public class SlotFacadesPoolBehaviour
 	{
@@ -37,22 +36,8 @@ namespace UnityInventorySystem.Inventory
 			_slots.Add(slot);
 		}
 
-		public ISlotFacade FindEmptySlot()
-		{
-			return _slots.First(s => s.Empty);
-		}
+		public ISlotFacade FindEmptySlot() => _slots.First(s => s.Empty);
 
-		public void ClearSlots()
-		{
-			_slots.ForEach(s => s.SetEmpty());
-		}
-
-		public void RemoveSlot()
-		{
-			if (!_slots.Any()) return;
-			var slot = _slots[0];
-			slot.Dispose();
-			_slots.Remove(slot);
-		}
+		public void ClearSlots() => _slots.ForEach(s => s.SetEmpty());
 	}
 }

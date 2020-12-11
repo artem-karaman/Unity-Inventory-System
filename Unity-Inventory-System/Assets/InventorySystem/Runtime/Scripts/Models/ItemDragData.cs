@@ -24,7 +24,6 @@ namespace InventorySystem.Runtime.Scripts.Models
 		public GameObject OldSlot { get; }
 		public PointerEventData EventData { get; }
 		public CanvasGroup CanvasGroup { get; }
-		
 		public ItemFacade Item { get; }
 		
 	}

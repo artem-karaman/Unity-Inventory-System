@@ -1,4 +1,5 @@
-﻿using InventorySystem.Runtime.Scripts.Core.Messages;
+﻿using System.Linq;
+using InventorySystem.Runtime.Scripts.Core.Messages;
 using InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory;
 using InventorySystem.Runtime.Scripts.Inventory.Slot;
 using InventorySystem.Runtime.Scripts.Models;
@@ -26,10 +27,7 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 			_inventoryViewModel = inventoryViewModel;
 		}
 
-		public void Prepare(ItemDragData itemDragData)
-		{
-			_itemDragData = itemDragData;
-		}
+		public void Prepare(ItemDragData itemDragData) => _itemDragData = itemDragData;
 
 		//TODO: Need to clear item from old slot when move item from it
 		public void OnEndDrag()
@@ -86,7 +84,7 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 
 		private void AddItemToStack(SlotFacade oldSlot)
 		{
-			_itemFacadesPoolBehaviour.RemoveItem(oldSlot.Item);
+			_itemFacadesPoolBehaviour.RemoveItem(oldSlot.AllItemsInSlot?.First());
 			_inventoryViewModel.MoveItem(oldSlot, _slotFacade);
 			oldSlot.ClearItems();
 

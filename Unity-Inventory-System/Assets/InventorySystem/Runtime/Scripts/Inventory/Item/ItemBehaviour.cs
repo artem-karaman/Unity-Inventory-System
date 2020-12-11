@@ -94,8 +94,10 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 		private void SelectOldSlot(bool value)
 		{
 			var slot = _oldSlot.GetComponent<SlotFacade>();
-			slot.SetSelected(value);
+
+			if (slot == null) return;
 			
+			slot.SetSelected(value);
 			MessageBroker.Default.Publish(new NewSlotSelectedMessage(slot));
 		}
 		
@@ -106,7 +108,7 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 		
 		private void OnLongPress()
 		{
-			//TODO: implement show tooltip about selected element
+			//TODO: implement show tooltip with info about selected element
 		}
 
 		private void OnDrag(PointerEventData eventData)
