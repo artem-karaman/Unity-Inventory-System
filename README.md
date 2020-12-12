@@ -47,7 +47,8 @@ and Extenject via open upm - https://openupm.com/packages/com.svermeulen.extenje
 
 
 ## How to install
-- Install this package via upm:
+Install this package via upm:
+
 Package:
 
 https://github.com/namarakM/Unity-Inventory-System.git?path=/Unity-Inventory-System/Assets/InventorySystem
