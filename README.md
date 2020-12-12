@@ -1,3 +1,5 @@
+[![Hits-of-Code](https://hitsofcode.com/github/namarakM/Unity-Inventory-System?branch=main)](https://hitsofcode.com/github/namarakM/Unity-Inventory-System?branch=main/view?branch=main/)
+
 Table of Contents
 1. [Intro](#intro)
 2. [Used plugins](#plugins-to-add)
