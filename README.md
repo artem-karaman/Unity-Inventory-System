@@ -1,4 +1,5 @@
 [![Hits-of-Code](https://hitsofcode.com/github/namarakM/Unity-Inventory-System?branch=main)](https://hitsofcode.com/github/namarakM/Unity-Inventory-System?branch=main/view?branch=main/)
+
 [Hits-of-Code-Overview](https://hitsofcode.com/view/github/namarakM/Unity-Inventory-System?branch=main)
 
 Table of Contents
