@@ -1,8 +1,5 @@
 [![Hits-of-Code](https://hitsofcode.com/github/namarakM/Unity-Inventory-System?branch=main)](https://hitsofcode.com/github/namarakM/Unity-Inventory-System?branch=main/view?branch=main/)
 
-
-
-
 Table of Contents
 <details>
   
@@ -61,7 +58,7 @@ How to use above link:
 
 [Unity-Manual](https://docs.unity3d.com/Manual/upm-ui-giturl.html)
 
-##Statisctics
+## Statistics
 
 [Hits-of-Code-Overview](https://hitsofcode.com/view/github/namarakM/Unity-Inventory-System?branch=main)
 
