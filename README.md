@@ -1,6 +1,6 @@
 [![Hits-of-Code](https://hitsofcode.com/github/namarakM/Unity-Inventory-System?branch=main)](https://hitsofcode.com/github/namarakM/Unity-Inventory-System?branch=main/view?branch=main/)
 
-Table of Contents
+## Table of Contents
 <details>
   
 1. [Intro](#intro)
