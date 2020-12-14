@@ -1,8 +1,6 @@
 [![Hits-of-Code](https://hitsofcode.com/github/namarakM/Unity-Inventory-System?branch=main)](https://hitsofcode.com/github/namarakM/Unity-Inventory-System?branch=main/view?branch=main/)
 
-[Hits-of-Code-Overview](https://hitsofcode.com/view/github/namarakM/Unity-Inventory-System?branch=main)
 
-[What does it mean - hits-of-code?](https://www.yegor256.com/2014/11/14/hits-of-code.html)
 
 
 Table of Contents
@@ -11,6 +9,7 @@ Table of Contents
 1. [Intro](#intro)
 2. [Used plugins](#plugins-to-add)
 3. [How to install](#how-to-install)
+4. [Repo statistics](#statistics)
 
 </details>
 
@@ -61,3 +60,10 @@ https://github.com/namarakM/Unity-Inventory-System.git?path=/Unity-Inventory-Sys
 How to use above link:
 
 [Unity-Manual](https://docs.unity3d.com/Manual/upm-ui-giturl.html)
+
+##Statisctics
+
+[Hits-of-Code-Overview](https://hitsofcode.com/view/github/namarakM/Unity-Inventory-System?branch=main)
+
+[What does it mean - hits-of-code?](https://www.yegor256.com/2014/11/14/hits-of-code.html)
+
