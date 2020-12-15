@@ -31,22 +31,20 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 
 		private ItemEndDragBehaviour _itemEndDragBehaviour;
 
-		private bool _click = false;
+		private bool _click;
 		private float _time;
-		private bool tooltipIsShown;
-		private readonly TooltipBehaviour.Factory _toolTipFactory;
-		private TooltipBehaviour _tooltipBehaviour;
+		private readonly TooltipBehavior _tooltipBehavior;
 
 		public ItemBehaviour(
 			SharedUIManager sharedUIManager,
 			ItemFacade item,
 			ItemEndDragBehaviour.Factory itemEndDragBehaviourFactory,
-			TooltipBehaviour.Factory toolTipFactory)
+			TooltipBehavior tooltipBehavior)
 		{
 			_sharedUIManager = sharedUIManager;
 			_item = item;
 			_itemEndDragBehaviourFactory = itemEndDragBehaviourFactory;
-			_toolTipFactory = toolTipFactory;
+			_tooltipBehavior = tooltipBehavior;
 		}
 		
 		public void Initialize()
@@ -107,11 +105,10 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 				{
 					if (_click && (Time.time - _time) > .5f)
 					{
-						ShowTooltip();
+						_tooltipBehavior.ShowToolTip(_item.Item);
 					}
 				})
 				.AddTo(Disposables);
-			
 		}
 
 		private void OnPointerUp(PointerEventData eventData)
@@ -119,7 +116,7 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 			_time = 0;
 			_click = false;
 			
-			HideTooltip();
+			_tooltipBehavior.HideToolTip();
 		}
 
 		private void OnPointerDown(PointerEventData eventData)
@@ -145,30 +142,6 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 		private void OnPress()
 		{
 			SelectOldSlot(true);
-		}
-
-		private void ShowTooltip()
-		{
-			if (!tooltipIsShown)
-			{
-				if (_tooltipBehaviour == null)
-				{
-					_tooltipBehaviour = _toolTipFactory.Create(_item.Item);
-				}
-				else
-				{
-					_tooltipBehaviour.gameObject.SetActive(true);
-				}
-				
-				tooltipIsShown = true;
-			}
-		}
-
-		private void HideTooltip()
-		{
-			if (!tooltipIsShown) return;
-			_tooltipBehaviour.gameObject.SetActive(false);
-			tooltipIsShown = false;
 		}
 
 		private void OnDrag(PointerEventData eventData)

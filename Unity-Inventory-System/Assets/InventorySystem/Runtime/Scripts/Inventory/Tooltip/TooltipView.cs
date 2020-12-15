@@ -5,14 +5,14 @@ using Zenject;
 
 namespace InventorySystem.Runtime.Scripts.Inventory.Tooltip
 {
-	public class TooltipBehaviour : MonoBehaviour
+	public class TooltipView : MonoBehaviour
 	{
 		private IItem _item;
 		
 		[Inject]
 		void Construct(IItem item)
 		{
-			_item = item;
+			Prepare(item);
 		}
 
 		void Start()
@@ -21,6 +21,11 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Tooltip
 		}
 		
 		
-		public class Factory : PlaceholderFactory<IItem, TooltipBehaviour>{}
+		public class Factory : PlaceholderFactory<IItem, TooltipView>{}
+
+		public void Prepare(IItem item)
+		{
+			_item = item;
+		}
 	}
 }
