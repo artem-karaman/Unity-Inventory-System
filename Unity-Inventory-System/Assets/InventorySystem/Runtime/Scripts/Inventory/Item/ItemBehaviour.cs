@@ -1,5 +1,11 @@
-﻿using InventorySystem.Runtime.Scripts.Core.Messages;
+﻿using System;
+using System.Linq;
+using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks.Triggers;
+using InventorySystem.Runtime.Scripts.Core.Messages;
+using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
 using InventorySystem.Runtime.Scripts.Inventory.Slot;
+using InventorySystem.Runtime.Scripts.Inventory.Tooltip;
 using InventorySystem.Runtime.Scripts.Managers;
 using InventorySystem.Runtime.Scripts.Models;
 using InventorySystem.Runtime.Scripts.Presenters.Base;
@@ -26,14 +32,20 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 
 		private ItemEndDragBehaviour _itemEndDragBehaviour;
 
+		private bool _click;
+		private float _time;
+		private readonly TooltipBehavior _tooltipBehavior;
+
 		public ItemBehaviour(
 			SharedUIManager sharedUIManager,
 			ItemFacade item,
-			ItemEndDragBehaviour.Factory itemEndDragBehaviourFactory)
+			ItemEndDragBehaviour.Factory itemEndDragBehaviourFactory,
+			TooltipBehavior tooltipBehavior)
 		{
 			_sharedUIManager = sharedUIManager;
 			_item = item;
 			_itemEndDragBehaviourFactory = itemEndDragBehaviourFactory;
+			_tooltipBehavior = tooltipBehavior;
 		}
 		
 		public void Initialize()
@@ -59,7 +71,14 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 				.OnPointerDownAsObservable()
 				.Subscribe(OnPointerDown)
 				.AddTo(Disposables);
-			
+
+			_item
+				.gameObject
+				.AddComponent<ObservablePointerUpTrigger>()
+				.OnPointerUpAsObservable()
+				.Subscribe(OnPointerUp)
+				.AddTo(Disposables);
+
 			_item
 				.gameObject
 				.AddComponent<ObservableDragTrigger>()
@@ -83,26 +102,35 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 
 			Observable
 				.EveryUpdate()
-				.Subscribe(_ =>
-				{
-					for (int i = 0; i < Input.touchCount; ++i)
-					{
-						if (Input.GetTouch(i).deltaTime > 0.2f)
-						{
-							OnLongPress();
-						}
-					}
-				})
+				.Subscribe(_ => ShowTooltip())
 				.AddTo(Disposables);
+		}
+
+		private void ShowTooltip()
+		{
+			if (_click && Time.time - _time > .5f)
+			{
+				_tooltipBehavior.ShowToolTip(_item.Item);
+			}
+		}
+
+		private void OnPointerUp(PointerEventData eventData)
+		{
+			_time = 0;
+			_click = false;
+			
+			_tooltipBehavior.HideToolTip();
+			_oldSlot.GetComponent<ISlotFacade>().FillSlotBackground();
 		}
 
 		private void OnPointerDown(PointerEventData eventData)
 		{
 			_oldSlot = _item.transform.parent.gameObject;
+
+			_click = true;
+			_time = Time.time;
 			
 			OnPress();
-			
-			//_item.Invoke("OnLongPress", 1f);
 		}
 
 		private void SelectOldSlot(bool value)
@@ -114,16 +142,10 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 			slot.SetSelected(value);
 			MessageBroker.Default.Publish(new NewSlotSelectedMessage(slot));
 		}
-		
+
 		private void OnPress()
 		{
 			SelectOldSlot(true);
-		}
-		
-		private void OnLongPress()
-		{
-			//TODO: implement show tooltip with info about selected element
-			Debug.Log("Woohooo, long press happened");
 		}
 
 		private void OnDrag(PointerEventData eventData)

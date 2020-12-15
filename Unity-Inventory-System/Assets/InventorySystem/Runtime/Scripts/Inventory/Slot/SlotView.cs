@@ -41,19 +41,6 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Slot
 			FillSlot();
 		}
 
-		private void FillSlot()
-		{
-			Color color = Color.white;
-
-			if (_slotViewModel.ItemsInSlot.Any())
-			{
-				var c = _slotViewModel.ItemsInSlot?.First()?.Item?.Color;
-				color = c.HasValue ? c.Value : Color.white;
-			}
-			
-			_image.color = color;
-		}
-
 		private void SubscribeComponents()
 		{
 			_slotViewModel
@@ -77,6 +64,19 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Slot
 				.AddTo(Disposables);
 		}
 
+		private void FillSlot()
+		{
+			Color color = Color.white;
+
+			if (_slotViewModel.ItemsInSlot.Any())
+			{
+				var c = _slotViewModel.ItemsInSlot?.First()?.Item?.Color;
+				color = c.HasValue ? c.Value : Color.white;
+			}
+			
+			_image.color = color;
+		}
+
 		private void FillSlot(int value)
 		{
 			_image.color = value == 0 ? Color.white 
@@ -91,5 +91,10 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Slot
 
 		private void ChangeItemCount(int count) => 
 			_itemCount.text = count == 0 || count == 1 ? string.Empty : count.ToString();
+
+		public void FillSlotBackground()
+		{
+			FillSlot();
+		}
 	}
 }
