@@ -80,6 +80,20 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 				.OnEndDragAsObservable()
 				.Subscribe(OnEndDrag)
 				.AddTo(Disposables);
+
+			Observable
+				.EveryUpdate()
+				.Subscribe(_ =>
+				{
+					for (int i = 0; i < Input.touchCount; ++i)
+					{
+						if (Input.GetTouch(i).deltaTime > 0.2f)
+						{
+							OnLongPress();
+						}
+					}
+				})
+				.AddTo(Disposables);
 		}
 
 		private void OnPointerDown(PointerEventData eventData)
@@ -88,7 +102,7 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 			
 			OnPress();
 			
-			_item.Invoke("OnLongPress", 1f);
+			//_item.Invoke("OnLongPress", 1f);
 		}
 
 		private void SelectOldSlot(bool value)
@@ -109,6 +123,7 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 		private void OnLongPress()
 		{
 			//TODO: implement show tooltip with info about selected element
+			Debug.Log("Woohooo, long press happened");
 		}
 
 		private void OnDrag(PointerEventData eventData)

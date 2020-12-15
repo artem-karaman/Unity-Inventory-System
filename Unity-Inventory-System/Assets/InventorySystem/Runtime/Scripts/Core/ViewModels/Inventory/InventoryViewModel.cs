@@ -12,12 +12,15 @@ namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
 		private readonly CompositeDisposable _compositeDisposable = new CompositeDisposable();
 		private readonly int _slotsCount;
 		private ISlotFacade _selectedSlot;
+		private List<IItem> _originalList;
 		public InventoryViewModel(
 			int slotsCount)
 		{
 			_slotsCount = slotsCount;
 			SlotsCount = new ReactiveProperty<int>(slotsCount);
 			InventoryItems = new List<ISlotFacade>();
+
+			_originalList = new List<IItem>();
 		}
 
 		public IReactiveProperty<int> SlotsCount;
@@ -30,10 +33,10 @@ namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
 			_selectedSlot?.SetSelected(false);
 
 			return null;
-			// return InventoryItems
-			// 	.Where(i => !i.Empty && i.Item.Item is T)
-			// 	.Select(i => i.Item.Item)
-			// 	.ToArray();
+			// InventoryItems
+			// .Where(i => !i.Empty && i.Item.Item is T)
+			// .Select(i => i.Item.Item)
+			// .ToArray();
 		}
 
 		public void RemoveItem()

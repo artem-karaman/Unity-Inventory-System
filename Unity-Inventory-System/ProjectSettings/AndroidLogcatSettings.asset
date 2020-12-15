@@ -1,9 +1,9 @@
 {
-    "m_SelectedDeviceId": "emulator-5554",
+    "m_SelectedDeviceId": "0123456789ABCDEF",
     "m_SelectedPackage": {
-        "deviceId": "",
-        "name": "",
-        "processId": 0,
+        "deviceId": "0123456789ABCDEF",
+        "name": "com.namarakM.inventorysystem",
+        "processId": 19598,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -12,24 +12,36 @@
             "deviceId": "0123456789ABCDEF",
             "name": "com.DefaultCompany.UnityInventorySystem",
             "processId": 31522,
-            "exited": false
+            "exited": true
         },
         {
             "deviceId": "0123456789ABCDEF",
             "name": "com.namarakM.inventorysystem",
             "processId": 24278,
-            "exited": false
+            "exited": true
         },
         {
             "deviceId": "0123456789ABCDEF",
             "name": "com.namarakM.inventorysystem",
             "processId": 24893,
-            "exited": false
+            "exited": true
         },
         {
             "deviceId": "0123456789ABCDEF",
             "name": "com.namarakM.inventorysystem",
             "processId": 26395,
+            "exited": true
+        },
+        {
+            "deviceId": "0123456789ABCDEF",
+            "name": "com.android.launcher3",
+            "processId": 1960,
+            "exited": false
+        },
+        {
+            "deviceId": "0123456789ABCDEF",
+            "name": "com.namarakM.inventorysystem",
+            "processId": 19598,
             "exited": false
         },
         {
@@ -107,7 +119,7 @@
         "MemoryGroup": 1,
         "Behavior": 1
     },
-    "m_Filter": "Unity",
+    "m_Filter": "unity",
     "m_FilterIsRegularExpression": false,
     "m_SymbolPaths": []
 }

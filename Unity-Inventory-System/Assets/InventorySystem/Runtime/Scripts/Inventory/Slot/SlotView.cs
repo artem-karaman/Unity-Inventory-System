@@ -54,12 +54,6 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Slot
 			_image.color = color;
 		}
 
-		private void FillSlot(int value)
-		{
-			_image.color = value == 0 ? Color.white 
-				: _slotViewModel.ItemsInSlot.First().Item.Color;
-		}
-
 		private void SubscribeComponents()
 		{
 			_slotViewModel
@@ -79,8 +73,14 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Slot
 				.ItemsInSlot
 				.ObserveEveryValueChanged(x => x.Count)
 				.AsObservable()
-				.Subscribe(value => { FillSlot(value); })
+				.Subscribe(value => FillSlot(value))
 				.AddTo(Disposables);
+		}
+
+		private void FillSlot(int value)
+		{
+			_image.color = value == 0 ? Color.white 
+				: _slotViewModel.ItemsInSlot.First().Item.Color;
 		}
 
 		private void PrepareSelectedSlot(bool value) =>
