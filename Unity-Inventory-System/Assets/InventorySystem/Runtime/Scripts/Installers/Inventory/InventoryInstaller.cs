@@ -1,5 +1,7 @@
 using Assets.Scripts.Core.ViewModels;
+using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
 using InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory;
+using InventorySystem.Runtime.Scripts.Inventory.Tooltip;
 using UnityEngine;
 using UnityInventorySystem.Inventory;
 using Zenject;
@@ -20,6 +22,10 @@ namespace UnityInventorySystem.Installers
 		{
 			SlotsContainerInstaller.Install(Container);
 			ItemsContainerInstaller.Install(Container);
+
+			Container
+				.BindFactory<IItem, TooltipBehaviour, TooltipBehaviour.Factory>()
+				.FromNewComponentOnNewPrefabResource("Prefabs/TooltipPanel");
 			
 			Container
 				.Bind<Transform>()
