@@ -52,7 +52,9 @@ Install this package via upm:
 
 Package:
 
+```yaml
 https://github.com/namarakM/Unity-Inventory-System.git?path=/Unity-Inventory-System/Assets/InventorySystem
+```
 
 How to use above link:
 
