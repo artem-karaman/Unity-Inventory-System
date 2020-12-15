@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
 using UniRx;
-using UnityEditor;
 using Zenject;
 
 namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory

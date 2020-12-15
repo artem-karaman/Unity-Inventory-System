@@ -30,10 +30,5 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Slot
 		public void SetSelected(bool value) => _slotViewModel.SetSelected(value);
 		public void ClearStack() => _slotViewModel.ClearItems();
 		public void AddItems(IEnumerable<IItemFacade> items) => _slotViewModel.AddItems(items);
-
-		public void FillSlotBackGround()
-		{
-			
-		}
 	}
 }

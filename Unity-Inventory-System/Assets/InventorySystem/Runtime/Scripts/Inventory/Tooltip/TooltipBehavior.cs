@@ -19,7 +19,7 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Tooltip
 
 		public void HideToolTip()
 		{
-			_tooltipView.gameObject.SetActive(false);
+			_tooltipView?.gameObject.SetActive(false);
 		}
 
 		private void Show(IItem item)

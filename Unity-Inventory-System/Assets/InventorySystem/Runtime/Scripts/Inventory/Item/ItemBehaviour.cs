@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks.Triggers;
 using InventorySystem.Runtime.Scripts.Core.Messages;
 using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
 using InventorySystem.Runtime.Scripts.Inventory.Slot;
@@ -101,14 +102,16 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 
 			Observable
 				.EveryUpdate()
-				.Subscribe(_ =>
-				{
-					if (_click && (Time.time - _time) > .5f)
-					{
-						_tooltipBehavior.ShowToolTip(_item.Item);
-					}
-				})
+				.Subscribe(_ => ShowTooltip())
 				.AddTo(Disposables);
+		}
+
+		private void ShowTooltip()
+		{
+			if (_click && Time.time - _time > .5f)
+			{
+				_tooltipBehavior.ShowToolTip(_item.Item);
+			}
 		}
 
 		private void OnPointerUp(PointerEventData eventData)
@@ -117,6 +120,7 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 			_click = false;
 			
 			_tooltipBehavior.HideToolTip();
+			_oldSlot.GetComponent<ISlotFacade>().FillSlotBackground();
 		}
 
 		private void OnPointerDown(PointerEventData eventData)

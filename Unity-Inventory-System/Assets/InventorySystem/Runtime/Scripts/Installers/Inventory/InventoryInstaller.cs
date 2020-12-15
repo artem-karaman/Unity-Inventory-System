@@ -25,8 +25,7 @@ namespace UnityInventorySystem.Installers
 
 			Container
 				.BindFactory<IItem, TooltipView, TooltipView.Factory>()
-				.FromNewComponentOnNewPrefabResource("Prefabs/TooltipPanel")
-				.AsSingle();
+				.FromNewComponentOnNewPrefabResource("Prefabs/TooltipPanel");
 
 			Container
 				.Bind<TooltipBehavior>()

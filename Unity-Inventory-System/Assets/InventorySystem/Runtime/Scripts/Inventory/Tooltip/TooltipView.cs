@@ -12,7 +12,7 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Tooltip
 		[Inject]
 		void Construct(IItem item)
 		{
-			Prepare(item);
+			_item = item;
 		}
 
 		void Start()
@@ -26,6 +26,8 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Tooltip
 		public void Prepare(IItem item)
 		{
 			_item = item;
+			
+			Start();
 		}
 	}
 }
