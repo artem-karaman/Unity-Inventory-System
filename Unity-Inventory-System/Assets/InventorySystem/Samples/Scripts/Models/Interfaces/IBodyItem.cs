@@ -1,6 +1,6 @@
 ﻿using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
 
-namespace UnityInventorySystem
+namespace InventorySystem.Samples.Scripts.Models.Interfaces
 {
 	public interface IBodyItem : IItem
 	{

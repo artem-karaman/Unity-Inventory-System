@@ -1,10 +1,11 @@
 ﻿using System;
+using InventorySystem.Runtime.Scripts.Installers.Inventory;
+using InventorySystem.Runtime.Scripts.Inventory;
+using InventorySystem.Samples.Scripts.Presenters.MainInventoryScene;
 using UnityEngine;
-using UnityInventorySystem.Inventory;
-using UnityInventorySystem.Presenters;
 using Zenject;
 
-namespace UnityInventorySystem.Installers
+namespace InventorySystem.Samples.Scripts.Installers.MainScene
 {
 	public class MainInventoryMonoInstaller : MonoInstaller<MainInventoryMonoInstaller>
 	{

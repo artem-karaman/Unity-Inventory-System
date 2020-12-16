@@ -3,7 +3,7 @@ using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
 using InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory;
 using Zenject;
 
-namespace UnityInventorySystem.Inventory
+namespace InventorySystem.Runtime.Scripts.Inventory
 {
 	public class InventoryFacade
 	{

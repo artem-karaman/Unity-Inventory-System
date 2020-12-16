@@ -1,8 +1,8 @@
 ﻿using System;
+using InventorySystem.Runtime.Scripts.Installers.Inventory;
+using InventorySystem.Runtime.Scripts.Inventory;
+using InventorySystem.Samples.Scripts.Presenters.HorizontalInventoryScene;
 using UnityEngine;
-using UnityInventorySystem.Installers;
-using UnityInventorySystem.Inventory;
-using UnityInventorySystem.Presenters;
 using Zenject;
 
 namespace InventorySystem.Samples.Scripts.Installers.HorizontalInventoryScene

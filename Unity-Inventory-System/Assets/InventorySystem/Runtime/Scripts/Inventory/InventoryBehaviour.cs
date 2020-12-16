@@ -7,7 +7,7 @@ using UniRx;
 using UnityEngine;
 using Zenject;
 
-namespace UnityInventorySystem.Inventory
+namespace InventorySystem.Runtime.Scripts.Inventory
 {
 	public class InventoryBehaviour : BasePresenter, IInitializable
 	{

@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
 using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
+using InventorySystem.Runtime.Scripts.Inventory;
 using InventorySystem.Runtime.Scripts.Presenters.Base;
+using InventorySystem.Samples.Scripts.Managers;
+using InventorySystem.Samples.Scripts.Models;
+using InventorySystem.Samples.Scripts.Models.Interfaces;
 using UniRx;
-using UnityInventorySystem.Inventory;
-using UnityInventorySystem.Managers;
 using Zenject;
 
-namespace UnityInventorySystem.Presenters
+namespace InventorySystem.Samples.Scripts.Presenters.MainInventoryScene
 {
 	public class MainInventoryPresenter : BasePresenter, IInitializable
 	{

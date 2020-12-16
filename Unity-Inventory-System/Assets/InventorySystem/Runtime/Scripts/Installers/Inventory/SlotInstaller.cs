@@ -1,11 +1,8 @@
-﻿using Assets.Scripts.Core.ViewModels;
-using InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory;
+﻿using InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory;
 using InventorySystem.Runtime.Scripts.Inventory.Slot;
-using UnityEngine;
-using UnityInventorySystem.Inventory;
 using Zenject;
 
-namespace UnityInventorySystem.Installers
+namespace InventorySystem.Runtime.Scripts.Installers.Inventory
 {
 	public class SlotInstaller : Installer<SlotInstaller>
 	{

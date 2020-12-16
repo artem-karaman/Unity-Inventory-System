@@ -1,13 +1,11 @@
-using Assets.Scripts.Core.ViewModels;
 using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
 using InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory;
-using InventorySystem.Runtime.Scripts.Installers.Inventory;
+using InventorySystem.Runtime.Scripts.Inventory;
 using InventorySystem.Runtime.Scripts.Inventory.Tooltip;
 using UnityEngine;
-using UnityInventorySystem.Inventory;
 using Zenject;
 
-namespace UnityInventorySystem.Installers
+namespace InventorySystem.Runtime.Scripts.Installers.Inventory
 {
 	public class InventoryInstaller : Installer<int, InventoryInstaller>
 	{

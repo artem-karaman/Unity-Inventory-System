@@ -4,7 +4,6 @@ using System.Linq;
 using InventorySystem.Runtime.Scripts.Core.Messages;
 using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
 using UniRx;
-using UnityEditor;
 using Zenject;
 
 namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory

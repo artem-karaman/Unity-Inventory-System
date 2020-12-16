@@ -62,6 +62,8 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Slot
 				.AsObservable()
 				.Subscribe(value => FillSlot(value))
 				.AddTo(Disposables);
+			
+			
 		}
 
 		private void FillSlot()
