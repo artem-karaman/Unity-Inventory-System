@@ -9,8 +9,7 @@ namespace UnityInventorySystem.Installers
 		public override void InstallBindings()
 		{
 			Container
-				.Bind<SlotFacadesPoolBehaviour>()
-				.ToSelf()
+				.BindInterfacesAndSelfTo<SlotFacadesPoolBehaviour>()
 				.AsSingle();
 
 			Container

@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
 using InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory;
+using InventorySystem.Runtime.Scripts.Presenters.Base;
+using UniRx;
 using UnityEngine;
+using Zenject;
 
 namespace InventorySystem.Runtime.Scripts.Inventory.Slot
 {
-	public class SlotFacadesPoolBehaviour
+	public class SlotFacadesPoolBehaviour : BasePresenter, IInitializable
 	{
 		private readonly SlotFacade.Factory _slotFacadeFactory;
 		private readonly InventoryViewModel _inventoryViewModel;
@@ -22,6 +25,15 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Slot
 			_inventoryViewModel = inventoryViewModel;
 		}
 
+		public void Initialize()
+		{
+			_inventoryViewModel
+				.Items
+				.ObserveReset()
+				.Subscribe(_ => ClearSlots())
+				.AddTo(Disposables);
+		}
+
 		public void SetParent(Transform parent)
 		{
 			_ = parent ? parent : throw new ArgumentNullException(nameof(parent));
@@ -31,7 +43,7 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Slot
 		public void AddSlot()
 		{
 			var slot = _slotFacadeFactory.Create();
-			_inventoryViewModel.InventoryItems.Add(slot);
+			_inventoryViewModel.InventorySlots.Add(slot);
 			slot.Transform.SetParent(_parent);
 			_slots.Add(slot);
 		}

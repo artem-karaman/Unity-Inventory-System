@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UnityInventorySystem
 {
-	[CreateAssetMenu(fileName = "InventoryItems", menuName = "SO/InventoryItemsSO")]
+	[CreateAssetMenu(fileName = "InventorySlots", menuName = "SO/InventoryItemsSO")]
 	public class InventoryItemsSo : ScriptableObject
 	{
 		[Reorderable]

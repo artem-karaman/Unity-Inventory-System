@@ -15,19 +15,19 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Tooltip
 			_item = item;
 		}
 
-		void Start()
-		{
-			gameObject.GetComponent<Image>().color = _item?.Color ?? Color.white;
-		}
-		
-		
-		public class Factory : PlaceholderFactory<IItem, TooltipView>{}
-
 		public void Prepare(IItem item)
 		{
 			_item = item;
 			
 			Start();
 		}
+
+		void Start()
+		{
+			gameObject.GetComponent<Image>().color = _item?.Color ?? Color.white;
+		}
+
+
+		public class Factory : PlaceholderFactory<IItem, TooltipView>{}
 	}
 }

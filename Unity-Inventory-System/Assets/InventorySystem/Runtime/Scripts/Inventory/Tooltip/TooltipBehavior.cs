@@ -12,15 +12,9 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Tooltip
 			_factory = factory;
 		}
 
-		public void ShowToolTip(IItem item)
-		{
-			Show(item);
-		}
+		public void ShowToolTip(IItem item) => Show(item);
 
-		public void HideToolTip()
-		{
-			_tooltipView?.gameObject.SetActive(false);
-		}
+		public void HideToolTip() => _tooltipView?.gameObject.SetActive(false);
 
 		private void Show(IItem item)
 		{
@@ -31,10 +25,8 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Tooltip
 			else
 			{
 				_tooltipView.Prepare(item);
+				_tooltipView.gameObject.SetActive(true);
 			}
-			
-			_tooltipView.gameObject.SetActive(true);
-			
 		}
 	}
 }

@@ -1,16 +1,15 @@
 ﻿using InventorySystem.Runtime.Scripts.Inventory.Item;
-using UnityInventorySystem.Inventory;
+using UnityInventorySystem.Installers;
 using Zenject;
 
-namespace UnityInventorySystem.Installers
+namespace InventorySystem.Runtime.Scripts.Installers.Inventory
 {
 	public class ItemsContainerInstaller : Installer<ItemsContainerInstaller>
 	{
 		public override void InstallBindings()
 		{
 			Container
-				.Bind<ItemFacadesPoolBehaviour>()
-				.ToSelf()
+				.BindInterfacesAndSelfTo<ItemFacadesPoolBehaviour>()
 				.AsSingle();
 			
 			Container
