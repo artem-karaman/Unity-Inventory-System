@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace UnityInventorySystem.Managers
+namespace InventorySystem.Samples.Scripts.Managers
 {
 	public class MainSceneUIManager : MonoBehaviour
 	{

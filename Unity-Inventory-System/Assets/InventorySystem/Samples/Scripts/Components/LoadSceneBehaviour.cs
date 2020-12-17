@@ -2,17 +2,20 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LoadSceneBehaviour : MonoBehaviour
+namespace InventorySystem.Samples.Scripts.Components
 {
-   public void LoadScene(string sceneName)
+   public class LoadSceneBehaviour : MonoBehaviour
    {
-      SceneManager.LoadSceneAsync(sceneName);
-   }
+      public void LoadScene(string sceneName)
+      {
+         SceneManager.LoadSceneAsync(sceneName);
+      }
 
-   [Serializable]
-   public enum SceneNames
-   {
-      HorizontalInventory,
-      MainInventory
+      [Serializable]
+      public enum SceneNames
+      {
+         HorizontalInventory,
+         MainInventory
+      }
    }
 }

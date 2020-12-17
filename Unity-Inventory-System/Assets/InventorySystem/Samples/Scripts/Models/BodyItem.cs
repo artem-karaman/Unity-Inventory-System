@@ -1,7 +1,8 @@
 ﻿using InventorySystem.Runtime.Scripts.Core.Models;
+using InventorySystem.Samples.Scripts.Models.Interfaces;
 using UnityEngine;
 
-namespace UnityInventorySystem
+namespace InventorySystem.Samples.Scripts.Models
 {
 	public class BodyItem : Item, IBodyItem
 	{

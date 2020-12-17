@@ -2,7 +2,7 @@
 using InventorySystem.Runtime.Scripts.Core.Models;
 using Malee.List;
 
-namespace UnityInventorySystem
+namespace InventorySystem.Samples.Scripts
 {
 	[Serializable]
 	public class ItemsList : ReorderableArray<Item> { }
