@@ -32,6 +32,15 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 				.ObserveReset()
 				.Subscribe(async _ => await RemoveAllItems())
 				.AddTo(Disposables);
+
+			_inventoryViewModel
+				.Items
+				.ObserveRemove()
+				.Subscribe(value =>
+				{
+					RemoveItem(value.Value);
+				})
+				.AddTo(Disposables);
 		}
 
 		public List<IItemFacade> Items => _items;
@@ -52,6 +61,15 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 			var item = _items[0];
 			item.Dispose();
 			_items.Remove(item);
+		}
+
+		public void RemoveItem(IItem item)
+		{
+			var resultItem = _items.FirstOrDefault(i => i.Item.Equals(item));
+
+			if (resultItem == null) return;
+			resultItem.Dispose();
+			_items.Remove(resultItem);
 		}
 
 		public async UniTask RemoveAllItems()

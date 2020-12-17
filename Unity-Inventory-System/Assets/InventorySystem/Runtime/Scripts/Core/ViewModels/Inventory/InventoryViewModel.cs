@@ -96,6 +96,14 @@ namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
 					Items.Add(value.Value);
 				})
 				.AddTo(_disposables);
+
+			_originalCollection
+				.ObserveRemove()
+				.Subscribe(value =>
+				{
+					Items.Remove(value.Value);
+				})
+				.AddTo(_disposables);
 		}
 
 		public void LateDispose()
@@ -105,6 +113,11 @@ namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
 
 		public void RemoveSelectedItem()
 		{
+			if (_selectedSlot == null) return;
+			var item = _selectedSlot.AllItemsInSlot.First().Item;
+			_originalCollection.Remove(item);
+			_selectedSlot.ClearItems();
+			_selectedSlot.SetSelected(false);
 		}
 	}
 }
