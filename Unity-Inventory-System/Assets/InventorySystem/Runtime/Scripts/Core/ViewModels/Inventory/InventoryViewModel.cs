@@ -50,7 +50,7 @@ namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
 		public void FilterItems<T>()
 			where T : IItem
 		{
-			_selectedSlot?.SetSelected(false);
+			_selectedSlot = null;
 
 			Items.Clear();
 			
@@ -62,14 +62,14 @@ namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
 			}
 		}
 
-		public void RemoveItem()
-		{
-			if (_selectedSlot != null)
-			{
-				if(_selectedSlot.Selected)
-					_selectedSlot.ClearItems();
-			}
-		}
+		// public void RemoveItem()
+		// {
+		// 	if (_selectedSlot != null)
+		// 	{
+		// 		if(_selectedSlot.Selected)
+		// 			_selectedSlot.ClearItems();
+		// 	}
+		// }
 
 		public void MoveItem(ISlotFacade from, ISlotFacade to)
 		{
@@ -117,7 +117,7 @@ namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
 		public void RemoveSelectedItem()
 		{
 			if (_selectedSlot == null) return;
-			var item = _selectedSlot.AllItemsInSlot.First().Item;
+			var item = _selectedSlot?.AllItemsInSlot?.First()?.Item;
 			_originalCollection.Remove(item);
 			_selectedSlot.ClearItems();
 			_selectedSlot.SetSelected(false);
