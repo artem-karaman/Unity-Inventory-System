@@ -9,7 +9,7 @@
 		{
 			"displayName": "Inventory samples",
 			"description": "short description about inventories"
-			"path":"Samples"
+			"path": "Samples"
 		}
 	],	
     "license": "MIT"
