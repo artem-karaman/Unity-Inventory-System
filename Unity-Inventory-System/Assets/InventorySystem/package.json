@@ -8,7 +8,7 @@
     "samples": [
 		{
 			"displayName": "Inventory samples",
-			"description": "short description about inventories"
+			"description": "short description about inventories",
 			"path": "Samples"
 		}
 	],	
