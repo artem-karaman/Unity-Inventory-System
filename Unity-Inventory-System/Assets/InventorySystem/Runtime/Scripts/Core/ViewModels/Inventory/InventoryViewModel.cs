@@ -73,8 +73,11 @@ namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
 
 		public void MoveItem(ISlotFacade from, ISlotFacade to)
 		{
-			var items = from.AllItemsInSlot;
-			to.AddItemsToSlot(items);
+			var items = from?.AllItemsInSlot;
+			if (items != null)
+			{
+				to.AddItemsToSlot(items);
+			}
 		}
 
 		public void Initialize()
