@@ -62,15 +62,6 @@ namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
 			}
 		}
 
-		// public void RemoveItem()
-		// {
-		// 	if (_selectedSlot != null)
-		// 	{
-		// 		if(_selectedSlot.Selected)
-		// 			_selectedSlot.ClearItems();
-		// 	}
-		// }
-
 		public void MoveItem(ISlotFacade from, ISlotFacade to)
 		{
 			var items = from?.AllItemsInSlot;
