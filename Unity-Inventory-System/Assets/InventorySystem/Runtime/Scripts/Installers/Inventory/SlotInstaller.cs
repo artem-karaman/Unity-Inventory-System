@@ -9,11 +9,12 @@ namespace InventorySystem.Runtime.Scripts.Installers.Inventory
 		public override void InstallBindings()
 		{
 			Container
-				.BindInterfacesAndSelfTo<SlotViewModel>()
+				.BindInterfacesAndSelfTo<SlotFacade>()
+				.FromNewComponentOnRoot()
 				.AsSingle();
 			
 			Container
-				.BindInterfacesAndSelfTo<SlotView>()
+				.BindInterfacesAndSelfTo<SlotViewModel>()
 				.AsSingle();
 
 			Container
@@ -21,8 +22,7 @@ namespace InventorySystem.Runtime.Scripts.Installers.Inventory
 				.AsSingle();
 			
 			Container
-				.BindInterfacesAndSelfTo<SlotFacade>()
-				.FromNewComponentOnRoot()
+				.BindInterfacesAndSelfTo<SlotView>()
 				.AsSingle();
 		}
 	}

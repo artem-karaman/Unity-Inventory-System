@@ -45,7 +45,7 @@ namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
 				.Items
 				.ObserveReset()
 				.Subscribe(_ => ClearItems())
-				.AddTo(_disposables);
+				.AddTo(_disposables);  
 
 			Empty.Value = ItemsInSlot.Count == 0;
 		}

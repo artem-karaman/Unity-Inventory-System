@@ -50,7 +50,7 @@ namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
 		public void FilterItems<T>()
 			where T : IItem
 		{
-			_selectedSlot?.SetSelected(false);
+			_selectedSlot = null;
 
 			Items.Clear();
 			
@@ -62,19 +62,13 @@ namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
 			}
 		}
 
-		public void RemoveItem()
-		{
-			if (_selectedSlot != null)
-			{
-				if(_selectedSlot.Selected)
-					_selectedSlot.ClearItems();
-			}
-		}
-
 		public void MoveItem(ISlotFacade from, ISlotFacade to)
 		{
-			var items = from.AllItemsInSlot;
-			to.AddItemsToSlot(items);
+			var items = from?.AllItemsInSlot;
+			if (items != null)
+			{
+				to.AddItemsToSlot(items);
+			}
 		}
 
 		public void Initialize()
@@ -85,6 +79,8 @@ namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
 				.AsObservable()
 				.Subscribe(value =>
 				{
+					_selectedSlot?.SetSelected(false);
+
 					_selectedSlot = value.SelectedSlot;
 				})
 				.AddTo(_disposables);
@@ -113,8 +109,8 @@ namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
 
 		public void RemoveSelectedItem()
 		{
-			if (_selectedSlot == null) return;
-			var item = _selectedSlot.AllItemsInSlot.First().Item;
+			if (_selectedSlot.Empty) return;
+			var item = _selectedSlot?.AllItemsInSlot?.First()?.Item;
 			_originalCollection.Remove(item);
 			_selectedSlot.ClearItems();
 			_selectedSlot.SetSelected(false);

@@ -78,7 +78,7 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 			{
 				_inventoryViewModel.MoveItem(oldSlot, _slotFacade);
 
-				oldSlot.ClearItems();
+				oldSlot?.ClearItems();
 			}
 		}
 

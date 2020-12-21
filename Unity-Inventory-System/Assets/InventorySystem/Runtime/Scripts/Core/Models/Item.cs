@@ -38,11 +38,11 @@ namespace InventorySystem.Runtime.Scripts.Core.Models
 			MaxStack = maxStack;
 		}
 
-
-		public string Title { get; }
-		public string Description { get; }
+		public string Title { get; private set; }
+		public string Description { get; private set; }
 		public Sprite ItemSprite { get; }
 		public Color Color { get; }
 		public int MaxStack { get; }
+		public int Count { get; }
 	}
 }

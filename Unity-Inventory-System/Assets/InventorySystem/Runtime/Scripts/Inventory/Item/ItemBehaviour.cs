@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
-using Cysharp.Threading.Tasks;
-using Cysharp.Threading.Tasks.Triggers;
-using InventorySystem.Runtime.Scripts.Core.Messages;
+﻿using InventorySystem.Runtime.Scripts.Core.Messages;
 using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
 using InventorySystem.Runtime.Scripts.Inventory.Slot;
 using InventorySystem.Runtime.Scripts.Inventory.Tooltip;
@@ -120,7 +116,7 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 			_click = false;
 			
 			_tooltipBehavior.HideToolTip();
-			_oldSlot.GetComponent<ISlotFacade>().FillSlotBackground();
+			_oldSlot?.GetComponent<ISlotFacade>()?.FillSlotBackground();
 		}
 
 		private void OnPointerDown(PointerEventData eventData)

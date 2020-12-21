@@ -1,27 +1,20 @@
 ﻿using System.Collections.Generic;
 using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
 using InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory;
-using InventorySystem.Runtime.Scripts.Inventory.Item;
 using InventorySystem.Runtime.Scripts.Presenters.Base;
 using UniRx;
-using Zenject;
 
 namespace InventorySystem.Runtime.Scripts.Inventory.Slot
 {
-	public class SlotBehaviour : BasePresenter, IInitializable
+	public class SlotBehaviour : BasePresenter
 	{
-		private readonly ItemFacadesPoolBehaviour _itemFacadesPoolBehaviour;
 		private readonly SlotViewModel _slotViewModel;
 
 		public SlotBehaviour(
-			ItemFacadesPoolBehaviour itemFacadesPoolBehaviour,
 			SlotViewModel slotViewModel)
 		{
-			_itemFacadesPoolBehaviour = itemFacadesPoolBehaviour;
 			_slotViewModel = slotViewModel;
 		}
-		public void Initialize() { }
-
 		public void AddItem(IItemFacade item) => _slotViewModel.AddItem(item);
 		public void ClearItemsInSlot() => _slotViewModel.ClearItemsInSlot();
 		public bool Empty => _slotViewModel.Empty.Value;
