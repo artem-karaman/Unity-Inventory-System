@@ -27,23 +27,9 @@ Tests with Unity Editor version - 2020.1.8f1
 
 - Unity reorderable list - https://github.com/cfoulston/Unity-Reorderable-List - unity package - upm 
 
-or 
+- Unity UI Extensions - https://bitbucket.org/UnityUIExtensions/unity-ui-extensions - unity package - upm
 
-Add to manifest
 
-```yaml
-{
-  "dependencies": 
-  {
-    "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
-    "com.malee.reorderablelist": "https://github.com/cfoulston/Unity-Reorderable-List.git",
-    "com.neuecc.unirx": "https://github.com/neuecc/UniRx.git?path=Assets/Plugins/UniRx/Scripts"
-    ...
-  }
-}
-```
-
-and Extenject via open upm - https://openupm.com/packages/com.svermeulen.extenject/
 
 
 
