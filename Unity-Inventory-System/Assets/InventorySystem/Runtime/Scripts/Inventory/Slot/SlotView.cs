@@ -46,7 +46,7 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Slot
 			_slotViewModel
 				.Selected
 				.AsObservable()
-				.Subscribe(PrepareSelectedSlot)
+				.Subscribe(_ => FillSlot())
 				.AddTo(Disposables);
 
 			_slotViewModel
@@ -60,43 +60,52 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Slot
 				.ItemsInSlot
 				.ObserveEveryValueChanged(x => x.Count)
 				.AsObservable()
-				.Subscribe(value => FillSlot(value))
+				.Subscribe(value =>
+                {
+                    FillSlot(value);
+                })
 				.AddTo(Disposables);
-			
-			
+
+            _slotViewModel
+                .Empty
+                .AsObservable()
+                .Where(v => v)
+                .Subscribe(_ => _image.color = Color.white)
+                .AddTo(Disposables);
+
+            _slotViewModel
+	            .ItemsInSlot
+	            .ObserveAdd()
+	            .Subscribe(_ => FillSlot())
+	            .AddTo(Disposables);
 		}
 
 		private void FillSlot()
 		{
 			Color color = Color.white;
 
-			if (_slotViewModel.ItemsInSlot.Any())
+			if (_slotViewModel.ItemsInSlot.Any() && !_slot.Selected)
 			{
 				var c = _slotViewModel.ItemsInSlot?.First()?.Item?.Color;
 				color = c.HasValue ? c.Value : Color.white;
 			}
+
+            if (_slot.Selected)
+                color = Color.cyan;
 			
 			_image.color = color;
 		}
 
 		private void FillSlot(int value)
 		{
+			if(_slot.Selected) return;
 			_image.color = value == 0 ? Color.white 
 				: _slotViewModel.ItemsInSlot.First().Item.Color;
 		}
 
-		private void PrepareSelectedSlot(bool value) =>
-			_slot.gameObject.GetComponent<Image>().color
-				= value
-					? Color.cyan
-					: Color.white;
-
 		private void ChangeItemCount(int count) => 
 			_itemCount.text = count == 0 || count == 1 ? string.Empty : count.ToString();
 
-		public void FillSlotBackground()
-		{
-			FillSlot();
-		}
+		public void FillSlotBackground() => FillSlot();
 	}
 }

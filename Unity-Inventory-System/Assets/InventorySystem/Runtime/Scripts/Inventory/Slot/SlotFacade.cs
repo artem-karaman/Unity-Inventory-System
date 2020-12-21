@@ -37,11 +37,8 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Slot
 				.AddTo(this);
 		}
 
-		public void FillSlotBackground()
-		{
-			_slotView.FillSlotBackground();
-		}
-		
+		public void FillSlotBackground() => _slotView.FillSlotBackground();
+
 		public Transform Transform => transform;
 
 		public void Dispose() => _memoryPool?.Despawn(this);

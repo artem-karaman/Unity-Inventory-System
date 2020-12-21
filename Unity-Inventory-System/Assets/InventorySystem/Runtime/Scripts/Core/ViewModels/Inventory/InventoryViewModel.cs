@@ -79,6 +79,8 @@ namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
 				.AsObservable()
 				.Subscribe(value =>
 				{
+					_selectedSlot?.SetSelected(false);
+
 					_selectedSlot = value.SelectedSlot;
 				})
 				.AddTo(_disposables);
@@ -107,7 +109,7 @@ namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
 
 		public void RemoveSelectedItem()
 		{
-			if (_selectedSlot == null) return;
+			if (_selectedSlot.Empty) return;
 			var item = _selectedSlot?.AllItemsInSlot?.First()?.Item;
 			_originalCollection.Remove(item);
 			_selectedSlot.ClearItems();
