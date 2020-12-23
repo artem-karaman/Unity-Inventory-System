@@ -106,7 +106,7 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 		{
 			if (_click && Time.time - _time > .5f)
 			{
-				_tooltipBehavior.ShowToolTip(_item.Item);
+				_tooltipBehavior.ShowToolTip(_item);
 			}
 		}
 

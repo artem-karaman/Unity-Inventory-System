@@ -23,7 +23,7 @@ namespace InventorySystem.Runtime.Scripts.Installers.Inventory
 			ItemsContainerInstaller.Install(Container);
 
 			Container
-				.BindFactory<IItem, TooltipView, TooltipView.Factory>()
+				.BindFactory<IItemFacade, TooltipView, TooltipView.Factory>()
 				.FromNewComponentOnNewPrefabResource("Prefabs/TooltipPanel");
 
 			Container

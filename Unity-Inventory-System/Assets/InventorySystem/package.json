@@ -1,6 +1,6 @@
 {
     "name": "com.namarakm.inventorysystem",
-	  "author": "Artem Karaman",
+	"author": "Artem Karaman",
     "displayName": "Inventory",
     "version": "0.1.0",
     "unity": "2020.1",
