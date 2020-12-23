@@ -1,4 +1,6 @@
 using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
+using InventorySystem.Runtime.Scripts.Managers;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -7,15 +9,23 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Tooltip
 {
 	public class TooltipView : MonoBehaviour
 	{
-		private IItem _item;
+		private SharedUIManager _uiManager;
+		private IItemFacade _item;
+		private RectTransform _toolTipRect;
+
+		private TextMeshProUGUI _topPanelText;
+		private TextMeshProUGUI _middlePanelText;
 		
 		[Inject]
-		void Construct(IItem item)
+		void Construct(
+			IItemFacade item,
+			SharedUIManager sharedUIManager)
 		{
 			_item = item;
+			_uiManager = sharedUIManager;
 		}
 
-		public void Prepare(IItem item)
+		public void Prepare(IItemFacade item)
 		{
 			_item = item;
 			
@@ -24,10 +34,57 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Tooltip
 
 		void Start()
 		{
-			gameObject.GetComponent<Image>().color = _item?.Color ?? Color.white;
+			gameObject.GetComponent<Image>().color = _item?.Item.Color ?? Color.white;
+			
+			_topPanelText = transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
+			_topPanelText.text = _item?.Item?.Title;
+
+			_middlePanelText = transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>();
+			_middlePanelText.text = _item?.Item?.Description;
+
+			_toolTipRect = GetComponent<RectTransform>();
+			
+			SetPosition();
 		}
 
+		void SetPosition()
+		{
+			var padding = 50f;
+			var cellSize = 400f * _uiManager.Canvas.scaleFactor;
 
-		public class Factory : PlaceholderFactory<IItem, TooltipView>{}
+			Vector3 newPos = _item.Transform.position;
+			newPos.z = 0;
+
+			float rightEdgeToScreenEdgeDistance =
+				Screen.width - (newPos.x + _toolTipRect.rect.width * _uiManager.Canvas.scaleFactor / 2) - padding;
+
+			if (rightEdgeToScreenEdgeDistance > _toolTipRect.rect.width * _uiManager.Canvas.scaleFactor / 2)
+			{
+				newPos.x += 200f;
+			}
+			else
+			{
+				newPos.x += -200f - _toolTipRect.rect.width * _uiManager.Canvas.scaleFactor / 2 - 300f;
+			}
+
+			float bottomEdgeToScreenEdgeDistance = newPos.y;
+			//force update tooltip table layout to get actual height
+			LayoutRebuilder.ForceRebuildLayoutImmediate(_toolTipRect);
+			var tooltipHeight = _toolTipRect.rect.height;
+
+			if (Mathf.Abs(bottomEdgeToScreenEdgeDistance) < tooltipHeight)
+			{
+				newPos.y += tooltipHeight - cellSize /* - cellSize / 2*/ - padding;
+			}
+			else
+			{
+				newPos.y += 200f * _uiManager.Canvas.scaleFactor;
+			}
+			
+			transform.position = newPos;
+		}
+		
+
+		public class Factory : PlaceholderFactory<IItemFacade, TooltipView>{}
 	}
 }
