@@ -19,11 +19,9 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 
 		public ItemEndDragBehaviour(
 			ItemFacadesPoolBehaviour itemFacadesPoolBehaviour,
-			ItemDragData itemDragData,
 			InventoryViewModel inventoryViewModel)
 		{
 			_itemFacadesPoolBehaviour = itemFacadesPoolBehaviour;
-			_itemDragData = itemDragData;
 			_inventoryViewModel = inventoryViewModel;
 		}
 
