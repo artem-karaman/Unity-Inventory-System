@@ -55,35 +55,52 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Tooltip
 			Vector3 newPos = _item.Transform.position;
 			newPos.z = 0;
 
+			newPos = CalculateXPosition(newPos, padding, cellSize);
+			newPos = CalculateYPosition(newPos, cellSize, padding);
+
+			transform.position = newPos;
+		}
+
+		private Vector3 CalculateXPosition(Vector3 newPos, float padding, float cellSize)
+		{
 			float rightEdgeToScreenEdgeDistance =
 				Screen.width - (newPos.x + _toolTipRect.rect.width * _uiManager.Canvas.scaleFactor / 2) - padding;
 
 			if (rightEdgeToScreenEdgeDistance > _toolTipRect.rect.width * _uiManager.Canvas.scaleFactor / 2)
 			{
-				newPos.x += 200f;
+				newPos.x += cellSize / 2 + padding;
 			}
 			else
 			{
-				newPos.x += -200f - _toolTipRect.rect.width * _uiManager.Canvas.scaleFactor / 2 - 300f;
+				newPos.x += -cellSize / 2 - _toolTipRect.rect.width * _uiManager.Canvas.scaleFactor - padding;
 			}
 
+			return newPos;
+		}
+
+		private Vector3 CalculateYPosition(Vector3 newPos, float cellSize, float padding)
+		{
 			float bottomEdgeToScreenEdgeDistance = newPos.y;
+
 			//force update tooltip table layout to get actual height
 			LayoutRebuilder.ForceRebuildLayoutImmediate(_toolTipRect);
+
 			var tooltipHeight = _toolTipRect.rect.height;
 
-			if (Mathf.Abs(bottomEdgeToScreenEdgeDistance) < tooltipHeight)
+			if (bottomEdgeToScreenEdgeDistance < tooltipHeight)
 			{
-				newPos.y += tooltipHeight - cellSize /* - cellSize / 2*/ - padding;
+				_toolTipRect.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Bottom, padding, 0);
+				
+				newPos.y += tooltipHeight - cellSize;
 			}
 			else
 			{
-				newPos.y += 200f * _uiManager.Canvas.scaleFactor;
+				newPos.y += cellSize / 2;
 			}
-			
-			transform.position = newPos;
+
+			return newPos;
 		}
-		
+
 
 		public class Factory : PlaceholderFactory<IItemFacade, TooltipView>{}
 	}
