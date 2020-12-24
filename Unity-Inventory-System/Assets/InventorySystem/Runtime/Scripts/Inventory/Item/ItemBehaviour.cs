@@ -17,7 +17,7 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 	{
 		private readonly SharedUIManager _sharedUIManager;
 		private readonly ItemFacade _item;
-		private readonly ItemEndDragBehaviour _itemEndDragBehaviour;
+		private readonly InventoryEndDragBehaviour _inventoryEndDragBehaviour;
 
 		private Canvas _canvas;
 		private RectTransform _rectTransform;
@@ -33,12 +33,12 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 		public ItemBehaviour(
 			SharedUIManager sharedUIManager,
 			ItemFacade item,
-			ItemEndDragBehaviour itemEndDragBehaviour,
+			InventoryEndDragBehaviour inventoryEndDragBehaviour,
 			TooltipBehavior tooltipBehavior)
 		{
 			_sharedUIManager = sharedUIManager;
 			_item = item;
-			_itemEndDragBehaviour = itemEndDragBehaviour;
+			_inventoryEndDragBehaviour = inventoryEndDragBehaviour;
 			_tooltipBehavior = tooltipBehavior;
 		}
 		
@@ -161,8 +161,8 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 		{
 			var itemData = new ItemDragData(_selectedItem, _oldSlot, eventData, _canvasGroup, _item);
 
-			_itemEndDragBehaviour.Prepare(itemData);
-			_itemEndDragBehaviour.OnEndDrag();
+			_inventoryEndDragBehaviour.Prepare(itemData);
+			_inventoryEndDragBehaviour.OnEndDrag();
 		}
 	}
 }

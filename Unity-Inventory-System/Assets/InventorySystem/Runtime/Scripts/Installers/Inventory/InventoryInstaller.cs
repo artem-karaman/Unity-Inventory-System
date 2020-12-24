@@ -31,10 +31,9 @@ namespace InventorySystem.Runtime.Scripts.Installers.Inventory
 				.Bind<TooltipBehavior>()
 				.ToSelf()
 				.AsSingle();
-
-			//Should be single for all items
+			
 			Container
-				.Bind<ItemEndDragBehaviour>()
+				.Bind<InventoryEndDragBehaviour>()
 				.ToSelf()
 				.AsSingle();
 			
