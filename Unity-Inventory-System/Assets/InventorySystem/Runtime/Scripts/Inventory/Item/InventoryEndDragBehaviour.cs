@@ -28,20 +28,54 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 
 		public void OnEndDrag()
 		{
-			FindSlot();
-			
 			_itemDragData.CanvasGroup.blocksRaycasts = true;
 			_itemDragData.CanvasGroup.alpha = 1f;
-
-			if (PointerNull()) return;
 			
-			var oldSlot = _itemDragData.OldSlot.GetComponent<ISlotFacade>();
-
+			if(!FindSlot()) return;
+			if (PointerNull()) return;
+			if (GetOldSlot(out var oldSlot)) return;
 			if (CanAddItemToSlotWithItem(oldSlot)) return;
 			if (PointerNotItemSlot()) return;
 
 			MoveItemToEmptySlot(oldSlot);
 			PublishNewSlotSelectedMessage();
+		}
+
+		private bool GetOldSlot(out ISlotFacade oldSlot)
+		{
+			oldSlot = _itemDragData?.OldSlot?.GetComponent<ISlotFacade>();
+
+			if (oldSlot != null) return false;
+			MoveToOriginalSlot();
+			return true;
+		}
+
+		private bool CanAddItemToSlotWithItem(ISlotFacade oldSlot)
+		{
+			if (!_itemDragData.EventData.pointerEnter.CompareTag("Item"))
+			{
+				MoveToOriginalSlot();
+				return false;
+			}
+
+			if (!PointerEnterItemEqualToDraggingItem())
+			{
+				MoveToOriginalSlot();
+				return false;
+			}
+
+			if (_itemDragData.Item.Item.MaxStack
+			    <= 1
+			    || _slotFacade.AllItemsInSlot.Count
+			    >= _itemDragData.Item.Item.MaxStack)
+			{
+				MoveToOriginalSlot();
+				return false;
+			}
+			
+			AddItemToStack(oldSlot);
+			
+			return true;
 		}
 
 		private bool PointerNotItemSlot()
@@ -51,40 +85,44 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 			return true;
 		}
 
-		private bool CanAddItemToSlotWithItem(ISlotFacade oldSlot)
+		private bool PointerEnterItemEqualToDraggingItem()
 		{
-			if (!_itemDragData.EventData.pointerEnter.CompareTag("Item")) return false;
+			var existingItem = _itemDragData.EventData.pointerEnter.GetComponent<IItemFacade>();
+
+			var existingItemType = existingItem.Item.GetType();
+			var dragingItemType = _itemDragData.Item.Item.GetType();
 			
-			if (_itemDragData.Item.Item.MaxStack 
-			    <= 1 
-			    || _slotFacade.AllItemsInSlot.Count 
-			    >= _itemDragData.Item.Item.MaxStack) return false;
-			
-			AddItemToStack(oldSlot);
-			
-			return true;
+			return existingItemType == dragingItemType;
 		}
 
 		private bool PointerNull()
 		{
-			if (_itemDragData.EventData.pointerEnter != null) return false;
+			var result = false;
 			
-			MoveToOriginalSlot();
-				
-			return true;
+			if (_itemDragData.EventData.pointerEnter == null)
+			{
+				MoveToOriginalSlot();
+				result = true;
+			}
+			
+			return result;
 		}
 
 		private void MoveItemToEmptySlot(ISlotFacade oldSlot)
 		{
 			_itemDragData.SelectedItem.transform.SetParent(_itemDragData.EventData.pointerEnter.transform);
-			// set item to the center of slot
+			
 			_itemDragData.SelectedItem.GetComponent<RectTransform>().localPosition = Vector3.zero;
 
 			if (!_slotFacade.Equals(oldSlot) && _slotFacade.Empty)
 			{
 				_inventoryViewModel.MoveItem(oldSlot, _slotFacade);
 
-				oldSlot?.ClearItems();
+				oldSlot.ClearItems();
+			}
+			else
+			{
+				MoveToOriginalSlot();
 			}
 		}
 
@@ -97,14 +135,18 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 			MessageBroker.Default.Publish(new NewSlotSelectedMessage(null));
 		}
 
-		private void FindSlot()
+		private bool FindSlot()
 		{
-			_slotFacade = _itemDragData.EventData.pointerEnter.GetComponent<ISlotFacade>();
+			_slotFacade =
+				_itemDragData.EventData?.pointerEnter?.GetComponent<ISlotFacade>()
+				?? _itemDragData.EventData?.pointerEnter?.GetComponentInParent<ISlotFacade>();
 
 			if (_slotFacade == null)
 			{
-				_slotFacade = _itemDragData.EventData.pointerEnter.GetComponentInParent<ISlotFacade>();
+				MoveToOriginalSlot();
 			}
+
+			return _slotFacade != null;
 		}
 
 		private void MoveToOriginalSlot()

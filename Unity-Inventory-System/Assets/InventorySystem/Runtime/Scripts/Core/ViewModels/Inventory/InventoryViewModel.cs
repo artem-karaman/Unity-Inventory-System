@@ -102,13 +102,11 @@ namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
 				.AddTo(_disposables);
 		}
 
-		public void LateDispose()
-		{
-			_disposables?.Dispose();
-		}
+		public void LateDispose() => _disposables?.Dispose();
 
 		public void RemoveSelectedItem()
 		{
+			if (_selectedSlot == null) return;
 			if (_selectedSlot.Empty) return;
 			var item = _selectedSlot?.AllItemsInSlot?.First()?.Item;
 			_originalCollection.Remove(item);
