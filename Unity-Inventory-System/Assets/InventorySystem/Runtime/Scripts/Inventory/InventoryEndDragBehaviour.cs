@@ -2,11 +2,12 @@
 using InventorySystem.Runtime.Scripts.Core.Messages;
 using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
 using InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory;
+using InventorySystem.Runtime.Scripts.Inventory.Item;
 using InventorySystem.Runtime.Scripts.Models;
 using UniRx;
 using UnityEngine;
 
-namespace InventorySystem.Runtime.Scripts.Inventory.Item
+namespace InventorySystem.Runtime.Scripts.Inventory
 {
 	public class InventoryEndDragBehaviour
 	{
