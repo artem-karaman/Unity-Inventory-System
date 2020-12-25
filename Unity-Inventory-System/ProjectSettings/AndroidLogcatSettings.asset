@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "0123456789ABCDEF",
         "name": "com.namarakM.inventorysystem",
-        "processId": 32340,
+        "processId": 621,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -54,6 +54,12 @@
             "deviceId": "0123456789ABCDEF",
             "name": "com.namarakM.inventorysystem",
             "processId": 32340,
+            "exited": false
+        },
+        {
+            "deviceId": "0123456789ABCDEF",
+            "name": "com.namarakM.inventorysystem",
+            "processId": 621,
             "exited": false
         },
         {

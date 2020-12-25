@@ -61,7 +61,7 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Tooltip
 			transform.position = newPos;
 		}
 
-		private Vector3 CalculateXPosition(Vector3 newPos, float padding, float cellSize)
+		Vector3 CalculateXPosition(Vector3 newPos, float padding, float cellSize)
 		{
 			float rightEdgeToScreenEdgeDistance =
 				Screen.width - (newPos.x + _toolTipRect.rect.width * _uiManager.Canvas.scaleFactor / 2) - padding;
@@ -78,7 +78,7 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Tooltip
 			return newPos;
 		}
 
-		private Vector3 CalculateYPosition(Vector3 newPos, float cellSize, float padding)
+		Vector3 CalculateYPosition(Vector3 newPos, float cellSize, float padding)
 		{
 			float bottomEdgeToScreenEdgeDistance = newPos.y;
 
@@ -100,7 +100,6 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Tooltip
 
 			return newPos;
 		}
-
 
 		public class Factory : PlaceholderFactory<IItemFacade, TooltipView>{}
 	}

@@ -55,15 +55,15 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 			return item;
 		}
 
-		public void RemoveItem()
+		public void RemoveItem(IItemFacade item)
 		{
-			if (!_items.Any()) return;
-			var item = _items[0];
+			_ = item ?? throw new ArgumentNullException(nameof(item));
+			
 			item.Dispose();
 			_items.Remove(item);
 		}
 
-		public void RemoveItem(IItem item)
+		private void RemoveItem(IItem item)
 		{
 			var resultItem = _items.FirstOrDefault(i => i.Item.Equals(item));
 
@@ -72,24 +72,14 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 			_items.Remove(resultItem);
 		}
 
-		public async UniTask RemoveAllItems()
+		private async UniTask RemoveAllItems()
 		{
 			if (!_items.Any()) return;
 
 			await RemoveItems();
 		}
 
-		public UniTask RemoveItem(IItemFacade item)
-		{
-			_ = item ?? throw new ArgumentNullException(nameof(item));
-			
-			item.Dispose();
-			_items.Remove(item);
-
-			return UniTask.CompletedTask;
-		}
-		
-		public UniTask RemoveItems()
+		private UniTask RemoveItems()
 		{
 			foreach (var item in _items)
 			{

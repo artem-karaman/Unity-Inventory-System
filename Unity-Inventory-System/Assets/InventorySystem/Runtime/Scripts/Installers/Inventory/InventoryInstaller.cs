@@ -1,6 +1,7 @@
 using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
 using InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory;
 using InventorySystem.Runtime.Scripts.Inventory;
+using InventorySystem.Runtime.Scripts.Inventory.Item;
 using InventorySystem.Runtime.Scripts.Inventory.Tooltip;
 using UnityEngine;
 using Zenject;
@@ -28,6 +29,11 @@ namespace InventorySystem.Runtime.Scripts.Installers.Inventory
 
 			Container
 				.Bind<TooltipBehavior>()
+				.ToSelf()
+				.AsSingle();
+			
+			Container
+				.Bind<InventoryEndDragBehaviour>()
 				.ToSelf()
 				.AsSingle();
 			
