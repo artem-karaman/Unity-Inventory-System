@@ -30,23 +30,7 @@ Tests with Unity Editor version - 2020.1.8f1
 - Unity UI Extensions - https://bitbucket.org/UnityUIExtensions/unity-ui-extensions - unity package - upm
 
 
-
-
-
-## How to install
-Install this package via upm:
-
-Package:
-
-```yaml
-https://github.com/namarakM/Unity-Inventory-System.git?path=/Unity-Inventory-System/Assets/InventorySystem
-```
-
-How to use above link:
-
-[Unity-Manual](https://docs.unity3d.com/Manual/upm-ui-giturl.html)
-
-## Statistics
+## Repo Statistics
 
 [Hits-of-Code-Overview](https://hitsofcode.com/view/github/namarakM/Unity-Inventory-System?branch=main)
 
