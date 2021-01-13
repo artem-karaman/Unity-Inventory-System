@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
 using UniRx;
-using UnityEditor;
 using Zenject;
 
 namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
@@ -41,7 +40,12 @@ namespace InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory
 				.ObserveAdd()
 				.Subscribe(_ => Empty.Value = false)
 				.AddTo(_disposables);
-			
+
+			_inventoryViewModel
+				.Items
+				.ObserveReset()
+				.Subscribe(_ => ClearItems())
+				.AddTo(_disposables);  
 
 			Empty.Value = ItemsInSlot.Count == 0;
 		}

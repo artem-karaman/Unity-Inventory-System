@@ -1,11 +1,14 @@
-﻿using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
+﻿using System.Collections.Generic;
+using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
+using InventorySystem.Runtime.Scripts.Inventory;
 using InventorySystem.Runtime.Scripts.Presenters.Base;
+using InventorySystem.Samples.Scripts.Managers;
+using InventorySystem.Samples.Scripts.Models;
+using InventorySystem.Samples.Scripts.Models.Interfaces;
 using UniRx;
-using UnityInventorySystem.Inventory;
-using UnityInventorySystem.Managers;
 using Zenject;
 
-namespace UnityInventorySystem.Presenters
+namespace InventorySystem.Samples.Scripts.Presenters.MainInventoryScene
 {
 	public class MainInventoryPresenter : BasePresenter, IInitializable
 	{
@@ -34,25 +37,47 @@ namespace UnityInventorySystem.Presenters
 
 		private void FillInventory()
 		{
-			_inventory.AddItem(new HandItem());
+			// _inventory.AddItem(new HandItem());
+			//
+			// _inventory.AddItem(new BodyItem());
+			// _inventory.AddItem(new BodyItem());
+			//
+			// _inventory.AddItem(new LegItem());
+			// _inventory.AddItem(new LegItem());
+			// _inventory.AddItem(new LegItem());
+			//
+			// _inventory.AddItem(new CardItem());
+			// _inventory.AddItem(new CardItem());
+			// _inventory.AddItem(new CardItem());
+			// _inventory.AddItem(new CardItem());
+			//
+			// _inventory.AddItem(new OtherItem());
+			// _inventory.AddItem(new OtherItem());
+			// _inventory.AddItem(new OtherItem());
+			// _inventory.AddItem(new OtherItem());
+			// _inventory.AddItem(new OtherItem());
 			
-			_inventory.AddItem(new BodyItem());
-			_inventory.AddItem(new BodyItem());
-			
-			_inventory.AddItem(new LegItem());
-			_inventory.AddItem(new LegItem());
-			_inventory.AddItem(new LegItem());
-			
-			_inventory.AddItem(new CardItem());
-			_inventory.AddItem(new CardItem());
-			_inventory.AddItem(new CardItem());
-			_inventory.AddItem(new CardItem());
-			
-			_inventory.AddItem(new OtherItem());
-			_inventory.AddItem(new OtherItem());
-			_inventory.AddItem(new OtherItem());
-			_inventory.AddItem(new OtherItem());
-			_inventory.AddItem(new OtherItem());
+			_inventory.AddItems(new List<IItem>()
+			{
+				new HandItem(),
+				
+				new BodyItem(),
+				new BodyItem(),
+				
+				new LegItem(),
+				new LegItem(),
+				new LegItem(),
+				
+				new CardItem(),
+				new CardItem(),
+				new CardItem(),
+				new CardItem(),
+				
+				new OtherItem(),
+				new OtherItem(),
+				new OtherItem(),
+				new OtherItem()
+			});
 		}
 
 		private void SubscribeComponents()

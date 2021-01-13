@@ -1,5 +1,7 @@
 ﻿using InventorySystem.Runtime.Scripts.Core.Messages;
+using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
 using InventorySystem.Runtime.Scripts.Inventory.Slot;
+using InventorySystem.Runtime.Scripts.Inventory.Tooltip;
 using InventorySystem.Runtime.Scripts.Managers;
 using InventorySystem.Runtime.Scripts.Models;
 using InventorySystem.Runtime.Scripts.Presenters.Base;
@@ -15,7 +17,7 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 	{
 		private readonly SharedUIManager _sharedUIManager;
 		private readonly ItemFacade _item;
-		private readonly ItemEndDragBehaviour.Factory _itemEndDragBehaviourFactory;
+		private readonly InventoryEndDragBehaviour _inventoryEndDragBehaviour;
 
 		private Canvas _canvas;
 		private RectTransform _rectTransform;
@@ -24,16 +26,20 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 		private GameObject _selectedItem;
 		private GameObject _oldSlot;
 
-		private ItemEndDragBehaviour _itemEndDragBehaviour;
+		private bool _click;
+		private float _time;
+		private readonly TooltipBehavior _tooltipBehavior;
 
 		public ItemBehaviour(
 			SharedUIManager sharedUIManager,
 			ItemFacade item,
-			ItemEndDragBehaviour.Factory itemEndDragBehaviourFactory)
+			InventoryEndDragBehaviour inventoryEndDragBehaviour,
+			TooltipBehavior tooltipBehavior)
 		{
 			_sharedUIManager = sharedUIManager;
 			_item = item;
-			_itemEndDragBehaviourFactory = itemEndDragBehaviourFactory;
+			_inventoryEndDragBehaviour = inventoryEndDragBehaviour;
+			_tooltipBehavior = tooltipBehavior;
 		}
 		
 		public void Initialize()
@@ -59,7 +65,14 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 				.OnPointerDownAsObservable()
 				.Subscribe(OnPointerDown)
 				.AddTo(Disposables);
-			
+
+			_item
+				.gameObject
+				.AddComponent<ObservablePointerUpTrigger>()
+				.OnPointerUpAsObservable()
+				.Subscribe(OnPointerUp)
+				.AddTo(Disposables);
+
 			_item
 				.gameObject
 				.AddComponent<ObservableDragTrigger>()
@@ -83,26 +96,35 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 
 			Observable
 				.EveryUpdate()
-				.Subscribe(_ =>
-				{
-					for (int i = 0; i < Input.touchCount; ++i)
-					{
-						if (Input.GetTouch(i).deltaTime > 0.2f)
-						{
-							OnLongPress();
-						}
-					}
-				})
+				.Subscribe(_ => ShowTooltip())
 				.AddTo(Disposables);
+		}
+
+		private void ShowTooltip()
+		{
+			if (_click && Time.time - _time > .5f)
+			{
+				_tooltipBehavior.ShowToolTip(_item);
+			}
+		}
+
+		private void OnPointerUp(PointerEventData eventData)
+		{
+			_time = 0;
+			_click = false;
+			
+			_tooltipBehavior.HideToolTip();
+			_oldSlot?.GetComponent<ISlotFacade>()?.FillSlotBackground();
 		}
 
 		private void OnPointerDown(PointerEventData eventData)
 		{
 			_oldSlot = _item.transform.parent.gameObject;
+
+			_click = true;
+			_time = Time.time;
 			
 			OnPress();
-			
-			//_item.Invoke("OnLongPress", 1f);
 		}
 
 		private void SelectOldSlot(bool value)
@@ -114,16 +136,10 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 			slot.SetSelected(value);
 			MessageBroker.Default.Publish(new NewSlotSelectedMessage(slot));
 		}
-		
+
 		private void OnPress()
 		{
 			SelectOldSlot(true);
-		}
-		
-		private void OnLongPress()
-		{
-			//TODO: implement show tooltip with info about selected element
-			Debug.Log("Woohooo, long press happened");
 		}
 
 		private void OnDrag(PointerEventData eventData)
@@ -145,21 +161,8 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 		{
 			var itemData = new ItemDragData(_selectedItem, _oldSlot, eventData, _canvasGroup, _item);
 
-			PrepareItemEndDragBehaviour(itemData);
-			
-			_itemEndDragBehaviour.OnEndDrag();
-		}
-
-		private void PrepareItemEndDragBehaviour(ItemDragData itemData)
-		{
-			if (_itemEndDragBehaviour == null)
-			{
-				_itemEndDragBehaviour = _itemEndDragBehaviourFactory.Create(itemData);
-			}
-			else
-			{
-				_itemEndDragBehaviour.Prepare(itemData);
-			}
+			_inventoryEndDragBehaviour.Prepare(itemData);
+			_inventoryEndDragBehaviour.OnEndDrag();
 		}
 	}
 }

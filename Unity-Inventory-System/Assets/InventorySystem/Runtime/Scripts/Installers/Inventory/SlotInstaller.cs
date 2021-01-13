@@ -1,22 +1,20 @@
-﻿using Assets.Scripts.Core.ViewModels;
-using InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory;
+﻿using InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory;
 using InventorySystem.Runtime.Scripts.Inventory.Slot;
-using UnityEngine;
-using UnityInventorySystem.Inventory;
 using Zenject;
 
-namespace UnityInventorySystem.Installers
+namespace InventorySystem.Runtime.Scripts.Installers.Inventory
 {
 	public class SlotInstaller : Installer<SlotInstaller>
 	{
 		public override void InstallBindings()
 		{
 			Container
-				.BindInterfacesAndSelfTo<SlotViewModel>()
+				.BindInterfacesAndSelfTo<SlotFacade>()
+				.FromNewComponentOnRoot()
 				.AsSingle();
 			
 			Container
-				.BindInterfacesAndSelfTo<SlotView>()
+				.BindInterfacesAndSelfTo<SlotViewModel>()
 				.AsSingle();
 
 			Container
@@ -24,8 +22,7 @@ namespace UnityInventorySystem.Installers
 				.AsSingle();
 			
 			Container
-				.BindInterfacesAndSelfTo<SlotFacade>()
-				.FromNewComponentOnRoot()
+				.BindInterfacesAndSelfTo<SlotView>()
 				.AsSingle();
 		}
 	}

@@ -1,8 +1,8 @@
-﻿using InventorySystem.Runtime.Scripts.Presenters.Base;
-using UnityInventorySystem.Inventory;
+﻿using InventorySystem.Runtime.Scripts.Inventory;
+using InventorySystem.Runtime.Scripts.Presenters.Base;
 using Zenject;
 
-namespace UnityInventorySystem.Presenters
+namespace InventorySystem.Samples.Scripts.Presenters.HorizontalInventoryScene
 {
 	public class HorizontalInventoryPresenter : BasePresenter, IInitializable
 	{

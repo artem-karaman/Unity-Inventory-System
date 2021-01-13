@@ -1,7 +1,6 @@
 ﻿using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityInventorySystem;
 
 namespace InventorySystem.Runtime.Scripts.Inventory.Item
 {

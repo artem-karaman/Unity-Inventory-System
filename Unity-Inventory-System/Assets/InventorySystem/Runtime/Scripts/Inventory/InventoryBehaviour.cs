@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
+﻿using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
 using InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory;
 using InventorySystem.Runtime.Scripts.Inventory.Item;
 using InventorySystem.Runtime.Scripts.Inventory.Slot;
@@ -10,7 +7,7 @@ using UniRx;
 using UnityEngine;
 using Zenject;
 
-namespace UnityInventorySystem.Inventory
+namespace InventorySystem.Runtime.Scripts.Inventory
 {
 	public class InventoryBehaviour : BasePresenter, IInitializable
 	{
@@ -50,6 +47,15 @@ namespace UnityInventorySystem.Inventory
 				.AsObservable()
 				.Subscribe(AddSlots)
 				.AddTo(Disposables);
+
+			_inventoryViewModel
+				.Items
+				.ObserveAdd()
+				.Subscribe(item =>
+				{
+					AddItemToSlot(item.Value);
+				})
+				.AddTo(Disposables);
 		}
 
 		private void AddSlots(int value)
@@ -58,32 +64,6 @@ namespace UnityInventorySystem.Inventory
 			{
 				_slotFacadesPoolBehaviour.AddSlot();
 			}
-		}
-
-		public void AddItem(IItem item) => AddItemToSlot(item);
-
-		public void AddItems(IEnumerable<IItem> items)
-		{
-			_ = items ?? throw new ArgumentNullException(nameof(items));
-			
-			foreach (var item in items)
-			{
-				AddItemToSlot(item);
-			}
-		}
-		
-		public void ClearItems() => _slotFacadesPoolBehaviour.ClearSlots();
-
-		public void FilterItems<T>() 
-			where T : IItem
-		{
-			ClearItems();
-
-			var list = _inventoryViewModel.FilteredItems<T>().ToList();
-
-			if (!list.Any()) return;
-			
-			AddItems(list);
 		}
 
 		private void AddItemToSlot(IItem item)

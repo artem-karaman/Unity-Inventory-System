@@ -1,16 +1,14 @@
 ﻿using InventorySystem.Runtime.Scripts.Inventory.Slot;
-using UnityInventorySystem.Inventory;
 using Zenject;
 
-namespace UnityInventorySystem.Installers
+namespace InventorySystem.Runtime.Scripts.Installers.Inventory
 {
 	public class SlotsContainerInstaller : Installer<SlotsContainerInstaller>
 	{
 		public override void InstallBindings()
 		{
 			Container
-				.Bind<SlotFacadesPoolBehaviour>()
-				.ToSelf()
+				.BindInterfacesAndSelfTo<SlotFacadesPoolBehaviour>()
 				.AsSingle();
 
 			Container

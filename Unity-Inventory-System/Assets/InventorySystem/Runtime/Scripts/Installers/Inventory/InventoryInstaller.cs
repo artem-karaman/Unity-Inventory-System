@@ -1,10 +1,12 @@
-using Assets.Scripts.Core.ViewModels;
+using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
 using InventorySystem.Runtime.Scripts.Core.ViewModels.Inventory;
+using InventorySystem.Runtime.Scripts.Inventory;
+using InventorySystem.Runtime.Scripts.Inventory.Item;
+using InventorySystem.Runtime.Scripts.Inventory.Tooltip;
 using UnityEngine;
-using UnityInventorySystem.Inventory;
 using Zenject;
 
-namespace UnityInventorySystem.Installers
+namespace InventorySystem.Runtime.Scripts.Installers.Inventory
 {
 	public class InventoryInstaller : Installer<int, InventoryInstaller>
 	{
@@ -20,6 +22,20 @@ namespace UnityInventorySystem.Installers
 		{
 			SlotsContainerInstaller.Install(Container);
 			ItemsContainerInstaller.Install(Container);
+
+			Container
+				.BindFactory<IItemFacade, TooltipView, TooltipView.Factory>()
+				.FromNewComponentOnNewPrefabResource("Prefabs/TooltipPanel");
+
+			Container
+				.Bind<TooltipBehavior>()
+				.ToSelf()
+				.AsSingle();
+			
+			Container
+				.Bind<InventoryEndDragBehaviour>()
+				.ToSelf()
+				.AsSingle();
 			
 			Container
 				.Bind<Transform>()

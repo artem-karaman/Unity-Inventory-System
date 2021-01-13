@@ -8,8 +8,8 @@
     "samples": [
 		{
 			"displayName": "Inventory samples",
-			"description": "short description about inventories",
-			"path": "Samples~"
+			"description": "short description about inventories"
+			"path":"Samples~"
 		}
 	],	
     "license": "MIT"
