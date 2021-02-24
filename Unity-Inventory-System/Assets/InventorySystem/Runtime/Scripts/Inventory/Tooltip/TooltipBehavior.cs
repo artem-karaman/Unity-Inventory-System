@@ -14,11 +14,11 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Tooltip
 			_factory = factory;
 		}
 
-		public void ShowToolTip(IItem item) => Show(item);
+		public void ShowToolTip(IItemFacade item) => Show(item);
 
 		public void HideToolTip() => _tooltipView?.gameObject.SetActive(false);
 
-		private void Show(IItem item)
+		private void Show(IItemFacade item)
 		{
 			
 			if (_tooltipView == null)

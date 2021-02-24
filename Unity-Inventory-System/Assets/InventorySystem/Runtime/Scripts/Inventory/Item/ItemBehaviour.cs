@@ -17,7 +17,7 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 	{
 		private readonly SharedUIManager _sharedUIManager;
 		private readonly ItemFacade _item;
-		private readonly ItemEndDragBehaviour.Factory _itemEndDragBehaviourFactory;
+		private readonly InventoryEndDragBehaviour _inventoryEndDragBehaviour;
 
 		private Canvas _canvas;
 		private RectTransform _rectTransform;
@@ -26,8 +26,6 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 		private GameObject _selectedItem;
 		private GameObject _oldSlot;
 
-		private ItemEndDragBehaviour _itemEndDragBehaviour;
-
 		private bool _click;
 		private float _time;
 		private readonly TooltipBehavior _tooltipBehavior;
@@ -35,12 +33,12 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 		public ItemBehaviour(
 			SharedUIManager sharedUIManager,
 			ItemFacade item,
-			ItemEndDragBehaviour.Factory itemEndDragBehaviourFactory,
+			InventoryEndDragBehaviour inventoryEndDragBehaviour,
 			TooltipBehavior tooltipBehavior)
 		{
 			_sharedUIManager = sharedUIManager;
 			_item = item;
-			_itemEndDragBehaviourFactory = itemEndDragBehaviourFactory;
+			_inventoryEndDragBehaviour = inventoryEndDragBehaviour;
 			_tooltipBehavior = tooltipBehavior;
 		}
 		
@@ -106,7 +104,7 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 		{
 			if (_click && Time.time - _time > .5f)
 			{
-				_tooltipBehavior.ShowToolTip(_item.Item);
+				_tooltipBehavior.ShowToolTip(_item);
 			}
 		}
 
@@ -163,21 +161,8 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Item
 		{
 			var itemData = new ItemDragData(_selectedItem, _oldSlot, eventData, _canvasGroup, _item);
 
-			PrepareItemEndDragBehaviour(itemData);
-			
-			_itemEndDragBehaviour.OnEndDrag();
-		}
-
-		private void PrepareItemEndDragBehaviour(ItemDragData itemData)
-		{
-			if (_itemEndDragBehaviour == null)
-			{
-				_itemEndDragBehaviour = _itemEndDragBehaviourFactory.Create(itemData);
-			}
-			else
-			{
-				_itemEndDragBehaviour.Prepare(itemData);
-			}
+			_inventoryEndDragBehaviour.Prepare(itemData);
+			_inventoryEndDragBehaviour.OnEndDrag();
 		}
 	}
 }

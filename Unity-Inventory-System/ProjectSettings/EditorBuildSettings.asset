@@ -6,10 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/InventorySystem/Samples/Scenes/MainInventory.unity
+    path: Assets/InventorySystem/Samples/Samples/Scenes/MainInventory.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/InventorySystem/Samples/Scenes/HorizontalInventory.unity
+    path: Assets/InventorySystem/Samples/Samples/Scenes/HorizontalInventory.unity
     guid: db41c11ae6d005048a8b77086e57950f
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 60ef5a5e667938d43a8eb2de08a8a38f, type: 2}

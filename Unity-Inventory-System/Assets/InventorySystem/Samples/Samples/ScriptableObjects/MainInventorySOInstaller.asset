@@ -9,12 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ab372d6a005c8344b5d6b25dbc310ce, type: 3}
-  m_Name: ZenjectReflectionBakingSettings
+  m_Script: {fileID: 11500000, guid: 70e3aac9bd6d4144cbebbb267e114bd0, type: 3}
+  m_Name: MainInventorySOInstaller
   m_EditorClassIdentifier: 
-  _isEnabledInBuilds: 1
-  _isEnabledInEditor: 0
-  _allGeneratedAssemblies: 1
-  _includeAssemblies: []
-  _excludeAssemblies: []
-  _namespacePatterns: []
+  _mainInventoryMonoInstallerSettings:
+    VerticalInventoryPrefab: {fileID: 319869100437528885, guid: eda5fbcbb04a12644a5177346b915ac9, type: 3}

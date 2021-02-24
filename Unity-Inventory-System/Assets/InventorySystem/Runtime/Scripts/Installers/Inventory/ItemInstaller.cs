@@ -25,10 +25,6 @@ namespace InventorySystem.Runtime.Scripts.Installers.Inventory
 			Container
 				.BindInterfacesAndSelfTo<ItemBehaviour>()
 				.AsSingle();
-
-			Container
-				.BindFactory<ItemDragData, ItemEndDragBehaviour, ItemEndDragBehaviour.Factory>()
-				.AsSingle();
 		}
 	}
 }

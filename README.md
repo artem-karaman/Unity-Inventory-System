@@ -27,40 +27,10 @@ Tests with Unity Editor version - 2020.1.8f1
 
 - Unity reorderable list - https://github.com/cfoulston/Unity-Reorderable-List - unity package - upm 
 
-or 
-
-Add to manifest
-
-```yaml
-{
-  "dependencies": 
-  {
-    "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
-    "com.malee.reorderablelist": "https://github.com/cfoulston/Unity-Reorderable-List.git",
-    "com.neuecc.unirx": "https://github.com/neuecc/UniRx.git?path=Assets/Plugins/UniRx/Scripts"
-    ...
-  }
-}
-```
-
-and Extenject via open upm - https://openupm.com/packages/com.svermeulen.extenject/
+- Unity UI Extensions - https://bitbucket.org/UnityUIExtensions/unity-ui-extensions - unity package - upm
 
 
-
-## How to install
-Install this package via upm:
-
-Package:
-
-```yaml
-https://github.com/namarakM/Unity-Inventory-System.git?path=/Unity-Inventory-System/Assets/InventorySystem
-```
-
-How to use above link:
-
-[Unity-Manual](https://docs.unity3d.com/Manual/upm-ui-giturl.html)
-
-## Statistics
+## Repo Statistics
 
 [Hits-of-Code-Overview](https://hitsofcode.com/view/github/namarakM/Unity-Inventory-System?branch=main)
 
