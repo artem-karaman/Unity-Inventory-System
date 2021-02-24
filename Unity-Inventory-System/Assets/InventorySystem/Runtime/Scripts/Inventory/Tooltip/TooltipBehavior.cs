@@ -1,4 +1,6 @@
 using InventorySystem.Runtime.Scripts.Core.Models.Interfaces;
+using UnityEditor.SceneManagement;
+using UnityEngine.UI;
 
 namespace InventorySystem.Runtime.Scripts.Inventory.Tooltip
 {
@@ -18,6 +20,7 @@ namespace InventorySystem.Runtime.Scripts.Inventory.Tooltip
 
 		private void Show(IItem item)
 		{
+			
 			if (_tooltipView == null)
 			{
 				_tooltipView = _factory.Create(item);

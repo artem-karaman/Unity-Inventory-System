@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEditor.Graphs;
 using UnityEngine;
 
 namespace InventorySystem.Runtime.Scripts.Core.Models
