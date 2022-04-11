@@ -1,6 +1,6 @@
 <div align="center">
 
-  [Inventory Example on github pages](https://artem-karaman.github.io/Unity-Inventory-System/Build/)
+  [Inventory Example on github pages](https://artem-karaman.github.io/Unity-Inventory-System/)
 
   
 </div>
