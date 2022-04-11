@@ -1,3 +1,10 @@
+<div align="center">
+
+  [Inventory Example on github pages](https://artem-karaman.github.io/Unity-Inventory-System/Build/)
+
+  
+</div>
+  
 [![Hits-of-Code](https://hitsofcode.com/github/namarakM/Unity-Inventory-System?branch=main)](https://hitsofcode.com/github/namarakM/Unity-Inventory-System?branch=main/view?branch=main/)
 
 ## Table of Contents
